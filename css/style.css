@@ -1,0 +1,28 @@
+.dropdown-item:hover{
+    background-color: #ada72b !important;
+}
+/* body{
+    background: black;
+} */
+.card-title, .card-text{
+    text-align: center !important;
+}
+.card-body a{
+    width: 100% !important;
+}
+.footer{
+    height: 30px;
+}
+body {
+    text-align: center !important;
+}
+.footer_text{
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    line-height: 30px;
+    margin-bottom: 0 !important;
+}
+header{
+    background: #ada72b;
+}
