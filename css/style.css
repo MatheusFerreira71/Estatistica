@@ -1,9 +1,7 @@
 .dropdown-item:hover{
     background-color: #ada72b !important;
 }
-/* body{
-    background: black;
-} */
+
 .card-title, .card-text{
     text-align: center !important;
 }
@@ -12,9 +10,6 @@
 }
 .footer{
     height: 30px;
-}
-body {
-    text-align: center !important;
 }
 .footer_text{
     color: #fff;
@@ -25,4 +20,25 @@ body {
 }
 header{
     background: #ada72b;
+}
+.card-link{
+    font-size: 40px !important;
+    color: #000000 !important;
+    text-align: center !important;
+    width: 100% !important;
+}
+.linked{
+    transition: font-size 0.5s;
+}
+.github{
+    transition: font-size 0.5s;
+}
+.linked:hover{
+    color: #0073b0 !important;
+    font-size: 44px !important;
+}
+
+.github:hover{
+    color: #33006e !important;
+    font-size: 44px !important;
 }
