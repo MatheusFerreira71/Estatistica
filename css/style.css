@@ -8,14 +8,11 @@
 .card-body a{
     width: 100% !important;
 }
-.footer{
-    height: 30px;
-}
 .footer_text{
     color: #fff;
     width: 100%;
     text-align: center;
-    line-height: 30px;
+    line-height: 100%;
     margin-bottom: 0 !important;
 }
 header{

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" class="h-100">
 
 <head>
     <meta charset="UTF-8">
@@ -9,13 +9,13 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="font_awesome/css/all.css">
-    <title>RM²</title>
+    <title>RM² - Home</title>
 </head>
 
 
-<body>
+<body class="d-flex flex-column h-100">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.html"><img src="#" alt="Navbar"></a>
+        <a class="navbar-brand" href="index.html"><img src="..." alt="Navbar"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -24,7 +24,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#Sobre">Sobre nós</a>
@@ -35,7 +35,7 @@
                         Estatísticas
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Estatística Descritiva</a>
+                        <a class="dropdown-item" href="descritiva.html">Estatística Descritiva</a>
                         <a class="dropdown-item" href="#">Probabilidade</a>
                         <a class="dropdown-item" href="#">Correlação e Regressão</a>
                     </div>
@@ -54,7 +54,7 @@
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk
                             of
                             the card's content.</p>
-                        <a href="#" class="btn btn-primary">Acessar</a>
+                        <a href="descritiva.html" class="btn btn-primary">Acessar</a>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@
         </header>
         <div class="container">
             <div class="row">
-                <div class="col-md-3 ">
+                <div class="col-md-3 my-2">
                     <div class="card" style="width: auto;">
                         <img src="..." class="card-img-top" alt="Matheus">
                         <div class="card-body">
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 ">
+                <div class="col-md-3 my-2">
                     <div class="card" style="width: auto;">
                         <img src="..." class="card-img-top" alt="Diego">
                         <div class="card-body">
@@ -128,7 +128,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 ">
+                <div class="col-md-3 my-2">
                     <div class="card" style="width: auto;">
                         <img src="..." class="card-img-top" alt="Mário">
                         <div class="card-body">
@@ -147,7 +147,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 ">
+                <div class="col-md-3 my-2">
                     <div class="card" style="width: auto;">
                         <img src="..." class="card-img-top" alt="Mateus">
                         <div class="card-body">
@@ -169,13 +169,12 @@
             </div>
         </div>
     </section>
-    <div class="footer bg-dark">
+
+    <footer class="bg-dark mt-auto py-2">
         <div class="container-fluid">
-            <div class="row">
-                <p class="footer_text">RM² - Todos os direitos reservados</p>
-            </div>
+            <p class="footer_text">RM² - Todos os direitos reservados</p>
         </div>
-    </div>
+    </footer>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
