@@ -40,7 +40,7 @@
         </div>
     </nav>
 
-    <div class="container mt-4">
+    <div class="container my-4">
         <div class="card border-info">
             <h5 class="card-header border-info text-center">Estatística Descritiva</h5>
             <div class="card-body px-0 py-0">
@@ -56,29 +56,49 @@
                             </form>
                         </div>
                         <div class="col-md-3 bordas_coluna px-3 py-3">
-                            <!-- <div class="form-check">
-                                <input class="form-check-input" type="radio" name="População" id="Populacao1"
-                                    value="populacao" checked>
-                                <label class="form-check-label" for="Populacao1">
-                                    População
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="Amostra" id="Amostra1"
-                                    value="amostra">
-                                <label class="form-check-label" for="Amostra1">
-                                    Amostra
-                                </label>
-                            </div> -->
+                            <form action="">
+                                <div class="form-group">
+                                    <label for="TipoDeAnalise">Tipo de Análise</label>
+                                    <select class="form-control" id="TipoDeAnalise">
+                                        <option>População</option>
+                                        <option>Amostra</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Separatrizes">Medidas Separatrizes</label>
+                                    <select name="MedidasSeparatrizes" id="Separatrizes" class="form-control">
+                                        <option>Quartil</option>
+                                        <option>Quintil</option>
+                                        <option>Decil</option>
+                                        <option>Porcentil</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <input type="range" class="custom-range" min="0" max="100" id="RangeSeparatriz">
+                                    <label for="RangeSeparatriz" class="mb-0">Teste</label>
+                                </div>
+                            </form>
                         </div>
                         <div class="col-md-6 px-3 py-3">
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <form action="">
+                                <div class="form-group">
+                                    <label for="entrarDados">Inserir Dados</label>
+                                    <textarea class="form-control" id="entrarDados" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="arquivo">Importar uma Planilha</label>
+                                    <input type="file" class="form-control-file" id="arquivo">
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">Adicionar Variável</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-
-
-
+            </div>
+            <div class="card-footer bg-transparent border-info">
+                <form action="">
+                        <button type="submit" class="btn btn-success" style="width: 100%;">Calcular</button>
+                </form>
             </div>
         </div>
     </div>
