@@ -39,3 +39,22 @@ header{
     color: #33006e !important;
     font-size: 44px !important;
 }
+.bordas_coluna{
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-color: #17A2B8 !important;
+    border-left: 0px !important;
+    border-top: 0px !important;
+    border-bottom: 0px !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .bordas_coluna{
+        border-width: 1px !important;
+        border-style: solid !important;
+        border-color: #17A2B8 !important;
+        border-left: 0px !important;
+        border-top: 0px !important;
+        border-right: 0px !important;
+    }
+  }
