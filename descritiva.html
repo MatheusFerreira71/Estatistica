@@ -47,58 +47,52 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-3 bordas_coluna px-3 py-3">
-                            <form action="">
-                                <div class="form-group">
-                                    <label for="nomeVariavel">Nome da Variável</label>
-                                    <input type="text" class="form-control" id="nomeVariavel"
-                                        placeholder="Nome da Variável">
-                                </div>
-                            </form>
+                            <div class="form-group">
+                                <label for="nomeVariavel">Nome da Variável</label>
+                                <input type="text" class="form-control" id="nomeVariavel"
+                                    placeholder="Nome da Variável">
+                            </div>
                         </div>
                         <div class="col-md-3 bordas_coluna px-3 py-3">
-                            <form action="">
-                                <div class="form-group">
-                                    <label for="TipoDeAnalise">Tipo de Análise</label>
-                                    <select class="form-control" id="TipoDeAnalise">
-                                        <option>População</option>
-                                        <option>Amostra</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="Separatrizes">Medidas Separatrizes</label>
-                                    <select name="MedidasSeparatrizes" id="Separatrizes" class="form-control">
-                                        <option>Quartil</option>
-                                        <option>Quintil</option>
-                                        <option>Decil</option>
-                                        <option>Porcentil</option>
-                                    </select>
-                                </div>
-                                <div class="form-group mb-0">
-                                    <input type="range" class="custom-range" min="0" max="100" id="RangeSeparatriz">
-                                    <label for="RangeSeparatriz" class="mb-0">Teste</label>
-                                </div>
-                            </form>
+                            <div class="form-group">
+                                <label for="TipoDeAnalise">Tipo de Análise</label>
+                                <select class="form-control" id="TipoDeAnalise">
+                                    <option>População</option>
+                                    <option>Amostra</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="Separatrizes">Medidas Separatrizes</label>
+                                <select name="MedidasSeparatrizes" id="Separatrizes" class="form-control">
+                                    <option>Quartil</option>
+                                    <option>Quintil</option>
+                                    <option>Decil</option>
+                                    <option>Porcentil</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-0">
+                                <input type="range" class="custom-range" min="0" max="100" id="RangeSeparatriz">
+                                <label for="RangeSeparatriz" class="mb-0">Teste</label>
+                            </div>
                         </div>
                         <div class="col-md-6 px-3 py-3">
-                            <form action="">
-                                <div class="form-group">
-                                    <label for="entrarDados">Inserir Dados</label>
-                                    <textarea class="form-control" id="entrarDados" rows="3"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="arquivo">Importar uma Planilha</label>
-                                    <input type="file" class="form-control-file" id="arquivo">
-                                </div>
-                                <button type="submit" class="btn btn-primary" style="width: 100%;">Adicionar Variável</button>
-                            </form>
+                            <div class="form-group">
+                                <label for="entrarDados">Inserir Dados</label>
+                                <textarea class="form-control" id="entrarDados" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="arquivo">Importar uma Planilha</label>
+                                <input type="file" class="form-control-file" id="arquivo">
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;"
+                                onclick="adicionarVariavel()">Adicionar
+                                Variável</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="card-footer bg-transparent border-info">
-                <form action="">
-                        <button type="submit" class="btn btn-success" style="width: 100%;">Calcular</button>
-                </form>
+                <button type="submit" class="btn btn-success" style="width: 100%;">Calcular</button>
             </div>
         </div>
     </div>
@@ -119,5 +113,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-
+    <script src="js/main.js"></script>
 </html>
