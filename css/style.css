@@ -58,3 +58,9 @@ header{
         border-right: 0px !important;
     }
 }
+
+.scrollspy{
+    position: relative;
+    overflow-y: scroll;
+    height: 380px;
+}

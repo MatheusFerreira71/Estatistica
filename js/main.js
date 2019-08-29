@@ -1,10 +1,3 @@
-// obj = {
-//     nome: "Idade",
-//     tipoAnalise: "População",
-//     separatriz: 0.1,
-//     tipoVariavel: "QC",
-//     dados: [12, 23, 23, 12, 23, 21]
-// }
 let tabelas = [];
 let barra = document.getElementById('RangeSeparatriz');
 
@@ -22,6 +15,7 @@ function separador(vetor) {
     }
     return Quantidades;
 }
+
 function vetorNaN(vetor) {
     let aux = 0;
     for (let i of vetor) {
@@ -146,4 +140,8 @@ function mudarSeparatriz() {
 function mudarValorBarra() {
     let labelResultado = document.getElementById('MedidaValor');
     labelResultado.innerText = barra.value + '%';
+}
+
+function calcular(vetorTabelas){
+    
 }
