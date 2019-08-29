@@ -48,6 +48,7 @@ function adicionarVariavel(vetorTabelas) {
     if (vetorNaN(obj.dados)) {
         for (let i = 0; i < obj.dados.length; i++) {
             obj.dados[i] = obj.dados[i].toUpperCase();
+            obj.dados[i] = obj.dados[i].trim();
         }
     }
 
@@ -57,23 +58,27 @@ function adicionarVariavel(vetorTabelas) {
     // for (let i in Obejeto) {
     //     aux++
     // }
-
-    //Verifica qual o tipo de variável
-    // if (vetorNaN(obj.dados) && ) {
-    //     obj.tipoVar = 'Qualitativa Nominal';
-    // } else if (!vetorNaN(obj.dados) && aux > 7) {
-    //     obj.tipoVar = 'Quantitativa Continua';
-    // } else if (!vetorNaN(obj.dados) && aux <= 7) {
-    //     obj.tipoVar = 'Quantitativa Discreta';
-    // } else {
-    //     obj.tipoVar = 'Qualitativa Ordinal';
-    // }
     obj.tipoVar = document.getElementById('TipoVar').value
-    vetorTabelas.push(obj);
-    console.log(vetorTabelas);
-    document.getElementById('nomeVariavel').value = "";
-    document.getElementById('entrarDados').value = "";
-    document.getElementById('TipoVar').value = "Escolha...";
+
+    if (obj.tipoVar == 'Qualitativa Ordinal') {
+        let Obejeto = separador(obj.dados);
+        let card = document.getElementById('selectGrau');
+        let vars = document.getElementById('vars');
+        card.innerHTML = `<h5 class="card-title">Selecione o grau dos dados</h5>`;
+        document.getElementsByTagName('header')[0].classList.remove('my-3');
+        for (let i in Obejeto) {
+            vars.innerHTML += `<li class="list-group-item">${i}<div class="form-group">
+            <input type="number" class="form-control text-center" placeholder="1, 2, 3"></div></li>`;
+        }
+        document.getElementById('cardBordado').classList.add('border-info')
+        vars.innerHTML += `<li class="list-group-item"></li>`
+    } else {
+        vetorTabelas.push(obj);
+        console.log(vetorTabelas);
+        document.getElementById('nomeVariavel').value = "";
+        document.getElementById('entrarDados').value = "";
+        document.getElementById('TipoVar').value = "Escolha...";
+    }
 }
 
 function previewDados(vetorTabelas) {
@@ -142,6 +147,6 @@ function mudarValorBarra() {
     labelResultado.innerText = barra.value + '%';
 }
 
-function calcular(vetorTabelas){
-    
+function calcular(vetorTabelas) {
+
 }
