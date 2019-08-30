@@ -62,16 +62,29 @@ function adicionarVariavel(vetorTabelas) {
 
     if (obj.tipoVar == 'Qualitativa Ordinal') {
         let Obejeto = separador(obj.dados);
-        let card = document.getElementById('selectGrau');
-        let vars = document.getElementById('vars');
-        card.innerHTML = `<h5 class="card-title">Selecione o grau dos dados</h5>`;
+        let card = document.getElementById('cardBordado');
+        card.innerHTML = `<div class="card" style="width: auto;">
+                            <div class="card-body">
+                                <h5 class="card-title">Selecione o grau dos dados</h5>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                            </ul>
+                        </div>`;
+
+        let vars = document.getElementsByTagName('ul')[1];
         document.getElementsByTagName('header')[0].classList.remove('my-3');
+
         for (let i in Obejeto) {
-            vars.innerHTML += `<li class="list-group-item">${i}<div class="form-group">
+            vars.innerHTML += `<li class="list-group-item border-info">${i}<div class="form-group">
             <input type="number" class="form-control text-center" placeholder="1, 2, 3"></div></li>`;
         }
+
         document.getElementById('cardBordado').classList.add('border-info')
-        vars.innerHTML += `<li class="list-group-item"></li>`
+        vars.innerHTML += `<li class="list-group-item border-info">
+                                <button class="btn btn-success" onclick="tabelaOrdinal(tabelas);" style="width: 100%;">Salvar</button>
+                            </li>`;
+
+        card.getElementsByTagName('div')[0].classList.add('border-info');
     } else {
         vetorTabelas.push(obj);
         console.log(vetorTabelas);
@@ -81,6 +94,37 @@ function adicionarVariavel(vetorTabelas) {
     }
 }
 
+function tabelaOrdinal(vetorTabelas){
+    document.getElementsByTagName('header')[0].classList.add('my-3');
+    let obj = {}
+    obj.nome = document.getElementById('nomeVariavel').value;
+    obj.tipoAna = document.getElementById('TipoDeAnalise').value;
+    obj.separatriz = document.getElementById('MedidaValor').innerText.split('%');
+    obj.separatriz[0] = parseInt(obj.separatriz[0]);
+    obj.separatriz = obj.separatriz[0] / 100;
+    obj.dados = (document.getElementById('entrarDados').value).split(';');
+
+    // Transforma em número se for possível
+    for (let i = 0; i < obj.dados.length; i++) {
+        if (!isNaN(parseInt(obj.dados[i]))) {
+            obj.dados[i] = parseInt(obj.dados[i]);
+        }
+    }
+
+    //Se for um vetor NaN, deixa todos em letra maiúscula.
+    if (vetorNaN(obj.dados)) {
+        for (let i = 0; i < obj.dados.length; i++) {
+            obj.dados[i] = obj.dados[i].toUpperCase();
+            obj.dados[i] = obj.dados[i].trim();
+        }
+    }
+
+    obj.tipoVar = document.getElementById('TipoVar').value
+    
+    document.getElementById('nomeVariavel').value = "";
+    document.getElementById('entrarDados').value = "";
+    document.getElementById('TipoVar').value = "Escolha...";
+}
 function previewDados(vetorTabelas) {
     let totalLinhas = 0
     let cabecalho = document.getElementById('linhaCabecalhoPreview');
