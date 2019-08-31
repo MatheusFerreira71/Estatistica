@@ -36,6 +36,7 @@ function adicionarVariavel(vetorTabelas) {
     obj.separatriz[0] = parseInt(obj.separatriz[0]);
     obj.separatriz = obj.separatriz[0] / 100;
     obj.dados = (document.getElementById('entrarDados').value).split(';');
+    
 
     // Transforma em número se for possível
     for (let i = 0; i < obj.dados.length; i++) {
@@ -52,12 +53,6 @@ function adicionarVariavel(vetorTabelas) {
         }
     }
 
-    //Popula a quantidade de variedades dentro dos dados para fazer a verificação das variáveis.
-    // Obejeto = separador(obj.dados);
-    // let aux = 0
-    // for (let i in Obejeto) {
-    //     aux++
-    // }
     obj.tipoVar = document.getElementById('TipoVar').value
 
     if (obj.tipoVar == 'Qualitativa Ordinal') {
@@ -76,7 +71,7 @@ function adicionarVariavel(vetorTabelas) {
 
         for (let i in Obejeto) {
             vars.innerHTML += `<li class="list-group-item border-info">${i}<div class="form-group">
-            <input type="number" class="form-control text-center" placeholder="1, 2, 3"></div></li>`;
+            <input type="number" class="form-control text-center" id="grau${i}" placeholder="1, 2, 3"></div></li>`;
         }
 
         document.getElementById('cardBordado').classList.add('border-info')
@@ -121,9 +116,18 @@ function tabelaOrdinal(vetorTabelas){
 
     obj.tipoVar = document.getElementById('TipoVar').value
     
+    let Obejeto = separador(obj.dados);
+    let grauObj = {};
+    for(let i in Obejeto){
+        grauObj[`${i}`] = document.getElementById(`grau${i}`).value;
+    }
+    obj.graus = grauObj;
     document.getElementById('nomeVariavel').value = "";
     document.getElementById('entrarDados').value = "";
     document.getElementById('TipoVar').value = "Escolha...";
+    vetorTabelas.push(obj);
+    console.log(vetorTabelas);
+    document.getElementById('cardBordado').innerHTML = '';
 }
 function previewDados(vetorTabelas) {
     let totalLinhas = 0
