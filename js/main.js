@@ -36,7 +36,7 @@ function adicionarVariavel(vetorTabelas) {
     obj.separatriz[0] = parseInt(obj.separatriz[0]);
     obj.separatriz = obj.separatriz[0] / 100;
     obj.dados = (document.getElementById('entrarDados').value).split(';');
-    
+
 
     // Transforma em número se for possível
     for (let i = 0; i < obj.dados.length; i++) {
@@ -89,7 +89,7 @@ function adicionarVariavel(vetorTabelas) {
     }
 }
 
-function tabelaOrdinal(vetorTabelas){
+function tabelaOrdinal(vetorTabelas) {
     document.getElementsByTagName('header')[0].classList.add('my-3');
     let obj = {}
     obj.nome = document.getElementById('nomeVariavel').value;
@@ -115,10 +115,10 @@ function tabelaOrdinal(vetorTabelas){
     }
 
     obj.tipoVar = document.getElementById('TipoVar').value
-    
+
     let Obejeto = separador(obj.dados);
     let grauObj = {};
-    for(let i in Obejeto){
+    for (let i in Obejeto) {
         grauObj[`${i}`] = document.getElementById(`grau${i}`).value;
     }
     obj.graus = grauObj;
@@ -129,6 +129,7 @@ function tabelaOrdinal(vetorTabelas){
     console.log(vetorTabelas);
     document.getElementById('cardBordado').innerHTML = '';
 }
+
 function previewDados(vetorTabelas) {
     let totalLinhas = 0
     let cabecalho = document.getElementById('linhaCabecalhoPreview');
@@ -161,7 +162,7 @@ function previewDados(vetorTabelas) {
             if (vetorTabelas[j].dados[i - 1] === undefined) {
                 linhaAtual.innerHTML += `<td></td>`;
             } else {
-                linhaAtual.innerHTML += `<td>${vetorTabelas[j].dados[i - 1]}</td>`
+                linhaAtual.innerHTML += `<td>${vetorTabelas[j].dados[i - 1]}</td>`;
             }
         }
     }
@@ -196,5 +197,64 @@ function mudarValorBarra() {
 }
 
 function calcular(vetorTabelas) {
+    document.getElementsByTagName('header')[0].innerHTML = `<h1 class="text-center">Resultados</h1>`;
+    document.getElementById('ocultar').innerHTML = '';
+    let grupoVar = document.getElementById('grupoVar');
+    document.getElementById('results').innerHTML = '<div data-spy="scroll" data-target="#grupoVar" data-offset="0" class="scrollspy" id="resultList"></div>';
+    let grupoResults = document.getElementById('resultList');
+    for (let i = 0; i < vetorTabelas.length; i++) {
+        if (vetorTabelas[i].tipoVar == "Qualitativa Nominal") {
+            vetorTabelas[i].dados.sort();
+            let obejeto = separador(vetorTabelas[i].dados);
+            console.log(obejeto);
+            grupoVar.innerHTML += `<a class="list-group-item list-group-item-action" href="#${vetorTabelas[i].nome}">${vetorTabelas[i].nome}</a>`;
+            grupoResults.innerHTML += `<h4 id="${vetorTabelas[i].nome}">${vetorTabelas[i].nome}</h4>
+            <table class="table table-hover table-dark table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
+                <thead class="thead-light">
+                    <tr id="linhaCabecalho">
 
+                    </tr>
+                </thead>
+                <tbody id="corpoTabela">
+
+                </tbody>
+            </table>`;
+            let totalLinhas = 0;
+            let totalFrequencia = 0;
+            for (let i in obejeto) {
+                totalLinhas++
+                totalFrequencia += obejeto[i];
+            }
+            let tabelaAtual = document.getElementById(`Tabela${vetorTabelas[i].nome}`)
+            let cabecalho = tabelaAtual.getElementsByTagName('tr')[0];
+            let corpo = tabelaAtual.getElementsByTagName('tbody')[0];
+
+            //Escreve todas as linha da tabela
+            for (let i = 1; i <= totalLinhas; i++) {
+                corpo.innerHTML += `<tr></tr>`;
+            }
+
+            //Pegou todas as linhas da tabela
+            let linhas = tabelaAtual.getElementsByTagName('tr');
+
+            //Escrever Cabeçalho
+            cabecalho.innerHTML += `<th scope="col">${vetorTabelas[i].nome}</th>
+                                    <th scope="col">Frequencia Simples</th>
+                                    <th scope="col">FR%</th>
+                                    <th scope="col">FAC</th>
+                                    <th scope="col">FAC%</th>`;
+            let FrequenciaAtual = 0, FrequenciaPorAtual = 0;
+            //Escreve a Tabela
+            let js = 1
+            for (let i in obejeto) {
+                let linhaAtual = linhas[js];
+                    linhaAtual.innerHTML = `<td>${i}</td>
+                                            <td>${obejeto[i]}</td>
+                                            <td>${(obejeto[i]/totalFrequencia * 100).toFixed(2)}</td>
+                                            <td>${FrequenciaAtual += obejeto[i]}</td>
+                                            <td>${(FrequenciaPorAtual += obejeto[i]/totalFrequencia * 100).toFixed(2)}</td>`;
+                js++
+            }
+        }
+    }
 }
