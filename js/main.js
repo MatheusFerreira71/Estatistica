@@ -257,9 +257,9 @@ function calcular(vetorTabelas) {
                                             <td>${(FrequenciaPorAtual += obejeto[i] / totalFrequencia * 100).toFixed(2)}</td>`;
                 js++
             }
-            $('[data-spy="scroll"]').each(function () {
-                var $spy = $(this).scrollspy('refresh')
-            })
         }
     }
+    $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this).scrollspy('refresh')
+    })
 }
