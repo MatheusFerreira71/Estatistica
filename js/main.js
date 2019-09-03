@@ -200,7 +200,9 @@ function calcular(vetorTabelas) {
     document.getElementsByTagName('header')[0].innerHTML = `<h1 class="text-center">Resultados</h1>`;
     document.getElementById('ocultar').innerHTML = '';
     let grupoVar = document.getElementById('grupoVar');
-    document.getElementById('results').innerHTML = '<div data-spy="scroll" data-target="#grupoVar" data-offset="0" class="scrollspy" id="resultList"></div>';
+    grupoVar.style = "border-width: 2px !important; border-style: solid !important; border-color: #17A2B8 !important; border-radius: 7px !important"
+    document.getElementById('results').innerHTML = '<div data-spy="scroll" data-target="#grupoVar" data-offset="0" class="scrollspy mx-3" id="resultList"></div>';
+    document.getElementById('results').style = "border-width: 2px !important; border-style: solid !important; border-color: #17A2B8 !important; border-radius: 10px !important"
     let grupoResults = document.getElementById('resultList');
     for (let i = 0; i < vetorTabelas.length; i++) {
         if (vetorTabelas[i].tipoVar == "Qualitativa Nominal") {
@@ -208,8 +210,8 @@ function calcular(vetorTabelas) {
             let obejeto = separador(vetorTabelas[i].dados);
             console.log(obejeto);
             grupoVar.innerHTML += `<a class="list-group-item list-group-item-action" href="#${vetorTabelas[i].nome}">${vetorTabelas[i].nome}</a>`;
-            grupoResults.innerHTML += `<h4 id="${vetorTabelas[i].nome}">${vetorTabelas[i].nome}</h4>
-            <table class="table table-hover table-dark table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
+            grupoResults.innerHTML += `<h4 id="${vetorTabelas[i].nome}" class="text-center">${vetorTabelas[i].nome}</h4>`;
+            grupoResults.innerHTML += `<table class="table table-hover table-dark table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
                 <thead class="thead-light">
                     <tr id="linhaCabecalho">
 
@@ -248,13 +250,16 @@ function calcular(vetorTabelas) {
             let js = 1
             for (let i in obejeto) {
                 let linhaAtual = linhas[js];
-                    linhaAtual.innerHTML = `<td>${i}</td>
+                linhaAtual.innerHTML = `<td>${i}</td>
                                             <td>${obejeto[i]}</td>
-                                            <td>${(obejeto[i]/totalFrequencia * 100).toFixed(2)}</td>
+                                            <td>${(obejeto[i] / totalFrequencia * 100).toFixed(2)}</td>
                                             <td>${FrequenciaAtual += obejeto[i]}</td>
-                                            <td>${(FrequenciaPorAtual += obejeto[i]/totalFrequencia * 100).toFixed(2)}</td>`;
+                                            <td>${(FrequenciaPorAtual += obejeto[i] / totalFrequencia * 100).toFixed(2)}</td>`;
                 js++
             }
+            $('[data-spy="scroll"]').each(function () {
+                var $spy = $(this).scrollspy('refresh')
+            })
         }
     }
 }
