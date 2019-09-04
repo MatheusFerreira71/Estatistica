@@ -204,7 +204,7 @@ function calcular(vetorTabelas) {
     document.getElementById('results').innerHTML = '<div data-spy="scroll" data-target="#grupoVar" data-offset="0" class="scrollspy mx-3" id="resultList"></div>';
     document.getElementById('results').style = "border-width: 2px !important; border-style: solid !important; border-color: #17A2B8 !important; border-radius: 10px !important"
     let grupoResults = document.getElementById('resultList');
-    
+
     for (let i = 0; i < vetorTabelas.length; i++) {
         if (vetorTabelas[i].tipoVar == "Qualitativa Nominal" || vetorTabelas[i].tipoVar == "Quantitativa Discreta") {
             vetorTabelas[i].dados.sort();
@@ -224,16 +224,16 @@ function calcular(vetorTabelas) {
             </table>`;
             let totalLinhas = 0;
             let totalFrequencia = 0;
-            for (let i in obejeto) {
+            for (let z in obejeto) {
                 totalLinhas++
-                totalFrequencia += obejeto[i];
+                totalFrequencia += obejeto[z];
             }
             let tabelaAtual = document.getElementById(`Tabela${vetorTabelas[i].nome}`)
             let cabecalho = tabelaAtual.getElementsByTagName('tr')[0];
             let corpo = tabelaAtual.getElementsByTagName('tbody')[0];
 
             //Escreve todas as linha da tabela
-            for (let i = 1; i <= totalLinhas; i++) {
+            for (let z = 1; z <= totalLinhas; z++) {
                 corpo.innerHTML += `<tr></tr>`;
             }
 
@@ -249,16 +249,16 @@ function calcular(vetorTabelas) {
             let FrequenciaAtual = 0, FrequenciaPorAtual = 0;
             //Escreve a Tabela
             let js = 1
-            for (let i in obejeto) {
+            for (let z in obejeto) {
                 let linhaAtual = linhas[js];
-                linhaAtual.innerHTML = `<td>${i}</td>
-                                            <td>${obejeto[i]}</td>
-                                            <td>${(obejeto[i] / totalFrequencia * 100).toFixed(2)}</td>
-                                            <td>${FrequenciaAtual += obejeto[i]}</td>
-                                            <td>${(FrequenciaPorAtual += obejeto[i] / totalFrequencia * 100).toFixed(2)}</td>`;
+                linhaAtual.innerHTML = `<td>${z}</td>
+                                            <td>${obejeto[z]}</td>
+                                            <td>${(obejeto[z] / totalFrequencia * 100).toFixed(2)}</td>
+                                            <td>${FrequenciaAtual += obejeto[z]}</td>
+                                            <td>${(FrequenciaPorAtual += obejeto[z] / totalFrequencia * 100).toFixed(2)}</td>`;
                 js++
             }
-        }else if(vetorTabelas[i].tipoVar == "Qualitativa Ordinal"){
+        } else if (vetorTabelas[i].tipoVar == "Qualitativa Ordinal") {
             let obejeto = separador(vetorTabelas[i].dados);
             console.log(obejeto);
             grupoVar.innerHTML += `<a class="list-group-item list-group-item-action" href="#${vetorTabelas[i].nome}">${vetorTabelas[i].nome}</a>`;
@@ -275,16 +275,16 @@ function calcular(vetorTabelas) {
             </table>`;
             let totalLinhas = 0;
             let totalFrequencia = 0;
-            for (let i in obejeto) {
+            for (let z in obejeto) {
                 totalLinhas++
-                totalFrequencia += obejeto[i];
+                totalFrequencia += obejeto[z];
             }
             let tabelaAtual = document.getElementById(`Tabela${vetorTabelas[i].nome}`)
             let cabecalho = tabelaAtual.getElementsByTagName('tr')[0];
             let corpo = tabelaAtual.getElementsByTagName('tbody')[0];
 
             //Escreve todas as linha da tabela
-            for (let i = 1; i <= totalLinhas; i++) {
+            for (let z = 1; z <= totalLinhas; z++) {
                 corpo.innerHTML += `<tr></tr>`;
             }
 
@@ -301,15 +301,15 @@ function calcular(vetorTabelas) {
 
             //Escrevendo a tabela.
             let js = 1, aux;
-            
+
             for (let k in obejeto) {
                 let linhaAtual = linhas[js];
                 let maiorGrau;
                 aux = 0;
-                
+
                 //Pegando o maior grau
-                for (let j in vetorTabelas[i].graus){
-                    if (vetorTabelas[i].graus[j] > aux){
+                for (let j in vetorTabelas[i].graus) {
+                    if (vetorTabelas[i].graus[j] > aux) {
                         aux = vetorTabelas[i].graus[j];
                         maiorGrau = j
                     }
@@ -322,8 +322,104 @@ function calcular(vetorTabelas) {
                                             <td>${(FrequenciaPorAtual += obejeto[maiorGrau] / totalFrequencia * 100).toFixed(2)}</td>`;
                 js++
             }
-        }else if(vetorTabelas[i].tipoVar == "Quantitativa Contínua"){
-            
+        } else if (vetorTabelas[i].tipoVar == "Quantitativa Contínua") {
+            let obejeto = separador(vetorTabelas[i].dados);
+            console.log(obejeto);
+            grupoVar.innerHTML += `<a class="list-group-item list-group-item-action" href="#${vetorTabelas[i].nome}">${vetorTabelas[i].nome}</a>`;
+            grupoResults.innerHTML += `<h4 id="${vetorTabelas[i].nome}" class="text-center">${vetorTabelas[i].nome}</h4>`;
+            grupoResults.innerHTML += `<table class="table table-hover table-danger table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
+                <thead class="thead-dark">
+                    <tr id="linhaCabecalho">
+
+                    </tr>
+                </thead>
+                <tbody id="corpoTabela">
+
+                </tbody>
+            </table>`;
+
+            //Pegar amplitude
+            let maxVal = 0, minVal;
+            for (let j in obejeto) {
+                if (parseInt(j) > maxVal) {
+                    maxVal = parseInt(j);
+                }
+            }
+            minVal = maxVal;
+            for (let j in obejeto) {
+                if (parseInt(j) < minVal) {
+                    minVal = parseInt(j);
+                }
+            }
+            let At = maxVal - minVal;
+
+            //Pegar o K = Classe
+            let K = parseInt(Math.sqrt(vetorTabelas[i].dados.length));
+
+            //Pegar o intervalo de classe
+            let Ic, ref = At + 1;
+
+            while (ref % (K - 1) != 0 && ref % K != 0 && ref % (K + 1) != 0) {
+                ref++
+            }
+
+            if (ref % (K - 1) == 0) {
+                Ic = ref / (K - 1);
+            } else if (ref % K == 0) {
+                Ic = ref / K;
+            } else {
+                Ic = ref / (K + 1);
+            }
+
+            let ultIntervalo = minVal, intervalos = {};
+            while (ultIntervalo < maxVal) {
+                intervalos[`${ultIntervalo}`] = ultIntervalo + Ic
+                ultIntervalo += Ic;
+            }
+
+            //Pegar total de linhas;
+            let totalLinhas = 0;
+            for (let z in intervalos) {
+                totalLinhas++
+            }
+            let totalFrequencia = vetorTabelas[i].dados.length;
+            let tabelaAtual = document.getElementById(`Tabela${vetorTabelas[i].nome}`)
+            let cabecalho = tabelaAtual.getElementsByTagName('tr')[0];
+            let corpo = tabelaAtual.getElementsByTagName('tbody')[0];
+
+            //Escreve todas as linha da tabela
+            for (let z = 1; z <= totalLinhas; z++) {
+                corpo.innerHTML += `<tr></tr>`;
+            }
+
+            //Pegou todas as linhas da tabela
+            let linhas = tabelaAtual.getElementsByTagName('tr');
+
+            //Escrever Cabeçalho 
+            cabecalho.innerHTML += `<th scope="col">${vetorTabelas[i].nome}</th>
+                                    <th scope="col">Frequencia Simples</th>
+                                    <th scope="col">FR%</th>
+                                    <th scope="col">FAC</th>
+                                    <th scope="col">FAC%</th>`;
+
+            let FrequenciaAtual = 0, FrequenciaPorAtual = 0;
+            //Escrever a tabela
+            let js = 1, fi;
+            for (let z in intervalos) {
+                let linhaAtual = linhas[js];
+                linhaAtual.innerHTML = `<td>${z} |-- ${intervalos[z]}</td>`;
+                fi = 0;
+                for (let s in obejeto) {
+                    if (s >= z && s < intervalos[z]) {
+                        fi += obejeto[s];
+                    }
+                }
+                linhaAtual.innerHTML += `<td>${fi}</td>
+                    <td>${(fi / totalFrequencia * 100).toFixed(2)}</td>
+                    <td>${FrequenciaAtual += fi}</td>
+                    <td>${(FrequenciaPorAtual += fi / totalFrequencia * 100).toFixed(2)}</td>`;
+                js++
+            }
         }
     }
     $('[data-spy="scroll"]').each(function () {
