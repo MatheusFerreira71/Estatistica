@@ -71,7 +71,7 @@ function adicionarVariavel(vetorTabelas) {
 
         for (let i in Obejeto) {
             vars.innerHTML += `<li class="list-group-item border-info">${i}<div class="form-group">
-            <input type="number" class="form-control text-center" id="grau${i}" placeholder="1, 2, 3"></div></li>`;
+            <input type="number" min="1" class="form-control text-center" id="grau${i}" placeholder="1, 2, 3"></div></li>`;
         }
 
         document.getElementById('cardBordado').classList.add('border-info')
@@ -212,8 +212,8 @@ function calcular(vetorTabelas) {
             console.log(obejeto);
             grupoVar.innerHTML += `<a class="list-group-item list-group-item-action" href="#${vetorTabelas[i].nome}">${vetorTabelas[i].nome}</a>`;
             grupoResults.innerHTML += `<h4 id="${vetorTabelas[i].nome}" class="text-center">${vetorTabelas[i].nome}</h4>`;
-            grupoResults.innerHTML += `<table class="table table-hover table-dark table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
-                <thead class="thead-light">
+            grupoResults.innerHTML += `<table class="table table-hover table-danger table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
+                <thead class="thead-dark">
                     <tr id="linhaCabecalho">
 
                     </tr>
@@ -263,8 +263,8 @@ function calcular(vetorTabelas) {
             console.log(obejeto);
             grupoVar.innerHTML += `<a class="list-group-item list-group-item-action" href="#${vetorTabelas[i].nome}">${vetorTabelas[i].nome}</a>`;
             grupoResults.innerHTML += `<h4 id="${vetorTabelas[i].nome}" class="text-center">${vetorTabelas[i].nome}</h4>`;
-            grupoResults.innerHTML += `<table class="table table-hover table-dark table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
-                <thead class="thead-light">
+            grupoResults.innerHTML += `<table class="table table-hover table-danger table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
+                <thead class="thead-dark">
                     <tr id="linhaCabecalho">
 
                     </tr>
@@ -300,14 +300,26 @@ function calcular(vetorTabelas) {
             let FrequenciaAtual = 0, FrequenciaPorAtual = 0;
 
             //Escrevendo a tabela.
-            let js = 1
-            for (let i in obejeto) {
+            let js = 1, aux;
+            
+            for (let k in obejeto) {
                 let linhaAtual = linhas[js];
-                linhaAtual.innerHTML = `<td>${i}</td>
-                                            <td>${obejeto[i]}</td>
-                                            <td>${(obejeto[i] / totalFrequencia * 100).toFixed(2)}</td>
-                                            <td>${FrequenciaAtual += obejeto[i]}</td>
-                                            <td>${(FrequenciaPorAtual += obejeto[i] / totalFrequencia * 100).toFixed(2)}</td>`;
+                let maiorGrau;
+                aux = 0;
+                
+                //Pegando o maior grau
+                for (let j in vetorTabelas[i].graus){
+                    if (vetorTabelas[i].graus[j] > aux){
+                        aux = vetorTabelas[i].graus[j];
+                        maiorGrau = j
+                    }
+                }
+                delete vetorTabelas[i].graus[maiorGrau];
+                linhaAtual.innerHTML = `<td>${maiorGrau}</td>
+                                            <td>${obejeto[maiorGrau]}</td>
+                                            <td>${(obejeto[maiorGrau] / totalFrequencia * 100).toFixed(2)}</td>
+                                            <td>${FrequenciaAtual += obejeto[maiorGrau]}</td>
+                                            <td>${(FrequenciaPorAtual += obejeto[maiorGrau] / totalFrequencia * 100).toFixed(2)}</td>`;
                 js++
             }
         }else if(vetorTabelas[i].tipoVar == "Quantitativa Contínua"){
