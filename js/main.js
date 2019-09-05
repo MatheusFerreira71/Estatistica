@@ -16,6 +16,53 @@ function separador(vetor) {
     return Quantidades;
 }
 
+function moda(Quantidades) {
+    let aux = 0, nome = [];
+    for (let i in Quantidades) {
+        if (Quantidades[i] > aux) {
+            aux = Quantidades[i];
+        }
+    }
+    for (let i in Quantidades) {
+        if (Quantidades[i] == aux) {
+            nome.push(i);
+        }
+    }
+    return nome;
+}
+
+function media(tipoVar, dados, totalFrequencia) {
+    if (tipoVar == "Quantitativa Discreta") {
+        let somatorio = 0;
+        for (let i in dados) {
+            somatorio += parseInt(i) * parseInt(dados[i]);
+        }
+        return parseFloat((somatorio / totalFrequencia).toFixed(2));
+    }
+}
+
+function mediana(tipoVar, dados, totalFrequencia) {
+    if (tipoVar == 'Qualitativa Nominal' || tipoVar == 'Qualitativa Ordinal') {
+        let posicoes = [], medianas = [];
+        if (totalFrequencia % 2 == 0) {
+            posicoes.push(totalFrequencia / 2, totalFrequencia / 2 + 1);
+        } else {
+            posicoes.push((totalFrequencia - 1) / 2 + 1);
+        }
+        for (let i of posicoes) {
+            let controle = 0;
+            for (let j in dados) {
+                if (i >= controle && i <= dados[j]) {
+                    medianas.push(j);
+                    break;
+                }
+                controle = dados[j];
+            }
+        }
+        return medianas;
+    }
+}
+
 function vetorNaN(vetor) {
     let aux = 0;
     for (let i of vetor) {
@@ -206,7 +253,7 @@ function calcular(vetorTabelas) {
     let grupoResults = document.getElementById('resultList');
 
     for (let i = 0; i < vetorTabelas.length; i++) {
-        if (vetorTabelas[i].tipoVar == "Qualitativa Nominal" || vetorTabelas[i].tipoVar == "Quantitativa Discreta") {
+        if (vetorTabelas[i].tipoVar == "Qualitativa Nominal") {
             vetorTabelas[i].dados.sort();
             let obejeto = separador(vetorTabelas[i].dados);
             console.log(obejeto);
@@ -252,7 +299,7 @@ function calcular(vetorTabelas) {
                                     <th scope="col">FAC%</th>`;
             let FrequenciaAtual = 0, FrequenciaPorAtual = 0;
             //Escreve a Tabela
-            let js = 1
+            let js = 1, objMediana = {}
             for (let z in obejeto) {
                 let linhaAtual = linhas[js];
                 linhaAtual.innerHTML = `<td>${z}</td>
@@ -260,6 +307,7 @@ function calcular(vetorTabelas) {
                                             <td>${(obejeto[z] / totalFrequencia * 100).toFixed(2)}</td>
                                             <td>${FrequenciaAtual += obejeto[z]}</td>
                                             <td>${(FrequenciaPorAtual += obejeto[z] / totalFrequencia * 100).toFixed(2)}</td>`;
+                objMediana[z] = FrequenciaAtual;
                 js++
             }
             grupoResults.innerHTML += `
@@ -270,7 +318,83 @@ function calcular(vetorTabelas) {
                             <div class="card my-3 border-info" style="width: auto;">
                                 <div class="card-header bg-dark text-white text-center" style="font-weight: bold;">Resultados Estatísticos</div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item text-center bg-success text-white">Moda: </li>
+                                    <li class="list-group-item text-center bg-success text-white">Moda: ${moda(obejeto)}</li>
+                                    <li class="list-group-item text-center bg-success text-white">Mediana: ${mediana(vetorTabelas[i].tipoVar, objMediana, vetorTabelas[i].dados.length)}</li>
+                                </ul>
+                            </div>
+                        </div>
+                <div class="col-md-2"></div>    
+                </div>
+            </div>
+            `;
+
+        } else if (vetorTabelas[i].tipoVar == "Quantitativa Discreta") {
+            vetorTabelas[i].dados.sort();
+            let obejeto = separador(vetorTabelas[i].dados);
+            console.log(obejeto);
+            grupoVar.innerHTML += `<a class="list-group-item list-group-item-action" style = "font-weight: bold;" href="#${vetorTabelas[i].nome}">${vetorTabelas[i].nome}</a>`;
+            grupoResults.innerHTML += `<h4 id="${vetorTabelas[i].nome}" class="text-center">${vetorTabelas[i].nome}</h4>`;
+            grupoResults.innerHTML += `
+                <div class="table-responsive">
+                    <table class="table table-hover table-danger table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
+                        <thead class="thead-dark">
+                            <tr id="linhaCabecalho">
+
+                            </tr>
+                        </thead>
+                        <tbody id="corpoTabela">
+
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            let totalLinhas = 0;
+            let totalFrequencia = 0;
+            for (let z in obejeto) {
+                totalLinhas++
+                totalFrequencia += obejeto[z];
+            }
+            let tabelaAtual = document.getElementById(`Tabela${vetorTabelas[i].nome}`)
+            let cabecalho = tabelaAtual.getElementsByTagName('tr')[0];
+            let corpo = tabelaAtual.getElementsByTagName('tbody')[0];
+
+            //Escreve todas as linha da tabela
+            for (let z = 1; z <= totalLinhas; z++) {
+                corpo.innerHTML += `<tr></tr>`;
+            }
+
+            //Pegou todas as linhas da tabela
+            let linhas = tabelaAtual.getElementsByTagName('tr');
+
+            //Escrever Cabeçalho
+            cabecalho.innerHTML += `<th scope="col">${vetorTabelas[i].nome}</th>
+                                    <th scope="col">Frequencia Simples</th>
+                                    <th scope="col">FR%</th>
+                                    <th scope="col">FAC</th>
+                                    <th scope="col">FAC%</th>`;
+            let FrequenciaAtual = 0, FrequenciaPorAtual = 0;
+            //Escreve a Tabela
+            let js = 1, objMediana = {};
+            for (let z in obejeto) {
+                let linhaAtual = linhas[js];
+                linhaAtual.innerHTML = `<td>${z}</td>
+                                            <td>${obejeto[z]}</td>
+                                            <td>${(obejeto[z] / totalFrequencia * 100).toFixed(2)}</td>
+                                            <td>${FrequenciaAtual += obejeto[z]}</td>
+                                            <td>${(FrequenciaPorAtual += obejeto[z] / totalFrequencia * 100).toFixed(2)}</td>`;
+                objMediana[z] = FrequenciaAtual;
+                js++
+            }
+            grupoResults.innerHTML += `
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                            <div class="card my-3 border-info" style="width: auto;">
+                                <div class="card-header bg-dark text-white text-center" style="font-weight: bold;">Resultados Estatísticos</div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item text-center bg-success text-white">Média: ${media(vetorTabelas[i].tipoVar, obejeto, vetorTabelas[i].dados.length)}</li>
+                                    <li class="list-group-item text-center bg-success text-white">Moda: ${moda(obejeto)}</li>
                                     <li class="list-group-item text-center bg-success text-white">Mediana: </li>
                                 </ul>
                             </div>
@@ -278,9 +402,7 @@ function calcular(vetorTabelas) {
                 <div class="col-md-2"></div>    
                 </div>
             </div>
-            
             `;
-
         } else if (vetorTabelas[i].tipoVar == "Qualitativa Ordinal") {
             let obejeto = separador(vetorTabelas[i].dados);
             console.log(obejeto);
@@ -327,7 +449,7 @@ function calcular(vetorTabelas) {
             let FrequenciaAtual = 0, FrequenciaPorAtual = 0;
 
             //Escrevendo a tabela.
-            let js = 1, aux;
+            let js = 1, aux, objMediana = {};
 
             for (let k in obejeto) {
                 let linhaAtual = linhas[js];
@@ -347,8 +469,26 @@ function calcular(vetorTabelas) {
                                             <td>${(obejeto[maiorGrau] / totalFrequencia * 100).toFixed(2)}</td>
                                             <td>${FrequenciaAtual += obejeto[maiorGrau]}</td>
                                             <td>${(FrequenciaPorAtual += obejeto[maiorGrau] / totalFrequencia * 100).toFixed(2)}</td>`;
+                objMediana[maiorGrau] = FrequenciaAtual;
                 js++
             }
+            grupoResults.innerHTML += `
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                            <div class="card my-3 border-info" style="width: auto;">
+                                <div class="card-header bg-dark text-white text-center" style="font-weight: bold;">Resultados Estatísticos</div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item text-center bg-success text-white">Moda: ${moda(obejeto)}</li>
+                                    <li class="list-group-item text-center bg-success text-white">Mediana: ${mediana(vetorTabelas[i].tipoVar, objMediana, vetorTabelas[i].dados.length)}</li>
+                                </ul>
+                            </div>
+                        </div>
+                <div class="col-md-2"></div>    
+                </div>
+            </div>
+            `;
         } else if (vetorTabelas[i].tipoVar == "Quantitativa Contínua") {
             let obejeto = separador(vetorTabelas[i].dados);
             console.log(obejeto);
@@ -451,6 +591,24 @@ function calcular(vetorTabelas) {
                     <td>${(FrequenciaPorAtual += fi / totalFrequencia * 100).toFixed(2)}</td>`;
                 js++
             }
+            grupoResults.innerHTML += `
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                            <div class="card my-3 border-info" style="width: auto;">
+                                <div class="card-header bg-dark text-white text-center" style="font-weight: bold;">Resultados Estatísticos</div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item text-center bg-success text-white">Média: </li>
+                                    <li class="list-group-item text-center bg-success text-white">Moda: </li>
+                                    <li class="list-group-item text-center bg-success text-white">Mediana: </li>
+                                </ul>
+                            </div>
+                        </div>
+                <div class="col-md-2"></div>    
+                </div>
+            </div>
+            `;
         }
     }
     $('[data-spy="scroll"]').each(function () {
