@@ -210,18 +210,22 @@ function calcular(vetorTabelas) {
             vetorTabelas[i].dados.sort();
             let obejeto = separador(vetorTabelas[i].dados);
             console.log(obejeto);
-            grupoVar.innerHTML += `<a class="list-group-item list-group-item-action" href="#${vetorTabelas[i].nome}">${vetorTabelas[i].nome}</a>`;
+            grupoVar.innerHTML += `<a class="list-group-item list-group-item-action" style = "font-weight: bold;" href="#${vetorTabelas[i].nome}">${vetorTabelas[i].nome}</a>`;
             grupoResults.innerHTML += `<h4 id="${vetorTabelas[i].nome}" class="text-center">${vetorTabelas[i].nome}</h4>`;
-            grupoResults.innerHTML += `<table class="table table-hover table-danger table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
-                <thead class="thead-dark">
-                    <tr id="linhaCabecalho">
+            grupoResults.innerHTML += `
+                <div class="table-responsive">
+                    <table class="table table-hover table-danger table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
+                        <thead class="thead-dark">
+                            <tr id="linhaCabecalho">
 
-                    </tr>
-                </thead>
-                <tbody id="corpoTabela">
+                            </tr>
+                        </thead>
+                        <tbody id="corpoTabela">
 
-                </tbody>
-            </table>`;
+                        </tbody>
+                    </table>
+                </div>
+            `;
             let totalLinhas = 0;
             let totalFrequencia = 0;
             for (let z in obejeto) {
@@ -258,21 +262,44 @@ function calcular(vetorTabelas) {
                                             <td>${(FrequenciaPorAtual += obejeto[z] / totalFrequencia * 100).toFixed(2)}</td>`;
                 js++
             }
+            grupoResults.innerHTML += `
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                            <div class="card my-3 border-info" style="width: auto;">
+                                <div class="card-header bg-dark text-white text-center" style="font-weight: bold;">Resultados Estatísticos</div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item text-center bg-success text-white">Moda: </li>
+                                    <li class="list-group-item text-center bg-success text-white">Mediana: </li>
+                                </ul>
+                            </div>
+                        </div>
+                <div class="col-md-2"></div>    
+                </div>
+            </div>
+            
+            `;
+
         } else if (vetorTabelas[i].tipoVar == "Qualitativa Ordinal") {
             let obejeto = separador(vetorTabelas[i].dados);
             console.log(obejeto);
-            grupoVar.innerHTML += `<a class="list-group-item list-group-item-action" href="#${vetorTabelas[i].nome}">${vetorTabelas[i].nome}</a>`;
+            grupoVar.innerHTML += `<a class="list-group-item list-group-item-action" style = "font-weight: bold;" href="#${vetorTabelas[i].nome}">${vetorTabelas[i].nome}</a>`;
             grupoResults.innerHTML += `<h4 id="${vetorTabelas[i].nome}" class="text-center">${vetorTabelas[i].nome}</h4>`;
-            grupoResults.innerHTML += `<table class="table table-hover table-danger table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
-                <thead class="thead-dark">
-                    <tr id="linhaCabecalho">
+            grupoResults.innerHTML += `
+                <div class="table-responsive">
+                    <table class="table table-hover table-danger table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
+                        <thead class="thead-dark">
+                            <tr id="linhaCabecalho">
 
-                    </tr>
-                </thead>
-                <tbody id="corpoTabela">
+                            </tr>
+                        </thead>
+                        <tbody id="corpoTabela">
 
-                </tbody>
-            </table>`;
+                        </tbody>
+                    </table>
+                </div>
+            `;
             let totalLinhas = 0;
             let totalFrequencia = 0;
             for (let z in obejeto) {
@@ -325,18 +352,22 @@ function calcular(vetorTabelas) {
         } else if (vetorTabelas[i].tipoVar == "Quantitativa Contínua") {
             let obejeto = separador(vetorTabelas[i].dados);
             console.log(obejeto);
-            grupoVar.innerHTML += `<a class="list-group-item list-group-item-action" href="#${vetorTabelas[i].nome}">${vetorTabelas[i].nome}</a>`;
+            grupoVar.innerHTML += `<a class="list-group-item list-group-item-action" style = "font-weight: bold;" href="#${vetorTabelas[i].nome}">${vetorTabelas[i].nome}</a>`;
             grupoResults.innerHTML += `<h4 id="${vetorTabelas[i].nome}" class="text-center">${vetorTabelas[i].nome}</h4>`;
-            grupoResults.innerHTML += `<table class="table table-hover table-danger table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
-                <thead class="thead-dark">
-                    <tr id="linhaCabecalho">
+            grupoResults.innerHTML += `
+                <div class="table-responsive">
+                    <table class="table table-hover table-danger table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
+                        <thead class="thead-dark">
+                            <tr id="linhaCabecalho">
 
-                    </tr>
-                </thead>
-                <tbody id="corpoTabela">
+                            </tr>
+                        </thead>
+                        <tbody id="corpoTabela">
 
-                </tbody>
-            </table>`;
+                        </tbody>
+                    </table>
+                </div>      
+            `;
 
             //Pegar amplitude
             let maxVal = 0, minVal;
