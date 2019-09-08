@@ -603,7 +603,7 @@ function calcular(vetorTabelas) {
             let pontosMedio = {};
             let jq = 1;
             for (let ks in intervalos) {
-                pontosMedio[`${(parseInt(ks) + intervalos[ks]) / 2}`] = parseInt(linhas[jq].getElementsByTagName('td')[1].innerText);
+                pontosMedio[`${parseInt(((parseInt(ks) + intervalos[ks]) / 2).toFixed(2))}`] = parseInt(linhas[jq].getElementsByTagName('td')[1].innerText);
                 jq++
             }
             console.log(pontosMedio)
