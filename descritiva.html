@@ -12,7 +12,7 @@
     <title>RM² - Descritiva</title>
 </head>
 
-<body class="d-flex flex-column h-100" onload="barra.value = 100; mudarSeparatriz();">
+<body class="d-flex flex-column h-100" onload="barra.value = 100; mudarSeparatriz(); tipoArquivo();">
     <!-- Modal -->
     <div class="modal fade" id="PreviewModal" tabindex="-1" role="dialog" aria-labelledby="PreviewModalLabel"
         aria-hidden="true">
@@ -131,9 +131,16 @@
                                     <textarea class="form-control" id="entrarDados" rows="3"
                                         placeholder="Inserir os dados separados por ; - 12; 323; 12; 34"></textarea>
                                 </div>
-                                <div class="form-group">
-                                    <label for="arquivo">Importar uma Planilha</label>
+                                <div class="form-inline">
+                                    <label for="arquivo" class="sr-only">Importar uma Planilha</label>
                                     <input type="file" class="form-control-file" id="arquivo">
+
+                                    <label for="tipoArquivo" class="my-1 mr-2">Tipo de arquivo</label>
+                                    <select onchange="tipoArquivo();" class="form-control my-1 mr-sm-2 custom-select"
+                                        id="tipoArquivo">
+                                        <option selected>.xlsx</option>
+                                        <option>.csv</option>
+                                    </select>
                                 </div>
                                 <button type="button" class="btn btn-primary" style="width: 100%;"
                                     onclick="adicionarVariavel(tabelas)">Adicionar
@@ -173,7 +180,7 @@
 
                 </div>
             </div>
-            <div class="col-md-9 my-3" id="results" >
+            <div class="col-md-9 my-3" id="results">
 
             </div>
         </div>

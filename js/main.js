@@ -31,18 +31,16 @@ function moda(Quantidades) {
     return nome;
 }
 
-function media(tipoVar, dados, totalFrequencia) {
-    if (tipoVar == "Quantitativa Discreta") {
-        let somatorio = 0;
-        for (let i in dados) {
-            somatorio += parseInt(i) * parseInt(dados[i]);
-        }
-        return parseFloat((somatorio / totalFrequencia).toFixed(2));
+function media(dados, totalFrequencia) {
+    let somatorio = 0;
+    for (let i in dados) {
+        somatorio += parseInt(i) * parseInt(dados[i]);
     }
+    return parseFloat((somatorio / totalFrequencia).toFixed(2));
 }
 
 function mediana(tipoVar, dados, totalFrequencia) {
-    if (tipoVar == 'Qualitativa Nominal' || tipoVar == 'Qualitativa Ordinal') {
+    if (tipoVar == 'Qualitativa Nominal' || tipoVar == 'Qualitativa Ordinal' || tipoVar == 'Quantitativa Discreta') {
         let posicoes = [], medianas = [];
         if (totalFrequencia % 2 == 0) {
             posicoes.push(totalFrequencia / 2, totalFrequencia / 2 + 1);
@@ -60,6 +58,8 @@ function mediana(tipoVar, dados, totalFrequencia) {
             }
         }
         return medianas;
+    } else if (tipoVar == 'Quantitatíva Contínua') {
+
     }
 }
 
@@ -243,6 +243,15 @@ function mudarValorBarra() {
     labelResultado.innerText = barra.value + '%';
 }
 
+function tipoArquivo() {
+    let tipoArquivo = document.getElementById('tipoArquivo');
+    if (tipoArquivo.value == ".xlsx") {
+        document.getElementById('arquivo').setAttribute('accept', '.xlsx')
+    } else {
+        document.getElementById('arquivo').setAttribute('accept', '.csv')
+    }
+}
+
 function calcular(vetorTabelas) {
     document.getElementsByTagName('header')[0].innerHTML = `<h1 class="text-center">Resultados</h1>`;
     document.getElementById('ocultar').innerHTML = '';
@@ -393,9 +402,9 @@ function calcular(vetorTabelas) {
                             <div class="card my-3 border-info" style="width: auto;">
                                 <div class="card-header bg-dark text-white text-center" style="font-weight: bold;">Resultados Estatísticos</div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item text-center bg-success text-white">Média: ${media(vetorTabelas[i].tipoVar, obejeto, vetorTabelas[i].dados.length)}</li>
+                                    <li class="list-group-item text-center bg-success text-white">Média: ${media(obejeto, vetorTabelas[i].dados.length)}</li>
                                     <li class="list-group-item text-center bg-success text-white">Moda: ${moda(obejeto)}</li>
-                                    <li class="list-group-item text-center bg-success text-white">Mediana: </li>
+                                    <li class="list-group-item text-center bg-success text-white">Mediana: ${mediana(vetorTabelas[i].tipoVar, objMediana, vetorTabelas[i].dados.length)}</li>
                                 </ul>
                             </div>
                         </div>
@@ -591,6 +600,13 @@ function calcular(vetorTabelas) {
                     <td>${(FrequenciaPorAtual += fi / totalFrequencia * 100).toFixed(2)}</td>`;
                 js++
             }
+            let pontosMedio = {};
+            let jq = 1;
+            for (let ks in intervalos) {
+                pontosMedio[`${(parseInt(ks) + intervalos[ks]) / 2}`] = parseInt(linhas[jq].getElementsByTagName('td')[1].innerText);
+                jq++
+            }
+            console.log(pontosMedio)
             grupoResults.innerHTML += `
             <div class="container-fluid">
                 <div class="row">
@@ -599,8 +615,8 @@ function calcular(vetorTabelas) {
                             <div class="card my-3 border-info" style="width: auto;">
                                 <div class="card-header bg-dark text-white text-center" style="font-weight: bold;">Resultados Estatísticos</div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item text-center bg-success text-white">Média: </li>
-                                    <li class="list-group-item text-center bg-success text-white">Moda: </li>
+                                    <li class="list-group-item text-center bg-success text-white">Média: ${media(pontosMedio, vetorTabelas[i].dados.length)}</li>
+                                    <li class="list-group-item text-center bg-success text-white">Moda: ${moda(pontosMedio)}</li>
                                     <li class="list-group-item text-center bg-success text-white">Mediana: </li>
                                 </ul>
                             </div>
@@ -609,6 +625,7 @@ function calcular(vetorTabelas) {
                 </div>
             </div>
             `;
+
         }
     }
     $('[data-spy="scroll"]').each(function () {
