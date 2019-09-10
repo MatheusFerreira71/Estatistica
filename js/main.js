@@ -1,225 +1,6 @@
 let tabelas = [];
 let barra = document.getElementById('RangeSeparatriz');
 
-Highcharts.setOptions({
-    colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
-        return {
-            radialGradient: {
-                cx: 0.5,
-                cy: 0.3,
-                r: 0.7
-            },
-            stops: [
-                [0, color],
-                [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
-            ]
-        };
-    })
-});
-
-Highcharts.theme = {
-    colors: ['#2b908f', '#90ee7e', '#f45b5b', '#7798BF', '#aaeeee', '#ff0066',
-        '#eeaaee', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'],
-    chart: {
-        backgroundColor: {
-            linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
-            stops: [
-                [0, '#2a2a2b'],
-                [1, '#3e3e40']
-            ]
-        },
-        style: {
-            fontFamily: '\'Unica One\', sans-serif'
-        },
-        plotBorderColor: '#606063'
-    },
-    title: {
-        style: {
-            color: '#E0E0E3',
-            textTransform: 'uppercase',
-            fontSize: '20px'
-        }
-    },
-    subtitle: {
-        style: {
-            color: '#E0E0E3',
-            textTransform: 'uppercase'
-        }
-    },
-    xAxis: {
-        gridLineColor: '#707073',
-        labels: {
-            style: {
-                color: '#E0E0E3'
-            }
-        },
-        lineColor: '#707073',
-        minorGridLineColor: '#505053',
-        tickColor: '#707073',
-        title: {
-            style: {
-                color: '#A0A0A3'
-
-            }
-        }
-    },
-    yAxis: {
-        gridLineColor: '#707073',
-        labels: {
-            style: {
-                color: '#E0E0E3'
-            }
-        },
-        lineColor: '#707073',
-        minorGridLineColor: '#505053',
-        tickColor: '#707073',
-        tickWidth: 1,
-        title: {
-            style: {
-                color: '#A0A0A3'
-            }
-        }
-    },
-    tooltip: {
-        backgroundColor: 'rgba(0, 0, 0, 0.85)',
-        style: {
-            color: '#F0F0F0'
-        }
-    },
-    plotOptions: {
-        series: {
-            dataLabels: {
-                color: '#F0F0F3',
-                style: {
-                    fontSize: '13px'
-                }
-            },
-            marker: {
-                lineColor: '#333'
-            }
-        },
-        boxplot: {
-            fillColor: '#505053'
-        },
-        candlestick: {
-            lineColor: 'white'
-        },
-        errorbar: {
-            color: 'white'
-        }
-    },
-    legend: {
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        itemStyle: {
-            color: '#E0E0E3'
-        },
-        itemHoverStyle: {
-            color: '#FFF'
-        },
-        itemHiddenStyle: {
-            color: '#606063'
-        },
-        title: {
-            style: {
-                color: '#C0C0C0'
-            }
-        }
-    },
-    credits: {
-        style: {
-            color: '#666'
-        }
-    },
-    labels: {
-        style: {
-            color: '#707073'
-        }
-    },
-
-    drilldown: {
-        activeAxisLabelStyle: {
-            color: '#F0F0F3'
-        },
-        activeDataLabelStyle: {
-            color: '#F0F0F3'
-        }
-    },
-
-    navigation: {
-        buttonOptions: {
-            symbolStroke: '#DDDDDD',
-            theme: {
-                fill: '#505053'
-            }
-        }
-    },
-
-    // scroll charts
-    rangeSelector: {
-        buttonTheme: {
-            fill: '#505053',
-            stroke: '#000000',
-            style: {
-                color: '#CCC'
-            },
-            states: {
-                hover: {
-                    fill: '#707073',
-                    stroke: '#000000',
-                    style: {
-                        color: 'white'
-                    }
-                },
-                select: {
-                    fill: '#000003',
-                    stroke: '#000000',
-                    style: {
-                        color: 'white'
-                    }
-                }
-            }
-        },
-        inputBoxBorderColor: '#505053',
-        inputStyle: {
-            backgroundColor: '#333',
-            color: 'silver'
-        },
-        labelStyle: {
-            color: 'silver'
-        }
-    },
-
-    navigator: {
-        handles: {
-            backgroundColor: '#666',
-            borderColor: '#AAA'
-        },
-        outlineColor: '#CCC',
-        maskFill: 'rgba(255,255,255,0.1)',
-        series: {
-            color: '#7798BF',
-            lineColor: '#A6C7ED'
-        },
-        xAxis: {
-            gridLineColor: '#505053'
-        }
-    },
-
-    scrollbar: {
-        barBackgroundColor: '#808083',
-        barBorderColor: '#808083',
-        buttonArrowColor: '#CCC',
-        buttonBackgroundColor: '#606063',
-        buttonBorderColor: '#606063',
-        rifleColor: '#FFF',
-        trackBackgroundColor: '#404043',
-        trackBorderColor: '#404043'
-    }
-};
-
-// Apply the theme
-Highcharts.setOptions(Highcharts.theme);
-
 function separador(vetor) {
     let Quantidades = {};
     let aux;
@@ -537,8 +318,8 @@ function calcular(vetorTabelas) {
                                             <td>${(FrequenciaPorAtual += obejeto[z] / totalFrequencia * 100).toFixed(2)}</td>`;
                 objMediana[z] = FrequenciaAtual;
                 let objGrafico = {};
-                objGrafico.name = z;
-                objGrafico.y = parseFloat((obejeto[z] / totalFrequencia * 100).toFixed(2));
+                objGrafico.label = z;
+                objGrafico.value = obejeto[z];
                 vetorGrafico.push(objGrafico);
                 js++
             }
@@ -558,53 +339,41 @@ function calcular(vetorTabelas) {
                 <div class="col-md-1"></div>    
                 </div>
             </div>
+            `;
+
+            //Gráfico
+            FusionCharts.ready(function(){
+                let fusioncharts = new FusionCharts({
+                type: 'pie3d',
+                renderAt: `chart${vetorTabelas[i].nome}`,
+                width: '100%',
+                height: '400',
+                dataFormat: 'json',
+                dataSource: {
+                    "chart": {
+                        "caption": `${vetorTabelas[i].nome}`,
+                        "enableSmartLabels": "0",
+                        "startingAngle": "0",
+                        "showPercentValues": "1",
+                        "decimals": "1",
+                        "useDataPlotColorForLabels": "1",
+                        "theme": "fusion"
+                    },
+                    "data": vetorGrafico
+                }
+            });
+                fusioncharts.render();
+                });
+            grupoResults.innerHTML += `
             <div class="container-fluid my-3">
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-10">
-                        <div id="chart${vetorTabelas[i].nome}" style="height: 400px; width: auto;"></div>
+                        <div id="chart${vetorTabelas[i].nome}"></div>
                     </div>
                     <div class="col-md-1"></div>
                 </div>
-            </div>
-            `;
-
-            //Gráfico
-            Highcharts.chart(`chart${vetorTabelas[i].nome}`, {
-                chart: {
-                    plotBackgroundColor: null,
-                    plotBorderWidth: null,
-                    plotShadow: false,
-                    type: 'pie',
-                    options3d: {
-                        enabled: true,
-                        alpha: 45,
-                        beta: 0
-                    }
-                },
-                title: {
-                    text: `${vetorTabelas[i].nome}`
-                },
-                tooltip: {
-                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
-                },
-                plotOptions: {
-                    pie: {
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        dataLabels: {
-                            enabled: false
-                        },
-                        showInLegend: true,
-                        depth: 35
-                    }
-                },
-                series: [{
-                    name: 'FR%',
-                    colorByPoint: true,
-                    data: vetorGrafico
-                }]
-            });
+            </div>`
 
         } else if (vetorTabelas[i].tipoVar == "Quantitativa Discreta") {
             vetorTabelas[i].dados.sort();
