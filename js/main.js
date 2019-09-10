@@ -342,28 +342,28 @@ function calcular(vetorTabelas) {
             `;
 
             //Gráfico
-            FusionCharts.ready(function(){
+            FusionCharts.ready(function () {
                 let fusioncharts = new FusionCharts({
-                type: 'pie3d',
-                renderAt: `chart${vetorTabelas[i].nome}`,
-                width: '100%',
-                height: '400',
-                dataFormat: 'json',
-                dataSource: {
-                    "chart": {
-                        "caption": `${vetorTabelas[i].nome}`,
-                        "enableSmartLabels": "0",
-                        "startingAngle": "0",
-                        "showPercentValues": "1",
-                        "decimals": "1",
-                        "useDataPlotColorForLabels": "1",
-                        "theme": "fusion"
-                    },
-                    "data": vetorGrafico
-                }
-            });
-                fusioncharts.render();
+                    type: 'pie3d',
+                    renderAt: `chart${vetorTabelas[i].nome}`,
+                    width: '100%',
+                    height: '400',
+                    dataFormat: 'json',
+                    dataSource: {
+                        "chart": {
+                            "caption": `${vetorTabelas[i].nome}`,
+                            "enableSmartLabels": "0",
+                            "startingAngle": "0",
+                            "showPercentValues": "1",
+                            "decimals": "1",
+                            "useDataPlotColorForLabels": "1",
+                            "theme": "candy"
+                        },
+                        "data": vetorGrafico
+                    }
                 });
+                fusioncharts.render();
+            });
             grupoResults.innerHTML += `
             <div class="container-fluid my-3">
                 <div class="row">
@@ -419,7 +419,7 @@ function calcular(vetorTabelas) {
                                     <th scope="col">FR%</th>
                                     <th scope="col">FAC</th>
                                     <th scope="col">FAC%</th>`;
-            let FrequenciaAtual = 0, FrequenciaPorAtual = 0;
+            let FrequenciaAtual = 0, FrequenciaPorAtual = 0, vetorGrafico = [];
             //Escreve a Tabela
             let js = 1, objMediana = {};
             for (let z in obejeto) {
@@ -429,6 +429,10 @@ function calcular(vetorTabelas) {
                                             <td>${(obejeto[z] / totalFrequencia * 100).toFixed(2)}</td>
                                             <td>${FrequenciaAtual += obejeto[z]}</td>
                                             <td>${(FrequenciaPorAtual += obejeto[z] / totalFrequencia * 100).toFixed(2)}</td>`;
+                let objGrafico = {};
+                objGrafico.label = z;
+                objGrafico.value = (obejeto[z] / totalFrequencia * 100).toFixed(2);
+                vetorGrafico.push(objGrafico);
                 objMediana[z] = FrequenciaAtual;
                 js++
             }
@@ -450,6 +454,37 @@ function calcular(vetorTabelas) {
                 </div>
             </div>
             `;
+
+            //Gráfico
+            FusionCharts.ready(function () {
+                let fusioncharts = new FusionCharts({
+                    type: 'bar3d',
+                    renderAt: `chart${vetorTabelas[i].nome}`,
+                    width: '100%',
+                    height: '400',
+                    dataFormat: 'json',
+                    dataSource: {
+                        "chart": {
+                            "caption": `${vetorTabelas[i].nome}`,
+                            "yAxisName": "FR%",
+                            "numberSuffix": "%",
+                            "theme": "candy"
+                        },
+                        "data": vetorGrafico
+                    }
+                });
+                fusioncharts.render();
+            });
+            grupoResults.innerHTML += `
+            <div class="container-fluid my-3">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <div id="chart${vetorTabelas[i].nome}"></div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>`
         } else if (vetorTabelas[i].tipoVar == "Qualitativa Ordinal") {
             let obejeto = separador(vetorTabelas[i].dados);
             console.log(obejeto);
@@ -496,7 +531,7 @@ function calcular(vetorTabelas) {
             let FrequenciaAtual = 0, FrequenciaPorAtual = 0;
 
             //Escrevendo a tabela.
-            let js = 1, aux, objMediana = {};
+            let js = 1, aux, objMediana = {}, vetorGrafico = [];
 
             for (let k in obejeto) {
                 let linhaAtual = linhas[js];
@@ -517,6 +552,10 @@ function calcular(vetorTabelas) {
                                             <td>${FrequenciaAtual += obejeto[maiorGrau]}</td>
                                             <td>${(FrequenciaPorAtual += obejeto[maiorGrau] / totalFrequencia * 100).toFixed(2)}</td>`;
                 objMediana[maiorGrau] = FrequenciaAtual;
+                let objGrafico = {};
+                objGrafico.label = maiorGrau;
+                objGrafico.value = obejeto[maiorGrau];
+                vetorGrafico.push(objGrafico);
                 js++
             }
             grupoResults.innerHTML += `
@@ -536,6 +575,39 @@ function calcular(vetorTabelas) {
                 </div>
             </div>
             `;
+            //Gráfico
+            FusionCharts.ready(function () {
+                let fusioncharts = new FusionCharts({
+                    type: 'pie3d',
+                    renderAt: `chart${vetorTabelas[i].nome}`,
+                    width: '100%',
+                    height: '400',
+                    dataFormat: 'json',
+                    dataSource: {
+                        "chart": {
+                            "caption": `${vetorTabelas[i].nome}`,
+                            "enableSmartLabels": "0",
+                            "startingAngle": "0",
+                            "showPercentValues": "1",
+                            "decimals": "1",
+                            "useDataPlotColorForLabels": "1",
+                            "theme": "candy"
+                        },
+                        "data": vetorGrafico
+                    }
+                });
+                fusioncharts.render();
+            });
+            grupoResults.innerHTML += `
+            <div class="container-fluid my-3">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <div id="chart${vetorTabelas[i].nome}"></div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>`
         } else if (vetorTabelas[i].tipoVar == "Quantitativa Contínua") {
             let obejeto = separador(vetorTabelas[i].dados);
             console.log(obejeto);
@@ -620,7 +692,7 @@ function calcular(vetorTabelas) {
                                     <th scope="col">FAC</th>
                                     <th scope="col">FAC%</th>`;
 
-            let FrequenciaAtual = 0, FrequenciaPorAtual = 0;
+            let FrequenciaAtual = 0, FrequenciaPorAtual = 0, vetorGrafico = [];
             //Escrever a tabela
             let js = 1, fi;
             for (let z in intervalos) {
@@ -636,6 +708,10 @@ function calcular(vetorTabelas) {
                     <td>${(fi / totalFrequencia * 100).toFixed(2)}</td>
                     <td>${FrequenciaAtual += fi}</td>
                     <td>${(FrequenciaPorAtual += fi / totalFrequencia * 100).toFixed(2)}</td>`;
+                let objGrafico = {};
+                objGrafico.label = `${z} |-- ${intervalos[z]}`;
+                objGrafico.value = (fi / totalFrequencia * 100).toFixed(2);
+                vetorGrafico.push(objGrafico);
                 js++
             }
             let pontosMedio = {};
@@ -663,10 +739,47 @@ function calcular(vetorTabelas) {
                 </div>
             </div>
             `;
-
+            //Gráfico
+            FusionCharts.ready(function () {
+                let fusioncharts = new FusionCharts({
+                    type: 'column2d',
+                    renderAt: `chart${vetorTabelas[i].nome}`,
+                    width: '100%',
+                    height: '400',
+                    dataFormat: 'json',
+                    dataSource: {
+                        "chart": {
+                            "caption": vetorTabelas[i].nome,
+                            "xAxisName": "Intervalos",
+                            "yAxisName": "FR%",
+                            "numberSuffix": "%",
+                            "theme": "candy",
+                            "plotSpacePercent": "0",
+                            "useRoundEdges": "1"
+                        },
+                        "data": vetorGrafico
+                    }
+                });
+                fusioncharts.render();
+            });
+            grupoResults.innerHTML += `
+            <div class="container-fluid my-3">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <div id="chart${vetorTabelas[i].nome}"></div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>`
         }
     }
     $('[data-spy="scroll"]').each(function () {
         var $spy = $(this).scrollspy('refresh')
     })
+
+    document.getElementById('ScrollspyRow').innerHTML += `
+    <div class="container-fluid my-3">
+        <a href="descritiva.html" class="btn btn-success" style="width: 100%">Voltar</a>
+    </div>`
 }
