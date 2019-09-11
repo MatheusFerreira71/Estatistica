@@ -39,8 +39,7 @@ function media(dados, totalFrequencia) {
     return parseFloat((somatorio / totalFrequencia).toFixed(2));
 }
 
-function mediana(tipoVar, dados, totalFrequencia) {
-    if (tipoVar == 'Qualitativa Nominal' || tipoVar == 'Qualitativa Ordinal' || tipoVar == 'Quantitativa Discreta') {
+function mediana(dados, totalFrequencia) {
         let posicoes = [], medianas = [];
         if (totalFrequencia % 2 == 0) {
             posicoes.push(totalFrequencia / 2, totalFrequencia / 2 + 1);
@@ -58,9 +57,21 @@ function mediana(tipoVar, dados, totalFrequencia) {
             }
         }
         return medianas;
-    } else if (tipoVar == 'Quantitatíva Contínua') {
+}
 
-    }
+function medianaContinua(totalFrequencia, intervalos, interClasses){
+    let posicao = parseInt((totalFrequencia / 2).toFixed(2));
+        let controle = 0, vetorIntervalos;
+        for (let j in intervalos) {
+            if (posicao >= controle && posicao <= intervalos[j][0]) {
+                vetorIntervalos = j.split('|--');
+                for(let i = 0; i < vetorIntervalos.length; i++){
+                    vetorIntervalos[i] = parseInt(vetorIntervalos[i]);
+                }
+                return vetorIntervalos[0] + ((posicao - controle) / intervalos[j][1]) * interClasses
+            }
+            controle = intervalos[j][0];
+        }
 }
 
 function vetorNaN(vetor) {
@@ -332,7 +343,7 @@ function calcular(vetorTabelas) {
                                 <div class="card-header bg-dark text-white text-center" style="font-weight: bold;">Resultados Estatísticos</div>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item text-center bg-success text-white">Moda: ${moda(obejeto)}</li>
-                                    <li class="list-group-item text-center bg-success text-white">Mediana: ${mediana(vetorTabelas[i].tipoVar, objMediana, vetorTabelas[i].dados.length)}</li>
+                                    <li class="list-group-item text-center bg-success text-white">Mediana: ${mediana(objMediana, vetorTabelas[i].dados.length)}</li>
                                 </ul>
                             </div>
                         </div>
@@ -446,7 +457,7 @@ function calcular(vetorTabelas) {
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item text-center bg-success text-white">Média: ${media(obejeto, vetorTabelas[i].dados.length)}</li>
                                     <li class="list-group-item text-center bg-success text-white">Moda: ${moda(obejeto)}</li>
-                                    <li class="list-group-item text-center bg-success text-white">Mediana: ${mediana(vetorTabelas[i].tipoVar, objMediana, vetorTabelas[i].dados.length)}</li>
+                                    <li class="list-group-item text-center bg-success text-white">Mediana: ${mediana(objMediana, vetorTabelas[i].dados.length)}</li>
                                 </ul>
                             </div>
                         </div>
@@ -567,7 +578,7 @@ function calcular(vetorTabelas) {
                                 <div class="card-header bg-dark text-white text-center" style="font-weight: bold;">Resultados Estatísticos</div>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item text-center bg-success text-white">Moda: ${moda(obejeto)}</li>
-                                    <li class="list-group-item text-center bg-success text-white">Mediana: ${mediana(vetorTabelas[i].tipoVar, objMediana, vetorTabelas[i].dados.length)}</li>
+                                    <li class="list-group-item text-center bg-success text-white">Mediana: ${mediana(objMediana, vetorTabelas[i].dados.length)}</li>
                                 </ul>
                             </div>
                         </div>
@@ -692,7 +703,7 @@ function calcular(vetorTabelas) {
                                     <th scope="col">FAC</th>
                                     <th scope="col">FAC%</th>`;
 
-            let FrequenciaAtual = 0, FrequenciaPorAtual = 0, vetorGrafico = [];
+            let FrequenciaAtual = 0, FrequenciaPorAtual = 0, vetorGrafico = [], objMediana = {};
             //Escrever a tabela
             let js = 1, fi;
             for (let z in intervalos) {
@@ -708,12 +719,14 @@ function calcular(vetorTabelas) {
                     <td>${(fi / totalFrequencia * 100).toFixed(2)}</td>
                     <td>${FrequenciaAtual += fi}</td>
                     <td>${(FrequenciaPorAtual += fi / totalFrequencia * 100).toFixed(2)}</td>`;
+                    objMediana[`${z}|--${intervalos[z]}`] = [FrequenciaAtual, fi];
                 let objGrafico = {};
                 objGrafico.label = `${z} |-- ${intervalos[z]}`;
                 objGrafico.value = (fi / totalFrequencia * 100).toFixed(2);
                 vetorGrafico.push(objGrafico);
                 js++
             }
+            console.log(objMediana)
             let pontosMedio = {};
             let jq = 1;
             for (let ks in intervalos) {
@@ -731,7 +744,7 @@ function calcular(vetorTabelas) {
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item text-center bg-success text-white">Média: ${media(pontosMedio, vetorTabelas[i].dados.length)}</li>
                                     <li class="list-group-item text-center bg-success text-white">Moda: ${moda(pontosMedio)}</li>
-                                    <li class="list-group-item text-center bg-success text-white">Mediana: </li>
+                                    <li class="list-group-item text-center bg-success text-white">Mediana: ${medianaContinua(vetorTabelas[i].dados.length,objMediana,Ic)}</li>
                                 </ul>
                             </div>
                         </div>
@@ -774,12 +787,11 @@ function calcular(vetorTabelas) {
             </div>`
         }
     }
-    $('[data-spy="scroll"]').each(function () {
-        var $spy = $(this).scrollspy('refresh')
-    })
-
     document.getElementById('ScrollspyRow').innerHTML += `
     <div class="container-fluid my-3">
         <a href="descritiva.html" class="btn btn-success" style="width: 100%">Voltar</a>
     </div>`
+    $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this).scrollspy('refresh')
+    })
 }
