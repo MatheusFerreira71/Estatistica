@@ -40,7 +40,7 @@ function media(dados, totalFrequencia) {
 }
 
 function medidaSeparatriz(porcentagem, dados, totalFrequencia) {
-    let posicao = parseInt((totalFrequencia * porcentagem).toFixed(0));
+    let posicao = parseFloat((totalFrequencia * porcentagem).toFixed(0));
     for (let i in dados) {
         let controle = 0;
         if (posicao >= controle && posicao <= dados[i]) {
@@ -51,7 +51,7 @@ function medidaSeparatriz(porcentagem, dados, totalFrequencia) {
 }
 
 function medidaSeparatrizContinua(totalFrequencia, intervalos, interClasses, porcentagem) {
-    let posicao = parseInt((totalFrequencia * porcentagem).toFixed(2));
+    let posicao = parseFloat((totalFrequencia * porcentagem).toFixed(2));
     let controle = 0, vetorIntervalos;
     for (let j in intervalos) {
         if (posicao >= controle && posicao <= intervalos[j][0]) {
@@ -59,7 +59,7 @@ function medidaSeparatrizContinua(totalFrequencia, intervalos, interClasses, por
             for (let i = 0; i < vetorIntervalos.length; i++) {
                 vetorIntervalos[i] = parseInt(vetorIntervalos[i]);
             }
-            return vetorIntervalos[0] + ((posicao - controle) / intervalos[j][1]) * interClasses
+            return (vetorIntervalos[0] + ((posicao - controle) / intervalos[j][1]) * interClasses).toFixed(2)
         }
         controle = intervalos[j][0];
     }
@@ -94,7 +94,7 @@ function medianaContinua(totalFrequencia, intervalos, interClasses) {
             for (let i = 0; i < vetorIntervalos.length; i++) {
                 vetorIntervalos[i] = parseInt(vetorIntervalos[i]);
             }
-            return vetorIntervalos[0] + ((posicao - controle) / intervalos[j][1]) * interClasses
+            return (vetorIntervalos[0] + ((posicao - controle) / intervalos[j][1]) * interClasses).toFixed(2)
         }
         controle = intervalos[j][0];
     }
