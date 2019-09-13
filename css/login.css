@@ -68,9 +68,9 @@ body{
 .focus + span::before{
   top: -5px;
 }
-.focus + span::after{
+/* .focus + span::after{
   width: 100%;
-}
+} */
 
 .logbtn{
   display: block;
