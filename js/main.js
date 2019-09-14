@@ -39,39 +39,65 @@ function media(dados, totalFrequencia) {
     return parseFloat((somatorio / totalFrequencia).toFixed(2));
 }
 
-function mediana(dados, totalFrequencia) {
-        let posicoes = [], medianas = [];
-        if (totalFrequencia % 2 == 0) {
-            posicoes.push(totalFrequencia / 2, totalFrequencia / 2 + 1);
-        } else {
-            posicoes.push((totalFrequencia - 1) / 2 + 1);
+function medidaSeparatriz(porcentagem, dados, totalFrequencia) {
+    let posicao = parseFloat((totalFrequencia * porcentagem).toFixed(0));
+    for (let i in dados) {
+        let controle = 0;
+        if (posicao >= controle && posicao <= dados[i]) {
+            return i
         }
-        for (let i of posicoes) {
-            let controle = 0;
-            for (let j in dados) {
-                if (i >= controle && i <= dados[j]) {
-                    medianas.push(j);
-                    break;
-                }
-                controle = dados[j];
-            }
-        }
-        return medianas;
+        controle = dados[i];
+    }
 }
 
-function medianaContinua(totalFrequencia, intervalos, interClasses){
-    let posicao = parseInt((totalFrequencia / 2).toFixed(2));
-        let controle = 0, vetorIntervalos;
-        for (let j in intervalos) {
-            if (posicao >= controle && posicao <= intervalos[j][0]) {
-                vetorIntervalos = j.split('|--');
-                for(let i = 0; i < vetorIntervalos.length; i++){
-                    vetorIntervalos[i] = parseInt(vetorIntervalos[i]);
-                }
-                return vetorIntervalos[0] + ((posicao - controle) / intervalos[j][1]) * interClasses
+function medidaSeparatrizContinua(totalFrequencia, intervalos, interClasses, porcentagem) {
+    let posicao = parseFloat((totalFrequencia * porcentagem).toFixed(2));
+    let controle = 0, vetorIntervalos;
+    for (let j in intervalos) {
+        if (posicao >= controle && posicao <= intervalos[j][0]) {
+            vetorIntervalos = j.split('|--');
+            for (let i = 0; i < vetorIntervalos.length; i++) {
+                vetorIntervalos[i] = parseInt(vetorIntervalos[i]);
             }
-            controle = intervalos[j][0];
+            return (vetorIntervalos[0] + ((posicao - controle) / intervalos[j][1]) * interClasses).toFixed(2)
         }
+        controle = intervalos[j][0];
+    }
+}
+
+function mediana(dados, totalFrequencia) {
+    let posicoes = [], medianas = [];
+    if (totalFrequencia % 2 == 0) {
+        posicoes.push(totalFrequencia / 2, totalFrequencia / 2 + 1);
+    } else {
+        posicoes.push((totalFrequencia - 1) / 2 + 1);
+    }
+    for (let i of posicoes) {
+        let controle = 0;
+        for (let j in dados) {
+            if (i >= controle && i <= dados[j]) {
+                medianas.push(j);
+                break;
+            }
+            controle = dados[j];
+        }
+    }
+    return medianas;
+}
+
+function medianaContinua(totalFrequencia, intervalos, interClasses) {
+    let posicao = parseInt((totalFrequencia / 2).toFixed(2));
+    let controle = 0, vetorIntervalos;
+    for (let j in intervalos) {
+        if (posicao >= controle && posicao <= intervalos[j][0]) {
+            vetorIntervalos = j.split('|--');
+            for (let i = 0; i < vetorIntervalos.length; i++) {
+                vetorIntervalos[i] = parseInt(vetorIntervalos[i]);
+            }
+            return (vetorIntervalos[0] + ((posicao - controle) / intervalos[j][1]) * interClasses).toFixed(2)
+        }
+        controle = intervalos[j][0];
+    }
 }
 
 function vetorNaN(vetor) {
@@ -344,6 +370,7 @@ function calcular(vetorTabelas) {
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item text-center bg-success text-white">Moda: ${moda(obejeto)}</li>
                                     <li class="list-group-item text-center bg-success text-white">Mediana: ${mediana(objMediana, vetorTabelas[i].dados.length)}</li>
+                                    <li class="list-group-item text-center bg-success text-white">Medida Separatriz ${vetorTabelas[i].separatriz * 100}%: ${medidaSeparatriz(vetorTabelas[i].separatriz, objMediana, vetorTabelas[i].dados.length)}</li>
                                 </ul>
                             </div>
                         </div>
@@ -458,6 +485,7 @@ function calcular(vetorTabelas) {
                                     <li class="list-group-item text-center bg-success text-white">Média: ${media(obejeto, vetorTabelas[i].dados.length)}</li>
                                     <li class="list-group-item text-center bg-success text-white">Moda: ${moda(obejeto)}</li>
                                     <li class="list-group-item text-center bg-success text-white">Mediana: ${mediana(objMediana, vetorTabelas[i].dados.length)}</li>
+                                    <li class="list-group-item text-center bg-success text-white">Medida Separatriz ${vetorTabelas[i].separatriz * 100}%: ${medidaSeparatriz(vetorTabelas[i].separatriz, objMediana, vetorTabelas[i].dados.length)}</li>
                                 </ul>
                             </div>
                         </div>
@@ -579,6 +607,7 @@ function calcular(vetorTabelas) {
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item text-center bg-success text-white">Moda: ${moda(obejeto)}</li>
                                     <li class="list-group-item text-center bg-success text-white">Mediana: ${mediana(objMediana, vetorTabelas[i].dados.length)}</li>
+                                    <li class="list-group-item text-center bg-success text-white">Medida Separatriz ${vetorTabelas[i].separatriz * 100}%: ${medidaSeparatriz(vetorTabelas[i].separatriz, objMediana, vetorTabelas[i].dados.length)}</li>
                                 </ul>
                             </div>
                         </div>
@@ -719,7 +748,7 @@ function calcular(vetorTabelas) {
                     <td>${(fi / totalFrequencia * 100).toFixed(2)}</td>
                     <td>${FrequenciaAtual += fi}</td>
                     <td>${(FrequenciaPorAtual += fi / totalFrequencia * 100).toFixed(2)}</td>`;
-                    objMediana[`${z}|--${intervalos[z]}`] = [FrequenciaAtual, fi];
+                objMediana[`${z}|--${intervalos[z]}`] = [FrequenciaAtual, fi];
                 let objGrafico = {};
                 objGrafico.label = `${z} |-- ${intervalos[z]}`;
                 objGrafico.value = (fi / totalFrequencia * 100).toFixed(2);
@@ -744,7 +773,8 @@ function calcular(vetorTabelas) {
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item text-center bg-success text-white">Média: ${media(pontosMedio, vetorTabelas[i].dados.length)}</li>
                                     <li class="list-group-item text-center bg-success text-white">Moda: ${moda(pontosMedio)}</li>
-                                    <li class="list-group-item text-center bg-success text-white">Mediana: ${medianaContinua(vetorTabelas[i].dados.length,objMediana,Ic)}</li>
+                                    <li class="list-group-item text-center bg-success text-white">Mediana: ${medianaContinua(vetorTabelas[i].dados.length, objMediana, Ic)}</li>
+                                    <li class="list-group-item text-center bg-success text-white">Medida Separatriz ${vetorTabelas[i].separatriz * 100}%: ${medidaSeparatrizContinua(vetorTabelas[i].dados.length, objMediana, Ic, vetorTabelas[i].separatriz)}</li>
                                 </ul>
                             </div>
                         </div>
@@ -790,7 +820,8 @@ function calcular(vetorTabelas) {
     document.getElementById('ScrollspyRow').innerHTML += `
     <div class="container-fluid my-3">
         <a href="descritiva.html" class="btn btn-success" style="width: 100%">Voltar</a>
-    </div>`
+    </div>`;
+
     $('[data-spy="scroll"]').each(function () {
         var $spy = $(this).scrollspy('refresh')
     })
