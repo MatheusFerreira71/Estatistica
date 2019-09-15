@@ -1,43 +1,98 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="css/login.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
-  </head>
-  <body>
+</head>
 
-      <form action="index.html" class="login-form">
+<body>
+
+    <form action="index.html" class="login-form">
         <h1>Login</h1>
 
         <div class="txtb">
-          <input id="ra" type="text">
-          <span data-placeholder="RA"></span>
+            <input id="ra" type="text">
+            <span data-placeholder="RA"></span>
         </div>
 
         <div class="txtb">
-          <input id="senha" type="password">
-          <span data-placeholder="CPF"></span>
+            <input id="cpf" type="password">
+            <span data-placeholder="CPF"></span>
         </div>
 
-        <input href="login.html" type="submit" class="logbtn" value="ENTRAR">
-
-        
-      </form>
- 
-      <script type="text/javascript">
-      $(".txtb input").on("focus",function(){
-        $(this).addClass("focus");
-      });
-
-      $(".txtb input").on("blur",function(){
-        if($(this).val() == "")
-        $(this).removeClass("focus");
-      });
-
-      </script>
+        <input onclick="validarCPF()" type="submit" class="logbtn" value="ENTRAR">
 
 
-  </body>
+    </form>
+
+    <script type="text/javascript">
+        $(".txtb input").on("focus", function() {
+            $(this).addClass("focus");
+        });
+
+        $(".txtb input").on("blur", function() {
+            if ($(this).val() == "")
+                $(this).removeClass("focus");
+        });
+
+
+
+        function validarCPF() {
+            let resCPF, resRA
+            var ra = document.getElementById('ra').value
+            var cpf = document.getElementById('cpf').value
+
+            //verificar se o Ra é valido
+            if (ra.length === 13 && ra[0] == 1 && ra[1] == 0) {
+                resRA = true
+            } else { //mudei o ra nao e valido
+                resRA = false
+            }
+
+            // if conferir para verificar se o CPF não é uma sequencia '00000000000' 
+            if (cpf == "00000000000") {
+                resCPF = false
+            }
+            // Variaveis para acumular as somas e as multiplicações 
+            let soma1 = 0
+            let soma2 = 0
+                //For é usado para fazer as somas e as multiplicações 
+            for (let i = 1; i < 11; i++) {
+                if (i < 10) {
+                    soma1 += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+                }
+                soma2 += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+            }
+            //Buscar o resto das multiplicações e somas 
+            let resto1 = (soma1 * 10) % 11
+            let resto2 = (soma2 * 10) % 11
+                //Comparar se é 10 ou 11, para atribuir o número 0
+            if ((resto1 == 10) || (resto1 == 11)) {
+                resto1 = 0
+            }
+            if ((resto2 == 10) || (resto2 == 11)) {
+                resto2 = 0
+            }
+            //Verificar se o valor dos digitos é correto
+            if (resto1 == parseInt(cpf.substring(9, 10)) & (resto2 == parseInt(cpf.substring(10, 11)))) {
+                resCPF = true
+            } else {
+                resCPF = false
+            }
+            // validaçao geral dentro da funçao
+            if (resCPF == true && resRA == true) {
+                alert("foi")
+                window.open('descritiva.html', 'janela') // abre ma janela nova           
+            } else {
+                alert("nao foi")
+            }
+        }
+    </script>
+
+
+</body>
+
 </html>
