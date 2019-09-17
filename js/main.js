@@ -1,4 +1,4 @@
-let tabelas = [];
+let tabelas = [], vetorImport = [];
 let barra = document.getElementById('RangeSeparatriz');
 
 function separador(vetor) {
@@ -110,45 +110,6 @@ function vetorNaN(vetor) {
         }
     }
     return (aux == vetor.length) ? true : false
-}
-
-function importDados(tabelas) {
-    let files = e.target.files, f = files[0];
-    let reader = new FileReader();
-    let celulas_Json = {};
-
-    reader.onload = function (e) {
-        let data = new Uint8Array(e.target.result);
-        let arquivo_completo = XLSX.read(data, { type: 'array', cellText: true, cellDates: true });
-        //propriedades do arquivo
-        // poe um if aq caso vc queira q, caso so um, retorne so o objeto, ou so pega o CELULAS_JSON E JA ERA
-        for (let i = 0; i < arquivo_completo.SheetNames.length; i++) {
-            todas_celulas = arquivo_completo.Sheets[arquivo_completo.SheetNames[i]]
-            celulas_Json = XLSX.utils.sheet_to_json(todas_celulas, { raw: false });
-            cabecalho = XLSX.utils.sheet_to_json(todas_celulas, { header: 1 });
-
-            for (let j = 0; j < cabecalho[0].length; j++) {
-                let dados = [];
-                for (let linhas of celulas_Json) {
-                    if (linhas[cabecalho[0][j]] != undefined) {
-                        dados.push((linhas[cabecalho[0][j]]).trim());
-                    }
-                }
-                if (vetorNaN(dados)) {
-                    for (let hs = 0; hs < dados.length; hs++) {
-                        dados[hs] = dados[hs].toUpperCase();
-                    }
-                } else {
-                    for (let hs = 0; hs < dados.length; hs++) {
-                        dados[hs] = parseInt(dados[hs])
-                    }
-                }
-                tabelas.push({ nome: cabecalho[0][j], dados: dados })
-            }
-        }
-        console.log(tabelas)
-    };
-    reader.readAsArrayBuffer(f);
 }
 
 function adicionarVariavel(vetorTabelas) {
@@ -865,3 +826,42 @@ function calcular(vetorTabelas) {
         var $spy = $(this).scrollspy('refresh')
     })
 }
+
+$('#arquivo').change(function (e) {
+    let files = e.target.files, f = files[0];
+    let reader = new FileReader();
+    let celulas_Json = {};
+
+    reader.onload = function (e) {
+        let data = new Uint8Array(e.target.result);
+        let arquivo_completo = XLSX.read(data, { type: 'array', cellText: true, cellDates: true });
+        //propriedades do arquivo
+        // poe um if aq caso vc queira q, caso so um, retorne so o objeto, ou so pega o CELULAS_JSON E JA ERA
+        for (let i = 0; i < arquivo_completo.SheetNames.length; i++) {
+            todas_celulas = arquivo_completo.Sheets[arquivo_completo.SheetNames[i]]
+            celulas_Json = XLSX.utils.sheet_to_json(todas_celulas, { raw: false });
+            cabecalho = XLSX.utils.sheet_to_json(todas_celulas, { header: 1 });
+
+            for (let j = 0; j < cabecalho[0].length; j++) {
+                let dados = [];
+                for (let linhas of celulas_Json) {
+                    if (linhas[cabecalho[0][j]] != undefined) {
+                        dados.push((linhas[cabecalho[0][j]]).trim());
+                    }
+                }
+                if (vetorNaN(dados)) {
+                    for (let hs = 0; hs < dados.length; hs++) {
+                        dados[hs] = dados[hs].toUpperCase();
+                    }
+                } else {
+                    for (let hs = 0; hs < dados.length; hs++) {
+                        dados[hs] = parseInt(dados[hs])
+                    }
+                }
+                vetorImport.push({ nome: cabecalho[0][j], dados: dados })
+            }
+        }
+        console.log(vetorImport)
+    };
+    reader.readAsArrayBuffer(f);
+})
