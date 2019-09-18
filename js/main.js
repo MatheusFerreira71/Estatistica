@@ -486,6 +486,8 @@ function calcular(vetorTabelas) {
                                     <li class="list-group-item text-center bg-success text-white">Moda: ${moda(obejeto)}</li>
                                     <li class="list-group-item text-center bg-success text-white">Mediana: ${mediana(objMediana, vetorTabelas[i].dados.length)}</li>
                                     <li class="list-group-item text-center bg-success text-white">Medida Separatriz ${vetorTabelas[i].separatriz * 100}%: ${medidaSeparatriz(vetorTabelas[i].separatriz, objMediana, vetorTabelas[i].dados.length)}</li>
+                                    <li class="list-group-item text-center bg-success text-white">Desvio Padrão ${vetorTabelas[i].tipoAna}: ${desvioPadrao(obejeto, media(obejeto, vetorTabelas[i].dados.length), vetorTabelas[i].tipoAna)}</li>
+                                    <li class="list-group-item text-center bg-success text-white">Coeficiente de Variação: ${coefiVaria(desvioPadrao(obejeto, media(obejeto, vetorTabelas[i].dados.length), vetorTabelas[i].tipoAna), media(obejeto, vetorTabelas[i].dados.length))}</li>
                                 </ul>
                             </div>
                         </div>
@@ -775,6 +777,8 @@ function calcular(vetorTabelas) {
                                     <li class="list-group-item text-center bg-success text-white">Moda: ${moda(pontosMedio)}</li>
                                     <li class="list-group-item text-center bg-success text-white">Mediana: ${medianaContinua(vetorTabelas[i].dados.length, objMediana, Ic)}</li>
                                     <li class="list-group-item text-center bg-success text-white">Medida Separatriz ${vetorTabelas[i].separatriz * 100}%: ${medidaSeparatrizContinua(vetorTabelas[i].dados.length, objMediana, Ic, vetorTabelas[i].separatriz)}</li>
+                                    <li class="list-group-item text-center bg-success text-white">Desvio Padrão ${vetorTabelas[i].tipoAna}: ${desvioPadrao(pontosMedio, media(pontosMedio, vetorTabelas[i].dados.length), vetorTabelas[i].tipoAna)}</li>
+                                    <li class="list-group-item text-center bg-success text-white">Coeficiente de Variação ${coefiVaria(desvioPadrao(pontosMedio, media(pontosMedio, vetorTabelas[i].dados.length), vetorTabelas[i].tipoAna), media(pontosMedio, vetorTabelas[i].dados.length))}</li>
                                 </ul>
                             </div>
                         </div>
@@ -865,3 +869,22 @@ $('#arquivo').change(function (e) {
     };
     reader.readAsArrayBuffer(f);
 })
+
+function desvioPadrao(dados, media, tipo) {
+
+    let somaNumerador = 0, somaDenominador = 0
+    for (let i in dados) {
+        somaNumerador += (parseInt(i) - media) ** 2 * dados[i];
+        somaDenominador += dados[i];
+    }
+
+    if (tipo == "População") {
+        return Math.sqrt(somaNumerador / somaDenominador);
+    } else if (tipo == "Amostra") {
+        return Math.sqrt(somaNumerador / (somaDenominador - 1));
+    }
+}
+
+function coefiVaria(DP, media) {
+    return `${DP / media * 100} %`;
+}
