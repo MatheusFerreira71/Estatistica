@@ -879,12 +879,12 @@ function desvioPadrao(dados, media, tipo) {
     }
 
     if (tipo == "População") {
-        return Math.sqrt(somaNumerador / somaDenominador);
+        return (Math.sqrt(somaNumerador / somaDenominador)).toFixed(2);
     } else if (tipo == "Amostra") {
-        return Math.sqrt(somaNumerador / (somaDenominador - 1));
+        return (Math.sqrt(somaNumerador / (somaDenominador - 1))).toFixed(2);
     }
 }
 
 function coefiVaria(DP, media) {
-    return `${DP / media * 100} %`;
+    return `${(DP / media * 100).toFixed(2)} %`;
 }
