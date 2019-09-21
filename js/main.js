@@ -868,6 +868,78 @@ $('#arquivo').change(function (e) {
         console.log(vetorImport)
     };
     reader.readAsArrayBuffer(f);
+
+    $('#ImportModal').modal({
+        backdrop: true,
+        keyboard: true,
+        focus: true,
+        show: true
+    });
+
+    let corpoImport = document.getElementById('CorpoImport');
+    console.log(corpoImport);
+    for (let i = 0; i < vetorImport.length; i++) {
+        corpoImport.innerHTML += `
+        
+            <div class="container my-4">
+                <div class="card border-info">
+                    <h5 class="card-header border-info text-center">${vetorImport[i].nome}</h5>
+                    <div class="card-body px-0 py-0">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-3 bordas_coluna px-3 py-3">
+                                    <div class="form-group">
+                                        <label for="nomeVariavel">Nome da Variável</label>
+                                        <input type="text" class="form-control-plaintext" id="nomeVariavel" value="${vetorImport[i].nome}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="TipoVar">Tipo de variável</label>
+                                        <select class="form-control" id="TipoVar">
+                                            <option selected>Escolha...</option>
+                                            <option>Qualitativa Nominal</option>
+                                            <option>Qualitativa Ordinal</option>
+                                            <option>Quantitativa Discreta</option>
+                                            <option>Quantitativa Contínua</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 bordas_coluna px-3 py-3">
+                                    <div class="form-group">
+                                        <label for="TipoDeAnalise">Tipo de Análise</label>
+                                        <select class="form-control" id="TipoDeAnalise">
+                                            <option>População</option>
+                                            <option>Amostra</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Separatrizes">Medidas Separatrizes</label>
+                                        <select name="MedidasSeparatrizes" id="Separatrizes" class="form-control"
+                                            onchange="mudarSeparatriz();">
+                                            <option value="Quartil" selected>Quartil</option>
+                                            <option value="Quintil">Quintil</option>
+                                            <option value="Decil">Decil</option>
+                                            <option value="Porcentil">Porcentil</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <input type="range" class="custom-range" min="0" max="100" id="RangeSeparatriz"
+                                            onchange="mudarValorBarra();">
+                                        <label for="RangeSeparatriz" class="mb-0" id="MedidaValor"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-info">
+                        <button type="button" class="btn btn-sucess" style="width: 100%;"
+                            onclick="">Salvar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            `;
+    console.log(corpoImport)
+    }
 })
 
 function desvioPadrao(dados, media, tipo) {
