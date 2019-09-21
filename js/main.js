@@ -1,4 +1,4 @@
-let tabelas = [], vetorImport = [];
+let tabelas = [], vetorImport = [], Obejetos;
 let barra = document.getElementById('RangeSeparatriz');
 
 function separador(vetor) {
@@ -158,59 +158,33 @@ function adicionarVariavel(vetorTabelas) {
             <input type="number" min="1" class="form-control text-center" id="grau${i}" placeholder="1, 2, 3"></div></li>`;
         }
 
+        Obejetos = Obejeto;
+
         document.getElementById('cardBordado').classList.add('border-info')
         vars.innerHTML += `<li class="list-group-item border-info">
-                                <button class="btn btn-success" onclick="tabelaOrdinal(tabelas);" style="width: 100%;">Salvar</button>
+                                <button class="btn btn-success" onclick="tabelaOrdinal(tabelas, Obejetos);" style="width: 100%;">Salvar</button>
                             </li>`;
 
         card.getElementsByTagName('div')[0].classList.add('border-info');
+        vetorTabelas.push(obj);
+        document.getElementById('nomeVariavel').value = "";
+        document.getElementById('entrarDados').value = "";
+        document.getElementById('TipoVar').value = "Escolha...";
     } else {
         vetorTabelas.push(obj);
-        console.log(vetorTabelas);
         document.getElementById('nomeVariavel').value = "";
         document.getElementById('entrarDados').value = "";
         document.getElementById('TipoVar').value = "Escolha...";
     }
 }
 
-function tabelaOrdinal(vetorTabelas) {
+function tabelaOrdinal(vetorTabelas, Objetante) {
     document.getElementsByTagName('header')[0].classList.add('my-3');
-    let obj = {}
-    obj.nome = document.getElementById('nomeVariavel').value;
-    obj.tipoAna = document.getElementById('TipoDeAnalise').value;
-    obj.separatriz = document.getElementById('MedidaValor').innerText.split('%');
-    obj.separatriz[0] = parseInt(obj.separatriz[0]);
-    obj.separatriz = obj.separatriz[0] / 100;
-    obj.dados = (document.getElementById('entrarDados').value).split(';');
-
-    // Transforma em número se for possível
-    for (let i = 0; i < obj.dados.length; i++) {
-        if (!isNaN(parseInt(obj.dados[i]))) {
-            obj.dados[i] = parseInt(obj.dados[i]);
-        }
-    }
-
-    //Se for um vetor NaN, deixa todos em letra maiúscula.
-    if (vetorNaN(obj.dados)) {
-        for (let i = 0; i < obj.dados.length; i++) {
-            obj.dados[i] = obj.dados[i].toUpperCase();
-            obj.dados[i] = obj.dados[i].trim();
-        }
-    }
-
-    obj.tipoVar = document.getElementById('TipoVar').value
-
-    let Obejeto = separador(obj.dados);
     let grauObj = {};
-    for (let i in Obejeto) {
+    for (let i in Objetante) {
         grauObj[`${i}`] = document.getElementById(`grau${i}`).value;
     }
-    obj.graus = grauObj;
-    document.getElementById('nomeVariavel').value = "";
-    document.getElementById('entrarDados').value = "";
-    document.getElementById('TipoVar').value = "Escolha...";
-    vetorTabelas.push(obj);
-    console.log(vetorTabelas);
+    vetorTabelas[vetorTabelas.length - 1].graus = grauObj;
     document.getElementById('cardBordado').innerHTML = '';
 }
 
@@ -293,7 +267,7 @@ function calcular(vetorTabelas) {
     document.getElementsByTagName('header')[0].innerHTML = `<h1 class="text-center">Resultados</h1>`;
     document.getElementById('ocultar').innerHTML = '';
     let grupoVar = document.getElementById('grupoVar');
-    grupoVar.style = "border-width: 2px !important; border-style: solid !important; border-color: #17A2B8 !important; border-radius: 7px !important"
+    grupoVar.style = "border-width: 2px !important; border-style: solid !important; border-color: #17A2B8 !important; border-radius: 7px !important;"
     document.getElementById('results').innerHTML = '<div data-spy="scroll" data-target="#grupoVar" data-offset="0" class="scrollspy mx-3" id="resultList"></div>';
     document.getElementById('results').style = "border-width: 2px !important; border-style: solid !important; border-color: #17A2B8 !important; border-radius: 10px !important"
     let grupoResults = document.getElementById('resultList');
@@ -865,81 +839,16 @@ $('#arquivo').change(function (e) {
                 vetorImport.push({ nome: cabecalho[0][j], dados: dados })
             }
         }
-        console.log(vetorImport)
+        document.getElementById('nomeVariavel').value = vetorImport[0].nome;
+        let str = '';
+        for (let i = 0; i < vetorImport[0].dados.length - 1; i++) {
+            str += `${vetorImport[0].dados[i]};`;
+        }
+        str += vetorImport[0].dados[vetorImport[0].dados.length - 1];
+        document.getElementById('entrarDados').value = str;
+        document.getElementById('addVar').setAttribute('onclick', 'importando(vetorImport)');
     };
     reader.readAsArrayBuffer(f);
-
-    $('#ImportModal').modal({
-        backdrop: true,
-        keyboard: true,
-        focus: true,
-        show: true
-    });
-
-    let corpoImport = document.getElementById('CorpoImport');
-    console.log(corpoImport);
-    for (let i = 0; i < vetorImport.length; i++) {
-        corpoImport.innerHTML += `
-        
-            <div class="container my-4">
-                <div class="card border-info">
-                    <h5 class="card-header border-info text-center">${vetorImport[i].nome}</h5>
-                    <div class="card-body px-0 py-0">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-3 bordas_coluna px-3 py-3">
-                                    <div class="form-group">
-                                        <label for="nomeVariavel">Nome da Variável</label>
-                                        <input type="text" class="form-control-plaintext" id="nomeVariavel" value="${vetorImport[i].nome}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="TipoVar">Tipo de variável</label>
-                                        <select class="form-control" id="TipoVar">
-                                            <option selected>Escolha...</option>
-                                            <option>Qualitativa Nominal</option>
-                                            <option>Qualitativa Ordinal</option>
-                                            <option>Quantitativa Discreta</option>
-                                            <option>Quantitativa Contínua</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 bordas_coluna px-3 py-3">
-                                    <div class="form-group">
-                                        <label for="TipoDeAnalise">Tipo de Análise</label>
-                                        <select class="form-control" id="TipoDeAnalise">
-                                            <option>População</option>
-                                            <option>Amostra</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Separatrizes">Medidas Separatrizes</label>
-                                        <select name="MedidasSeparatrizes" id="Separatrizes" class="form-control"
-                                            onchange="mudarSeparatriz();">
-                                            <option value="Quartil" selected>Quartil</option>
-                                            <option value="Quintil">Quintil</option>
-                                            <option value="Decil">Decil</option>
-                                            <option value="Porcentil">Porcentil</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group mb-0">
-                                        <input type="range" class="custom-range" min="0" max="100" id="RangeSeparatriz"
-                                            onchange="mudarValorBarra();">
-                                        <label for="RangeSeparatriz" class="mb-0" id="MedidaValor"></label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-transparent border-info">
-                        <button type="button" class="btn btn-sucess" style="width: 100%;"
-                            onclick="">Salvar
-                        </button>
-                    </div>
-                </div>
-            </div>
-            `;
-    console.log(corpoImport)
-    }
 })
 
 function desvioPadrao(dados, media, tipo) {
@@ -959,4 +868,20 @@ function desvioPadrao(dados, media, tipo) {
 
 function coefiVaria(DP, media) {
     return `${(DP / media * 100).toFixed(2)} %`;
+}
+
+function importando(vet) {
+    adicionarVariavel(tabelas);
+    vet.shift();
+    if (vet.length > 0) {
+        document.getElementById('nomeVariavel').value = vetorImport[0].nome;
+        let str = '';
+        for (let i = 0; i < vetorImport[0].dados.length - 1; i++) {
+            str += `${vetorImport[0].dados[i]};`;
+        }
+        str += vetorImport[0].dados[vetorImport[0].dados.length - 1];
+        document.getElementById('entrarDados').value = str;
+    } else {
+        document.getElementById('addVar').setAttribute('onclick', 'adicionarVariavel(tabelas)');
+    }
 }

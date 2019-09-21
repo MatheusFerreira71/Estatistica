@@ -19,26 +19,6 @@
 
 <body class="d-flex flex-column h-100" onload="barra.value = 100; mudarSeparatriz(); tipoArquivo();">
 
-    <!-- Modal Import -->
-    <div class="modal fade" id="ImportModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Importar Variáveis</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" id="CorpoImport">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success">Salvar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Modal Preview -->
     <div class="modal fade" id="PreviewModal" tabindex="-1" role="dialog" aria-labelledby="PreviewModalLabel"
         aria-hidden="true">
@@ -168,7 +148,7 @@
                                     </select>
                                 </div>
                                 <button type="button" class="btn btn-primary" style="width: 100%;"
-                                    onclick="adicionarVariavel(tabelas)">Adicionar
+                                    onclick="adicionarVariavel(tabelas)" id="addVar">Adicionar
                                     Variável</button>
                             </div>
                         </div>
