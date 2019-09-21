@@ -847,6 +847,14 @@ $('#arquivo').change(function (e) {
         str += vetorImport[0].dados[vetorImport[0].dados.length - 1];
         document.getElementById('entrarDados').value = str;
         document.getElementById('addVar').setAttribute('onclick', 'importando(vetorImport)');
+        let importado = document.getElementById('arquivo').files[0].name;
+        document.getElementsByClassName('toast-body')[0].innerText = `O arquivo "${importado}" foi importado com sucesso!`;
+        $('.toast').toast({
+            animation: true,
+            autohide: true,
+            delay: 6000
+        });
+        $('#notificaImport').toast('show')
     };
     reader.readAsArrayBuffer(f);
 })
@@ -872,6 +880,7 @@ function coefiVaria(DP, media) {
 
 function importando(vet) {
     adicionarVariavel(tabelas);
+
     vet.shift();
     if (vet.length > 0) {
         document.getElementById('nomeVariavel').value = vetorImport[0].nome;
