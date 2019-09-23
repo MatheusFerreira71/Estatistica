@@ -716,7 +716,7 @@ function calcular(vetorTabelas) {
                 linhaAtual.innerHTML = `<td>${z} |-- ${intervalos[z]}</td>`;
                 fi = 0;
                 for (let s in obejeto) {
-                    if (s >= z && s < intervalos[z]) {
+                    if (parseInt(s) >= parseInt(z) && parseInt(s) < intervalos[z]) {
                         fi += obejeto[s];
                     }
                 }
@@ -802,7 +802,7 @@ function calcular(vetorTabelas) {
 
     $('[data-spy="scroll"]').each(function () {
         var $spy = $(this).scrollspy('refresh')
-    })
+    });
 }
 
 $('#arquivo').change(function (e) {
