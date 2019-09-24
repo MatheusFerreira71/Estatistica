@@ -34,7 +34,7 @@ function moda(Quantidades) {
 function media(dados, totalFrequencia) {
     let somatorio = 0;
     for (let i in dados) {
-        somatorio += parseInt(i) * parseInt(dados[i]);
+        somatorio += parseFloat(i) * parseFloat(dados[i]);
     }
     return parseFloat((somatorio / totalFrequencia).toFixed(2));
 }
@@ -736,7 +736,7 @@ function calcular(vetorTabelas) {
             let pontosMedio = {};
             let jq = 1;
             for (let ks in intervalos) {
-                pontosMedio[`${parseInt(((parseInt(ks) + intervalos[ks]) / 2).toFixed(2))}`] = parseInt(linhas[jq].getElementsByTagName('td')[1].innerText);
+                pontosMedio[`${((parseFloat(ks) + intervalos[ks]) / 2).toFixed(2)}`] = parseInt(linhas[jq].getElementsByTagName('td')[1].innerText);
                 jq++
             }
             console.log(pontosMedio)
