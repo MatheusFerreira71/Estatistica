@@ -12,12 +12,14 @@
     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
     <script type="text/javascript"
         src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.candy.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 
     <title>RM² - Descritiva</title>
 </head>
 
 <body class="d-flex flex-column h-100" onload="barra.value = 100; mudarSeparatriz(); tipoArquivo();">
-    <!-- Modal -->
+
+    <!-- Modal Preview -->
     <div class="modal fade" id="PreviewModal" tabindex="-1" role="dialog" aria-labelledby="PreviewModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
@@ -79,6 +81,24 @@
         </div>
     </nav>
 
+    <!-- Notificação de Sucesso -->
+    <div id="notificacete">
+        <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 90px;">
+            <div class="toast border-dark bg-success text-white" style="position: absolute; top: 5px; right: 3px;" id="notificaImport">
+                <div class="toast-header border-dark">
+                    <i class="far fa-check-circle" style="color:#28a746;"></i>
+                    <strong class="ml-2 mr-auto">Sucesso!</strong>
+                    <small>1 Segundo Atrás</small>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Triagem -->
     <div id="ocultar">
@@ -147,7 +167,7 @@
                                     </select>
                                 </div>
                                 <button type="button" class="btn btn-primary" style="width: 100%;"
-                                    onclick="adicionarVariavel(tabelas)">Adicionar
+                                    onclick="adicionarVariavel(tabelas)" id="addVar">Adicionar
                                     Variável</button>
                             </div>
                         </div>
@@ -190,6 +210,7 @@
         </div>
     </div>
 
+    <!-- Footer -->
     <footer class="bg-dark mt-auto py-2">
         <div class="container-fluid">
             <p class="footer_text">RM² - Todos os direitos reservados</p>

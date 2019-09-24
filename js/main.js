@@ -1,4 +1,4 @@
-let tabelas = [];
+let tabelas = [], vetorImport = [], Obejetos;
 let barra = document.getElementById('RangeSeparatriz');
 
 function separador(vetor) {
@@ -112,45 +112,6 @@ function vetorNaN(vetor) {
     return (aux == vetor.length) ? true : false
 }
 
-function importDados(tabelas) {
-    let files = e.target.files, f = files[0];
-    let reader = new FileReader();
-    let celulas_Json = {};
-
-    reader.onload = function (e) {
-        let data = new Uint8Array(e.target.result);
-        let arquivo_completo = XLSX.read(data, { type: 'array', cellText: true, cellDates: true });
-        //propriedades do arquivo
-        // poe um if aq caso vc queira q, caso so um, retorne so o objeto, ou so pega o CELULAS_JSON E JA ERA
-        for (let i = 0; i < arquivo_completo.SheetNames.length; i++) {
-            todas_celulas = arquivo_completo.Sheets[arquivo_completo.SheetNames[i]]
-            celulas_Json = XLSX.utils.sheet_to_json(todas_celulas, { raw: false });
-            cabecalho = XLSX.utils.sheet_to_json(todas_celulas, { header: 1 });
-
-            for (let j = 0; j < cabecalho[0].length; j++) {
-                let dados = [];
-                for (let linhas of celulas_Json) {
-                    if (linhas[cabecalho[0][j]] != undefined) {
-                        dados.push((linhas[cabecalho[0][j]]).trim());
-                    }
-                }
-                if (vetorNaN(dados)) {
-                    for (let hs = 0; hs < dados.length; hs++) {
-                        dados[hs] = dados[hs].toUpperCase();
-                    }
-                } else {
-                    for (let hs = 0; hs < dados.length; hs++) {
-                        dados[hs] = parseInt(dados[hs])
-                    }
-                }
-                tabelas.push({ nome: cabecalho[0][j], dados: dados })
-            }
-        }
-        console.log(tabelas)
-    };
-    reader.readAsArrayBuffer(f);
-}
-
 function adicionarVariavel(vetorTabelas) {
     let obj = {}
     obj.nome = document.getElementById('nomeVariavel').value;
@@ -197,59 +158,33 @@ function adicionarVariavel(vetorTabelas) {
             <input type="number" min="1" class="form-control text-center" id="grau${i}" placeholder="1, 2, 3"></div></li>`;
         }
 
+        Obejetos = Obejeto;
+
         document.getElementById('cardBordado').classList.add('border-info')
         vars.innerHTML += `<li class="list-group-item border-info">
-                                <button class="btn btn-success" onclick="tabelaOrdinal(tabelas);" style="width: 100%;">Salvar</button>
+                                <button class="btn btn-success" onclick="tabelaOrdinal(tabelas, Obejetos);" style="width: 100%;">Salvar</button>
                             </li>`;
 
         card.getElementsByTagName('div')[0].classList.add('border-info');
+        vetorTabelas.push(obj);
+        document.getElementById('nomeVariavel').value = "";
+        document.getElementById('entrarDados').value = "";
+        document.getElementById('TipoVar').value = "Escolha...";
     } else {
         vetorTabelas.push(obj);
-        console.log(vetorTabelas);
         document.getElementById('nomeVariavel').value = "";
         document.getElementById('entrarDados').value = "";
         document.getElementById('TipoVar').value = "Escolha...";
     }
 }
 
-function tabelaOrdinal(vetorTabelas) {
+function tabelaOrdinal(vetorTabelas, Objetante) {
     document.getElementsByTagName('header')[0].classList.add('my-3');
-    let obj = {}
-    obj.nome = document.getElementById('nomeVariavel').value;
-    obj.tipoAna = document.getElementById('TipoDeAnalise').value;
-    obj.separatriz = document.getElementById('MedidaValor').innerText.split('%');
-    obj.separatriz[0] = parseInt(obj.separatriz[0]);
-    obj.separatriz = obj.separatriz[0] / 100;
-    obj.dados = (document.getElementById('entrarDados').value).split(';');
-
-    // Transforma em número se for possível
-    for (let i = 0; i < obj.dados.length; i++) {
-        if (!isNaN(parseInt(obj.dados[i]))) {
-            obj.dados[i] = parseInt(obj.dados[i]);
-        }
-    }
-
-    //Se for um vetor NaN, deixa todos em letra maiúscula.
-    if (vetorNaN(obj.dados)) {
-        for (let i = 0; i < obj.dados.length; i++) {
-            obj.dados[i] = obj.dados[i].toUpperCase();
-            obj.dados[i] = obj.dados[i].trim();
-        }
-    }
-
-    obj.tipoVar = document.getElementById('TipoVar').value
-
-    let Obejeto = separador(obj.dados);
     let grauObj = {};
-    for (let i in Obejeto) {
+    for (let i in Objetante) {
         grauObj[`${i}`] = document.getElementById(`grau${i}`).value;
     }
-    obj.graus = grauObj;
-    document.getElementById('nomeVariavel').value = "";
-    document.getElementById('entrarDados').value = "";
-    document.getElementById('TipoVar').value = "Escolha...";
-    vetorTabelas.push(obj);
-    console.log(vetorTabelas);
+    vetorTabelas[vetorTabelas.length - 1].graus = grauObj;
     document.getElementById('cardBordado').innerHTML = '';
 }
 
@@ -331,8 +266,9 @@ function tipoArquivo() {
 function calcular(vetorTabelas) {
     document.getElementsByTagName('header')[0].innerHTML = `<h1 class="text-center">Resultados</h1>`;
     document.getElementById('ocultar').innerHTML = '';
+    document.getElementById('notificacete').innerHTML = '';
     let grupoVar = document.getElementById('grupoVar');
-    grupoVar.style = "border-width: 2px !important; border-style: solid !important; border-color: #17A2B8 !important; border-radius: 7px !important"
+    grupoVar.style = "border-width: 2px !important; border-style: solid !important; border-color: #17A2B8 !important; border-radius: 7px !important;"
     document.getElementById('results').innerHTML = '<div data-spy="scroll" data-target="#grupoVar" data-offset="0" class="scrollspy mx-3" id="resultList"></div>';
     document.getElementById('results').style = "border-width: 2px !important; border-style: solid !important; border-color: #17A2B8 !important; border-radius: 10px !important"
     let grupoResults = document.getElementById('resultList');
@@ -525,6 +461,8 @@ function calcular(vetorTabelas) {
                                     <li class="list-group-item text-center bg-success text-white">Moda: ${moda(obejeto)}</li>
                                     <li class="list-group-item text-center bg-success text-white">Mediana: ${mediana(objMediana, vetorTabelas[i].dados.length)}</li>
                                     <li class="list-group-item text-center bg-success text-white">Medida Separatriz ${vetorTabelas[i].separatriz * 100}%: ${medidaSeparatriz(vetorTabelas[i].separatriz, objMediana, vetorTabelas[i].dados.length)}</li>
+                                    <li class="list-group-item text-center bg-success text-white">Desvio Padrão ${vetorTabelas[i].tipoAna}: ${desvioPadrao(obejeto, media(obejeto, vetorTabelas[i].dados.length), vetorTabelas[i].tipoAna)}</li>
+                                    <li class="list-group-item text-center bg-success text-white">Coeficiente de Variação: ${coefiVaria(desvioPadrao(obejeto, media(obejeto, vetorTabelas[i].dados.length), vetorTabelas[i].tipoAna), media(obejeto, vetorTabelas[i].dados.length))}</li>
                                 </ul>
                             </div>
                         </div>
@@ -779,7 +717,7 @@ function calcular(vetorTabelas) {
                 linhaAtual.innerHTML = `<td>${z} |-- ${intervalos[z]}</td>`;
                 fi = 0;
                 for (let s in obejeto) {
-                    if (s >= z && s < intervalos[z]) {
+                    if (parseInt(s) >= parseInt(z) && parseInt(s) < intervalos[z]) {
                         fi += obejeto[s];
                     }
                 }
@@ -814,6 +752,8 @@ function calcular(vetorTabelas) {
                                     <li class="list-group-item text-center bg-success text-white">Moda: ${moda(pontosMedio)}</li>
                                     <li class="list-group-item text-center bg-success text-white">Mediana: ${medianaContinua(vetorTabelas[i].dados.length, objMediana, Ic)}</li>
                                     <li class="list-group-item text-center bg-success text-white">Medida Separatriz ${vetorTabelas[i].separatriz * 100}%: ${medidaSeparatrizContinua(vetorTabelas[i].dados.length, objMediana, Ic, vetorTabelas[i].separatriz)}</li>
+                                    <li class="list-group-item text-center bg-success text-white">Desvio Padrão ${vetorTabelas[i].tipoAna}: ${desvioPadrao(pontosMedio, media(pontosMedio, vetorTabelas[i].dados.length), vetorTabelas[i].tipoAna)}</li>
+                                    <li class="list-group-item text-center bg-success text-white">Coeficiente de Variação ${coefiVaria(desvioPadrao(pontosMedio, media(pontosMedio, vetorTabelas[i].dados.length), vetorTabelas[i].tipoAna), media(pontosMedio, vetorTabelas[i].dados.length))}</li>
                                 </ul>
                             </div>
                         </div>
@@ -856,6 +796,7 @@ function calcular(vetorTabelas) {
             </div>`
         }
     }
+
     document.getElementById('ScrollspyRow').innerHTML += `
     <div class="container-fluid my-3">
         <a href="descritiva.html" class="btn btn-success" style="width: 100%">Voltar</a>
@@ -863,5 +804,95 @@ function calcular(vetorTabelas) {
 
     $('[data-spy="scroll"]').each(function () {
         var $spy = $(this).scrollspy('refresh')
-    })
+    });
+
+}
+
+$('#arquivo').change(function (e) {
+    let files = e.target.files, f = files[0];
+    let reader = new FileReader();
+    let celulas_Json = {};
+
+    reader.onload = function (e) {
+        let data = new Uint8Array(e.target.result);
+        let arquivo_completo = XLSX.read(data, { type: 'array', cellText: true, cellDates: true });
+        //propriedades do arquivo
+        for (let i = 0; i < arquivo_completo.SheetNames.length; i++) {
+            todas_celulas = arquivo_completo.Sheets[arquivo_completo.SheetNames[i]]
+            celulas_Json = XLSX.utils.sheet_to_json(todas_celulas, { raw: false });
+            cabecalho = XLSX.utils.sheet_to_json(todas_celulas, { header: 1 });
+
+            for (let j = 0; j < cabecalho[0].length; j++) {
+                let dados = [];
+                for (let linhas of celulas_Json) {
+                    if (linhas[cabecalho[0][j]] != undefined) {
+                        dados.push((linhas[cabecalho[0][j]]).trim());
+                    }
+                }
+                if (vetorNaN(dados)) {
+                    for (let hs = 0; hs < dados.length; hs++) {
+                        dados[hs] = dados[hs].toUpperCase();
+                    }
+                } else {
+                    for (let hs = 0; hs < dados.length; hs++) {
+                        dados[hs] = parseInt(dados[hs])
+                    }
+                }
+                vetorImport.push({ nome: cabecalho[0][j], dados: dados })
+            }
+        }
+        document.getElementById('nomeVariavel').value = vetorImport[0].nome;
+        let str = '';
+        for (let i = 0; i < vetorImport[0].dados.length - 1; i++) {
+            str += `${vetorImport[0].dados[i]};`;
+        }
+        str += vetorImport[0].dados[vetorImport[0].dados.length - 1];
+        document.getElementById('entrarDados').value = str;
+        document.getElementById('addVar').setAttribute('onclick', 'importando(vetorImport)');
+        let importado = document.getElementById('arquivo').files[0].name;
+        document.getElementsByClassName('toast-body')[0].innerText = `O arquivo "${importado}" foi importado com sucesso!`;
+        $('.toast').toast({
+            animation: true,
+            autohide: true,
+            delay: 6000
+        });
+        $('#notificaImport').toast('show')
+    };
+    reader.readAsArrayBuffer(f);
+})
+
+function desvioPadrao(dados, media, tipo) {
+
+    let somaNumerador = 0, somaDenominador = 0
+    for (let i in dados) {
+        somaNumerador += (parseInt(i) - media) ** 2 * dados[i];
+        somaDenominador += dados[i];
+    }
+
+    if (tipo == "População") {
+        return (Math.sqrt(somaNumerador / somaDenominador)).toFixed(2);
+    } else if (tipo == "Amostra") {
+        return (Math.sqrt(somaNumerador / (somaDenominador - 1))).toFixed(2);
+    }
+}
+
+function coefiVaria(DP, media) {
+    return `${(DP / media * 100).toFixed(2)} %`;
+}
+
+function importando(vet) {
+    adicionarVariavel(tabelas);
+
+    vet.shift();
+    if (vet.length > 0) {
+        document.getElementById('nomeVariavel').value = vetorImport[0].nome;
+        let str = '';
+        for (let i = 0; i < vetorImport[0].dados.length - 1; i++) {
+            str += `${vetorImport[0].dados[i]};`;
+        }
+        str += vetorImport[0].dados[vetorImport[0].dados.length - 1];
+        document.getElementById('entrarDados').value = str;
+    } else {
+        document.getElementById('addVar').setAttribute('onclick', 'adicionarVariavel(tabelas)');
+    }
 }
