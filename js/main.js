@@ -266,6 +266,7 @@ function tipoArquivo() {
 function calcular(vetorTabelas) {
     document.getElementsByTagName('header')[0].innerHTML = `<h1 class="text-center">Resultados</h1>`;
     document.getElementById('ocultar').innerHTML = '';
+    document.getElementById('notificacete').innerHTML = '';
     let grupoVar = document.getElementById('grupoVar');
     grupoVar.style = "border-width: 2px !important; border-style: solid !important; border-color: #17A2B8 !important; border-radius: 7px !important;"
     document.getElementById('results').innerHTML = '<div data-spy="scroll" data-target="#grupoVar" data-offset="0" class="scrollspy mx-3" id="resultList"></div>';
@@ -795,6 +796,7 @@ function calcular(vetorTabelas) {
             </div>`
         }
     }
+
     document.getElementById('ScrollspyRow').innerHTML += `
     <div class="container-fluid my-3">
         <a href="descritiva.html" class="btn btn-success" style="width: 100%">Voltar</a>
@@ -803,6 +805,7 @@ function calcular(vetorTabelas) {
     $('[data-spy="scroll"]').each(function () {
         var $spy = $(this).scrollspy('refresh')
     });
+
 }
 
 $('#arquivo').change(function (e) {
@@ -814,7 +817,6 @@ $('#arquivo').change(function (e) {
         let data = new Uint8Array(e.target.result);
         let arquivo_completo = XLSX.read(data, { type: 'array', cellText: true, cellDates: true });
         //propriedades do arquivo
-        // poe um if aq caso vc queira q, caso so um, retorne so o objeto, ou so pega o CELULAS_JSON E JA ERA
         for (let i = 0; i < arquivo_completo.SheetNames.length; i++) {
             todas_celulas = arquivo_completo.Sheets[arquivo_completo.SheetNames[i]]
             celulas_Json = XLSX.utils.sheet_to_json(todas_celulas, { raw: false });
