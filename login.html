@@ -10,7 +10,7 @@
 
 <body>
 
-    <form action="index.html" class="login-form">
+    <form class="login-form">
         <h1>Login</h1>
 
         <div class="txtb">
@@ -85,7 +85,8 @@
             // validaçao geral dentro da funçao
             if (resCPF == true && resRA == true) {
                 alert("foi")
-                window.open('descritiva.html', 'janela') // abre ma janela nova           
+                window.location.href = "index.html";
+                // window.open('index.html', 'janela') // abre ma janela nova           
             } else {
                 alert("nao foi")
             }
