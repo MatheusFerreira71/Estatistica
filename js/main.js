@@ -1,3 +1,4 @@
+// Declaração de variáveis globais
 let tabelas = [], vetorImport = [], Obejetos;
 let barra = document.getElementById('RangeSeparatriz');
 
@@ -155,7 +156,7 @@ function adicionarVariavel(vetorTabelas) {
 
         for (let i in Obejeto) {
             vars.innerHTML += `<li class="list-group-item border-info">${i}<div class="form-group">
-            <input type="number" min="1" class="form-control text-center" id="grau${i}" placeholder="1, 2, 3"></div></li>`;
+            <input type="number" min="1" class="form-control text-center" id="grau${i}" placeholder="O maior ficará no topo da tabela."></div></li>`;
         }
 
         Obejetos = Obejeto;
@@ -282,7 +283,7 @@ function calcular(vetorTabelas) {
             grupoResults.innerHTML += `<h4 id="${vetorTabelas[i].nome}" class="text-center">${vetorTabelas[i].nome}</h4>`;
             grupoResults.innerHTML += `
                 <div class="table-responsive">
-                    <table class="table table-hover table-danger table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
+                    <table class=" table table-hover table-danger table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
                         <thead class="thead-dark">
                             <tr id="linhaCabecalho">
 
@@ -315,9 +316,9 @@ function calcular(vetorTabelas) {
             //Escrever Cabeçalho
             cabecalho.innerHTML += `<th scope="col">${vetorTabelas[i].nome}</th>
                                     <th scope="col">Frequencia Simples</th>
-                                    <th scope="col">FR%</th>
-                                    <th scope="col">FAC</th>
-                                    <th scope="col">FAC%</th>`;
+                                    <th scope="col"aria-label="Frequência Relativa em Porcentagem" data-balloon-pos="left">FR%</th>
+                                    <th scope="col"aria-label="Frequência Simples Acumulada" data-balloon-pos="left">FAC</th>
+                                    <th scope="col"aria-label="Frequência Relativa Acumulada" data-balloon-pos="left">FAC%</th>`;
             let FrequenciaAtual = 0, FrequenciaPorAtual = 0;
             //Escreve a Tabela
             let js = 1, objMediana = {}, vetorGrafico = [];
@@ -396,7 +397,7 @@ function calcular(vetorTabelas) {
             grupoResults.innerHTML += `<h4 id="${vetorTabelas[i].nome}" class="text-center">${vetorTabelas[i].nome}</h4>`;
             grupoResults.innerHTML += `
                 <div class="table-responsive">
-                    <table class="table table-hover table-danger table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
+                    <table class=" table table-hover table-danger table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
                         <thead class="thead-dark">
                             <tr id="linhaCabecalho">
 
@@ -429,9 +430,9 @@ function calcular(vetorTabelas) {
             //Escrever Cabeçalho
             cabecalho.innerHTML += `<th scope="col">${vetorTabelas[i].nome}</th>
                                     <th scope="col">Frequencia Simples</th>
-                                    <th scope="col">FR%</th>
-                                    <th scope="col">FAC</th>
-                                    <th scope="col">FAC%</th>`;
+                                    <th scope="col"aria-label="Frequência Relativa em Porcentagem" data-balloon-pos="left">FR%</th>
+                                    <th scope="col"aria-label="Frequência Simples Acumulada" data-balloon-pos="left">FAC</th>
+                                    <th scope="col"aria-label="Frequência Relativa Acumulada" data-balloon-pos="left">FAC%</th>`
             let FrequenciaAtual = 0, FrequenciaPorAtual = 0, vetorGrafico = [];
             //Escreve a Tabela
             let js = 1, objMediana = {};
@@ -452,8 +453,8 @@ function calcular(vetorTabelas) {
             grupoResults.innerHTML += `
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-2"></div>
-                        <div class="col-md-8">
+                    <div class="col-md-1"></div>
+                        <div class="col-md-10">
                             <div class="card my-3 border-info" style="width: auto;">
                                 <div class="card-header bg-dark text-white text-center" style="font-weight: bold;">Resultados Estatísticos</div>
                                 <ul class="list-group list-group-flush">
@@ -466,7 +467,7 @@ function calcular(vetorTabelas) {
                                 </ul>
                             </div>
                         </div>
-                <div class="col-md-2"></div>    
+                <div class="col-md-1"></div>    
                 </div>
             </div>
             `;
@@ -508,7 +509,7 @@ function calcular(vetorTabelas) {
             grupoResults.innerHTML += `<h4 id="${vetorTabelas[i].nome}" class="text-center">${vetorTabelas[i].nome}</h4>`;
             grupoResults.innerHTML += `
                 <div class="table-responsive">
-                    <table class="table table-hover table-danger table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
+                    <table class=" table table-hover table-danger table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
                         <thead class="thead-dark">
                             <tr id="linhaCabecalho">
 
@@ -541,9 +542,9 @@ function calcular(vetorTabelas) {
             //Escrever Cabeçalho
             cabecalho.innerHTML += `<th scope="col">${vetorTabelas[i].nome}</th>
                                     <th scope="col">Frequencia Simples</th>
-                                    <th scope="col">FR%</th>
-                                    <th scope="col">FAC</th>
-                                    <th scope="col">FAC%</th>`;
+                                    <th scope="col"aria-label="Frequência Relativa em Porcentagem" data-balloon-pos="left">FR%</th>
+                                    <th scope="col"aria-label="Frequência Simples Acumulada" data-balloon-pos="left">FAC</th>
+                                    <th scope="col"aria-label="Frequência Relativa Acumulada" data-balloon-pos="left">FAC%</th>`;
             let FrequenciaAtual = 0, FrequenciaPorAtual = 0;
 
             //Escrevendo a tabela.
@@ -577,8 +578,8 @@ function calcular(vetorTabelas) {
             grupoResults.innerHTML += `
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-2"></div>
-                        <div class="col-md-8">
+                    <div class="col-md-1"></div>
+                        <div class="col-md-10">
                             <div class="card my-3 border-info" style="width: auto;">
                                 <div class="card-header bg-dark text-white text-center" style="font-weight: bold;">Resultados Estatísticos</div>
                                 <ul class="list-group list-group-flush">
@@ -588,7 +589,7 @@ function calcular(vetorTabelas) {
                                 </ul>
                             </div>
                         </div>
-                <div class="col-md-2"></div>    
+                <div class="col-md-1"></div>    
                 </div>
             </div>
             `;
@@ -632,7 +633,7 @@ function calcular(vetorTabelas) {
             grupoResults.innerHTML += `<h4 id="${vetorTabelas[i].nome}" class="text-center">${vetorTabelas[i].nome}</h4>`;
             grupoResults.innerHTML += `
                 <div class="table-responsive">
-                    <table class="table table-hover table-danger table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
+                    <table class=" table table-hover table-danger table-sm table-bordered table-striped text-center" id="Tabela${vetorTabelas[i].nome}">
                         <thead class="thead-dark">
                             <tr id="linhaCabecalho">
 
@@ -705,9 +706,9 @@ function calcular(vetorTabelas) {
             //Escrever Cabeçalho 
             cabecalho.innerHTML += `<th scope="col">${vetorTabelas[i].nome}</th>
                                     <th scope="col">Frequencia Simples</th>
-                                    <th scope="col">FR%</th>
-                                    <th scope="col">FAC</th>
-                                    <th scope="col">FAC%</th>`;
+                                    <th scope="col"aria-label="Frequência Relativa em Porcentagem" data-balloon-pos="left">FR%</th>
+                                    <th scope="col"aria-label="Frequência Simples Acumulada" data-balloon-pos="left">FAC</th>
+                                    <th scope="col"aria-label="Frequência Relativa Acumulada" data-balloon-pos="left">FAC%</th>`;
 
             let FrequenciaAtual = 0, FrequenciaPorAtual = 0, vetorGrafico = [], objMediana = {};
             //Escrever a tabela
@@ -743,8 +744,8 @@ function calcular(vetorTabelas) {
             grupoResults.innerHTML += `
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-2"></div>
-                        <div class="col-md-8">
+                    <div class="col-md-1"></div>
+                        <div class="col-md-10">
                             <div class="card my-3 border-info" style="width: auto;">
                                 <div class="card-header bg-dark text-white text-center" style="font-weight: bold;">Resultados Estatísticos</div>
                                 <ul class="list-group list-group-flush">
@@ -757,7 +758,7 @@ function calcular(vetorTabelas) {
                                 </ul>
                             </div>
                         </div>
-                <div class="col-md-2"></div>    
+                <div class="col-md-1"></div>    
                 </div>
             </div>
             `;
