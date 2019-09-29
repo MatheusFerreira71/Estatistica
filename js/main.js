@@ -1,7 +1,7 @@
 // Declaração de variáveis globais
 let tabelas = [], vetorImport = [], Obejetos;
 let barra = document.getElementById('RangeSeparatriz');
-
+let littleData = document.getElementById('entrarDados');
 function separador(vetor) {
     let Quantidades = {};
     let aux;
@@ -170,12 +170,14 @@ function adicionarVariavel(vetorTabelas) {
         vetorTabelas.push(obj);
         document.getElementById('nomeVariavel').value = "";
         document.getElementById('entrarDados').value = "";
-        document.getElementById('TipoVar').value = "Escolha...";
+        document.getElementById('TipoVar').value = "";
+        document.getElementById('TipoDeAnalise').value = "";
     } else {
         vetorTabelas.push(obj);
         document.getElementById('nomeVariavel').value = "";
         document.getElementById('entrarDados').value = "";
-        document.getElementById('TipoVar').value = "Escolha...";
+        document.getElementById('TipoVar').value = "";
+        document.getElementById('TipoDeAnalise').value = "";
     }
 }
 
