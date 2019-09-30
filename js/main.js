@@ -579,7 +579,7 @@ function calcular(vetorTabelas) {
                 //Pegando o maior grau
                 for (let j in vetorTabelas[i].graus) {
                     if (vetorTabelas[i].graus[j] > aux) {
-                        aux = vetorTabelas[i].graus[j];
+                        aux = parseInt(vetorTabelas[i].graus[j]);
                         maiorGrau = j
                     }
                 }
