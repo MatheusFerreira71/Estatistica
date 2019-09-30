@@ -289,6 +289,7 @@ function calcular(vetorTabelas) {
     document.getElementById('ocultar').innerHTML = '';
     document.getElementById('notificacete').innerHTML = '';
     let grupoVar = document.getElementById('grupoVar');
+    document.getElementById('addDinamica').classList.add('dinamica')
     grupoVar.style = "border-width: 2px !important; border-style: solid !important; border-color: #17A2B8 !important; border-radius: 7px !important;"
     document.getElementById('results').innerHTML = '<div data-spy="scroll" data-target="#grupoVar" data-offset="0" class="scrollspy mx-3" id="resultList"></div>';
     document.getElementById('results').style = "border-width: 2px !important; border-style: solid !important; border-color: #17A2B8 !important; border-radius: 10px !important"
