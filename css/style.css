@@ -57,9 +57,20 @@ header{
         border-top: 0px !important;
         border-right: 0px !important;
     }
+
+    .dinamica{
+        height: auto !important;
+        overflow-y: visible !important;
+    }
 }
 
 .scrollspy{
+    position: relative;
+    overflow-y: scroll;
+    height: 393px;
+}
+
+.dinamica{
     position: relative;
     overflow-y: scroll;
     height: 393px;

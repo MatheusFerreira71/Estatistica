@@ -18,7 +18,8 @@
     <title>RM² - Descritiva</title>
 </head>
 
-<body class="d-flex flex-column h-100" onload="barra.value = 100; mudarSeparatriz(); tipoArquivo(); littleData.value = '';">
+<body class="d-flex flex-column h-100"
+    onload="barra.value = 100; mudarSeparatriz(); tipoArquivo(); littleData.value = ''; ativarBotaoInserir(); ativarBotaoVerificar();">
 
     <!-- Modal Preview -->
     <div class="modal fade" id="PreviewModal" tabindex="-1" role="dialog" aria-labelledby="PreviewModalLabel"
@@ -85,7 +86,8 @@
     <!-- Notificação de Sucesso -->
     <div id="notificacete">
         <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 90px;">
-            <div class="toast border-dark bg-success text-white" style="position: absolute; top: 5px; right: 3px;" id="notificaImport">
+            <div class="toast border-dark bg-success text-white" style="position: absolute; top: 5px; right: 3px;"
+                id="notificaImport">
                 <div class="toast-header border-dark">
                     <i class="far fa-check-circle" style="color:#28a746;"></i>
                     <strong class="ml-2 mr-auto">Sucesso!</strong>
@@ -101,6 +103,17 @@
         </div>
     </div>
 
+    <!-- Selecionar Grau -->
+    <div class="container my-2 text-center" id="selectGrau">
+        <div class="row">
+            <div class="col-md 4"></div>
+            <div class="col-md 4" id="cardBordado">
+            </div>
+            <div class="col-md 4"></div>
+        </div>
+
+    </div>
+
     <!-- Triagem -->
     <div id="ocultar">
         <div class="container my-4">
@@ -113,13 +126,13 @@
                                 <div class="form-group was-validated">
                                     <label for="nomeVariavel">Nome da Variável</label>
                                     <input type="text" class="form-control" id="nomeVariavel"
-                                        placeholder="Nome da Variável" required>
-                                        <div class="invalid-feedback">Insira o nome da variável.</div>
-                                        <div class="valid-feedback">Muito bem!</div>
+                                        placeholder="Nome da Variável" required onchange="ativarBotaoInserir()">
+                                    <div class="invalid-feedback">Insira o nome da variável.</div>
+                                    <div class="valid-feedback">Muito bem!</div>
                                 </div>
                                 <div class="form-group was-validated">
                                     <label for="TipoVar">Tipo de variável</label>
-                                    <select class="custom-select" id="TipoVar" required>
+                                    <select class="custom-select" id="TipoVar" required onchange="ativarBotaoInserir()">
                                         <option value="">Escolha...</option>
                                         <option value="Qualitativa Nominal">Qualitativa Nominal</option>
                                         <option value="Qualitativa Ordinal">Qualitativa Ordinal</option>
@@ -133,7 +146,8 @@
                             <div class="col-md-3 bordas_coluna px-3 py-3">
                                 <div class="form-group was-validated">
                                     <label for="TipoDeAnalise">Tipo de Análise</label>
-                                    <select class="custom-select" id="TipoDeAnalise" required>
+                                    <select class="custom-select" id="TipoDeAnalise" required
+                                        onchange="ativarBotaoInserir()">
                                         <option value="">Escolha...</option>
                                         <option value="População">População</option>
                                         <option value="Amostra">Amostra</option>
@@ -162,7 +176,8 @@
                                 <div class="form-group was-validated">
                                     <label for="entrarDados">Inserir Dados</label>
                                     <textarea class="form-control" id="entrarDados" rows="3"
-                                        placeholder="Inserir os dados separados por ; - 12; 323; 12; 34" required>
+                                        placeholder="Inserir os dados separados por ; - 12; 323; 12; 34" required
+                                        onchange="ativarBotaoInserir()">
                                     </textarea>
                                     <div class="invalid-feedback">Insira os dados.</div>
                                     <div class="valid-feedback">Muito bem!</div>
@@ -179,7 +194,8 @@
                                     </select>
                                 </div>
                                 <button type="button" class="btn btn-primary" style="width: 100%;"
-                                    onclick="adicionarVariavel(tabelas)" id="addVar">Adicionar
+                                    onclick="adicionarVariavel(tabelas); ativarBotaoVerificar(); ativarBotaoInserir();"
+                                    id="addVar">Adicionar
                                     Variável</button>
                             </div>
                         </div>
@@ -187,7 +203,8 @@
                 </div>
                 <div class="card-footer bg-transparent border-info">
                     <button type="button" class="btn btn-info" style="width: 100%;" data-toggle="modal"
-                        data-target="#PreviewModal" onclick="resetPreview(); previewDados(tabelas)">Verificar
+                        data-target="#PreviewModal" onclick="resetPreview(); previewDados(tabelas);"
+                        id="previewDataButton">Verificar
                         Dados</button>
                 </div>
             </div>
@@ -197,21 +214,10 @@
     <header class="my-3">
     </header>
 
-    <!-- Selecionar Grau -->
-    <div class="container my-2 text-center" id="selectGrau">
-        <div class="row">
-            <div class="col-md 4"></div>
-            <div class="col-md 4" id="cardBordado">
-            </div>
-            <div class="col-md 4"></div>
-        </div>
-
-    </div>
-
     <!-- Scrollspy -->
     <div class="container">
         <div class="row" id="ScrollspyRow">
-            <div class="col-md-3 my-3">
+            <div class="col-md-3 my-3 dinamica">
                 <div id="grupoVar" class="list-group">
 
                 </div>

@@ -2,6 +2,7 @@
 let tabelas = [], vetorImport = [], Obejetos;
 let barra = document.getElementById('RangeSeparatriz');
 let littleData = document.getElementById('entrarDados');
+
 function separador(vetor) {
     let Quantidades = {};
     let aux;
@@ -113,6 +114,18 @@ function vetorNaN(vetor) {
     return (aux == vetor.length) ? true : false
 }
 
+function vetorBool(vetor) {
+    let aux = 0;
+    for (let i of vetor) {
+        if (i === true) {
+            aux++
+        } else {
+            aux--
+        }
+    }
+    return (aux == vetor.length) ? true : false
+}
+
 function adicionarVariavel(vetorTabelas) {
     let obj = {}
     obj.nome = document.getElementById('nomeVariavel').value;
@@ -153,42 +166,47 @@ function adicionarVariavel(vetorTabelas) {
 
         let vars = document.getElementsByTagName('ul')[1];
         document.getElementsByTagName('header')[0].classList.remove('my-3');
+        document.getElementById('ocultar').style = "visibility: hidden;";
+
 
         for (let i in Obejeto) {
             vars.innerHTML += `<li class="list-group-item border-info">${i}<div class="form-group">
-            <input type="number" min="1" class="form-control text-center" id="grau${i}" placeholder="O maior ficará no topo da tabela."></div></li>`;
+            <input type="number" min="1" class="form-control text-center graus" id="grau${i}" placeholder="O maior ficará no topo da tabela." onchange="ativarBotaoSalvar()"></div></li>`;
         }
 
         Obejetos = Obejeto;
 
         document.getElementById('cardBordado').classList.add('border-info')
         vars.innerHTML += `<li class="list-group-item border-info">
-                                <button class="btn btn-success" onclick="tabelaOrdinal(tabelas, Obejetos);" style="width: 100%;">Salvar</button>
+                                <button class="btn btn-success" id="salvarGraus" onclick="tabelaOrdinal(tabelas, Obejetos);" style="width: 100%;">Salvar</button>
                             </li>`;
-
+        ativarBotaoSalvar();
         card.getElementsByTagName('div')[0].classList.add('border-info');
-        vetorTabelas.push(obj);
-        document.getElementById('nomeVariavel').value = "";
-        document.getElementById('entrarDados').value = "";
-        document.getElementById('TipoVar').value = "";
-        document.getElementById('TipoDeAnalise').value = "";
-    } else {
-        vetorTabelas.push(obj);
-        document.getElementById('nomeVariavel').value = "";
-        document.getElementById('entrarDados').value = "";
-        document.getElementById('TipoVar').value = "";
-        document.getElementById('TipoDeAnalise').value = "";
     }
+    vetorTabelas.push(obj);
+    document.getElementById('nomeVariavel').value = "";
+    document.getElementById('entrarDados').value = "";
+    document.getElementById('TipoVar').value = "";
+    document.getElementById('TipoDeAnalise').value = "";
 }
 
 function tabelaOrdinal(vetorTabelas, Objetante) {
     document.getElementsByTagName('header')[0].classList.add('my-3');
+    let verificador = [];
     let grauObj = {};
     for (let i in Objetante) {
         grauObj[`${i}`] = document.getElementById(`grau${i}`).value;
+        verificador.push(grauObj[`${i}`]);
     }
-    vetorTabelas[vetorTabelas.length - 1].graus = grauObj;
-    document.getElementById('cardBordado').innerHTML = '';
+    if (grausNegativos(verificador)) {
+        alert("Existem graus com valor negativo!");
+    } else if (grausIguais(verificador).length > verificador.length) {
+        alert('Existem graus duplicados!');
+    } else {
+        vetorTabelas[vetorTabelas.length - 1].graus = grauObj;
+        document.getElementById('cardBordado').innerHTML = '';
+        document.getElementById('ocultar').style = "";
+    }
 }
 
 function previewDados(vetorTabelas) {
@@ -851,7 +869,7 @@ $('#arquivo').change(function (e) {
         }
         str += vetorImport[0].dados[vetorImport[0].dados.length - 1];
         document.getElementById('entrarDados').value = str;
-        document.getElementById('addVar').setAttribute('onclick', 'importando(vetorImport)');
+        document.getElementById('addVar').setAttribute('onclick', 'importando(vetorImport); ativarBotaoInserir();');
         let importado = document.getElementById('arquivo').files[0].name;
         document.getElementsByClassName('toast-body')[0].innerText = `O arquivo "${importado}" foi importado com sucesso!`;
         $('.toast').toast({
@@ -885,6 +903,7 @@ function coefiVaria(DP, media) {
 
 function importando(vet) {
     adicionarVariavel(tabelas);
+    ativarBotaoVerificar();
 
     vet.shift();
     if (vet.length > 0) {
@@ -896,6 +915,67 @@ function importando(vet) {
         str += vetorImport[0].dados[vetorImport[0].dados.length - 1];
         document.getElementById('entrarDados').value = str;
     } else {
-        document.getElementById('addVar').setAttribute('onclick', 'adicionarVariavel(tabelas)');
+        document.getElementById('addVar').setAttribute('onclick', 'adicionarVariavel(tabelas); ativarBotaoInserir();');
     }
+}
+
+function ativarBotaoInserir() {
+    let nome = document.getElementById('nomeVariavel').value;
+    let tipoVar = document.getElementById('TipoVar').value;
+    let tipoAna = document.getElementById('TipoDeAnalise').value;
+    let dados = document.getElementById('entrarDados').value;
+    let botao = document.getElementById('addVar');
+    if (nome != "" && tipoVar != "" && tipoAna && dados != "") {
+        botao.removeAttribute('disabled');
+    } else {
+        botao.setAttribute('disabled', 'disabled');
+    }
+}
+
+function ativarBotaoVerificar() {
+    if (tabelas.length == 0) {
+        document.getElementById('previewDataButton').setAttribute('disabled', 'disabled');
+    } else {
+        document.getElementById('previewDataButton').removeAttribute('disabled');
+    }
+}
+
+function ativarBotaoSalvar() {
+    let verificadores = [];
+    let graus = document.getElementsByClassName('graus');
+    let botao = document.getElementById('salvarGraus');
+    for (let i = 0; i < graus.length; i++) {
+        if (graus[i].value != "") {
+            verificadores.push(true);
+        } else {
+            verificadores.push(false);
+        }
+    }
+    if (vetorBool(verificadores)) {
+        botao.removeAttribute('disabled');
+    } else {
+        botao.setAttribute('disabled', 'disabled');
+    }
+}
+
+function grausIguais(Grauses) {
+    let resultadoses = [];
+
+    for (let i = 0; i < Grauses.length; i++) {
+        for (let j = 0; j < Grauses.length; j++) {
+            if (Grauses[i] == Grauses[j]) {
+                resultadoses.push(true);
+            }
+        }
+    }
+    return resultadoses;
+}
+
+function grausNegativos(Grauses) {
+    for (let i = 0; i < Grauses.length; i++) {
+        if (Grauses[i] < 0) {
+            return true;
+        }
+    }
+    return false;
 }
