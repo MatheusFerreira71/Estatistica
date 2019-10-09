@@ -1,6 +1,9 @@
 .dropdown-item:hover{
     background-color: #ada72b !important;
 }
+.es{
+    height:80%
+}
 
 .card-title, .card-text{
     text-align: center !important;
