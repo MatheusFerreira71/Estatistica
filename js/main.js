@@ -166,7 +166,14 @@ function adicionarVariavel(vetorTabelas) {
 
         let vars = document.getElementsByTagName('ul')[1];
         document.getElementsByTagName('header')[0].classList.remove('my-3');
-        document.getElementById('ocultar').style = "visibility: hidden;";
+        document.getElementById('nomeVariavel').setAttribute('disabled', 'disabled');
+        document.getElementById('TipoVar').setAttribute('disabled', 'disabled');
+        document.getElementById('TipoDeAnalise').setAttribute('disabled', 'disabled');
+        document.getElementById('entrarDados').setAttribute('disabled', 'disabled');
+        document.getElementById('arquivo').setAttribute('disabled', 'disabled');
+        document.getElementById('RangeSeparatriz').setAttribute('disabled', 'disabled');
+        document.getElementById('Separatrizes').setAttribute('disabled', 'disabled');
+        document.getElementById('tipoArquivo').setAttribute('disabled', 'disabled');
 
 
         for (let i in Obejeto) {
@@ -205,7 +212,15 @@ function tabelaOrdinal(vetorTabelas, Objetante) {
     } else {
         vetorTabelas[vetorTabelas.length - 1].graus = grauObj;
         document.getElementById('cardBordado').innerHTML = '';
-        document.getElementById('ocultar').style = "";
+        document.getElementById('nomeVariavel').removeAttribute('disabled');
+        document.getElementById('TipoVar').removeAttribute('disabled');
+        document.getElementById('TipoDeAnalise').removeAttribute('disabled');
+        document.getElementById('entrarDados').removeAttribute('disabled');
+        document.getElementById('arquivo').removeAttribute('disabled');
+        document.getElementById('previewDataButton').removeAttribute('disabled');
+        document.getElementById('RangeSeparatriz').removeAttribute('disabled');
+        document.getElementById('Separatrizes').removeAttribute('disabled');
+        document.getElementById('tipoArquivo').removeAttribute('disabled');
     }
 }
 
@@ -904,7 +919,11 @@ function coefiVaria(DP, media) {
 
 function importando(vet) {
     adicionarVariavel(tabelas);
-    ativarBotaoVerificar();
+    if (tabelas[tabelas.length - 1].tipoVar == "Qualitativa Ordinal") {
+        document.getElementById('previewDataButton').setAttribute('disabled', 'disabled');
+    } else {
+        ativarBotaoVerificar();
+    }
 
     vet.shift();
     if (vet.length > 0) {

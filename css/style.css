@@ -1,5 +1,6 @@
 .dropdown-item:hover{
-    background-color: #ada72b !important;
+    background-color: #343A40 !important;
+    color: #fff !important;
 }
 .es{
     height:80%
@@ -19,7 +20,8 @@
     margin-bottom: 0 !important;
 }
 header{
-    background: #ada72b;
+    background: #343A40;
+    color: white;
 }
 .card-link{
     font-size: 40px !important;
