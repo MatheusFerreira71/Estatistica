@@ -1,50 +1,60 @@
-.dropdown-item:hover{
+.dropdown-item:hover {
     background-color: #343A40 !important;
     color: #fff !important;
 }
-.es{
-    height:80%
+
+.es {
+    height: 80%
 }
 
-.card-title, .card-text{
+.card-title,
+.card-text {
     text-align: center !important;
 }
-.card-body a{
+
+.card-body a {
     width: 100% !important;
 }
-.footer_text{
+
+.footer_text {
     color: #fff;
     width: 100%;
     text-align: center;
     line-height: 100%;
     margin-bottom: 0 !important;
 }
-header{
+
+header {
     background: #343A40;
     color: white;
 }
-.card-link{
+
+.card-link {
     font-size: 40px !important;
     color: #000000 !important;
     text-align: center !important;
     width: 100% !important;
 }
-.linked{
+
+.linked {
     transition: font-size 0.5s;
 }
-.github{
+
+.github {
     transition: font-size 0.5s;
 }
-.linked:hover{
+
+.linked:hover {
     color: #0073b0 !important;
     font-size: 44px !important;
 }
 
-.github:hover{
+.github:hover {
     color: #33006e !important;
     font-size: 44px !important;
 }
-.bordas_coluna{
+
+.bordas_coluna {
     border-width: 1px !important;
     border-style: solid !important;
     border-color: #17A2B8 !important;
@@ -53,8 +63,16 @@ header{
     border-bottom: 0px !important;
 }
 
+.bordas_coluna5px {
+    border-width: 3px !important;
+    border-style: solid !important;
+    border-color: #007bff !important;
+    background-color: #007bff;
+    color: white;
+}
+
 @media only screen and (max-width: 768px) {
-    .bordas_coluna{
+    .bordas_coluna {
         border-width: 1px !important;
         border-style: solid !important;
         border-color: #17A2B8 !important;
@@ -62,20 +80,26 @@ header{
         border-top: 0px !important;
         border-right: 0px !important;
     }
-
-    .dinamica{
+    .bordas_coluna5px {
+        border-width: 3px !important;
+        border-style: solid !important;
+        border-color: #007bff !important;
+        background-color: #007bff;
+        color: white;
+    }
+    .dinamica {
         height: auto !important;
         overflow-y: visible !important;
     }
 }
 
-.scrollspy{
+.scrollspy {
     position: relative;
     overflow-y: scroll;
     height: 393px;
 }
 
-.dinamica{
+.dinamica {
     position: relative;
     overflow-y: scroll;
     height: 393px;
