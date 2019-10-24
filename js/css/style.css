@@ -1,0 +1,106 @@
+.dropdown-item:hover {
+    background-color: #343A40 !important;
+    color: #fff !important;
+}
+
+.es {
+    height: 80%
+}
+
+.card-title,
+.card-text {
+    text-align: center !important;
+}
+
+.card-body a {
+    width: 100% !important;
+}
+
+.footer_text {
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    line-height: 100%;
+    margin-bottom: 0 !important;
+}
+
+header {
+    background: #343A40;
+    color: white;
+}
+
+.card-link {
+    font-size: 40px !important;
+    color: #000000 !important;
+    text-align: center !important;
+    width: 100% !important;
+}
+
+.linked {
+    transition: font-size 0.5s;
+}
+
+.github {
+    transition: font-size 0.5s;
+}
+
+.linked:hover {
+    color: #0073b0 !important;
+    font-size: 44px !important;
+}
+
+.github:hover {
+    color: #33006e !important;
+    font-size: 44px !important;
+}
+
+.bordas_coluna {
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-color: #17A2B8 !important;
+    border-left: 0px !important;
+    border-top: 0px !important;
+    border-bottom: 0px !important;
+}
+
+.bordas_coluna5px {
+    border-width: 3px !important;
+    border-style: solid !important;
+    border-color: #007bff !important;
+    background-color: #007bff;
+    color: white;
+}
+
+@media only screen and (max-width: 768px) {
+    .bordas_coluna {
+        border-width: 1px !important;
+        border-style: solid !important;
+        border-color: #17A2B8 !important;
+        border-left: 0px !important;
+        border-top: 0px !important;
+        border-right: 0px !important;
+    }
+    .bordas_coluna5px {
+        border-width: 3px !important;
+        border-style: solid !important;
+        border-color: #007bff !important;
+        background-color: #007bff;
+        color: white;
+    }
+    .dinamica {
+        height: auto !important;
+        overflow-y: visible !important;
+    }
+}
+
+.scrollspy {
+    position: relative;
+    overflow-y: scroll;
+    height: 393px;
+}
+
+.dinamica {
+    position: relative;
+    overflow-y: scroll;
+    height: 393px;
+}
