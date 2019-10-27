@@ -75,14 +75,14 @@
                             <div class="col-md-6 px-3 py-3 bordas_coluna ">
                                 <div class="form-group was-validated">
                                     <label for="exampleInputEmail1">Ponto Máximo</label>
-                                    <input required onchange="ativarBotaoUniforme()" id="pmaximo" type="number" class="form-control"  aria-describedby="emailHelp" placeholder="Digite aqui seu pnto Máximo" onchange="mudarSeparatriz();">
+                                    <input required onchange="ativarBotaoUniforme()" id="pmaximo" type="number" class="form-control" aria-describedby="emailHelp" placeholder="Digite aqui seu pnto Máximo" onchange="mudarSeparatriz();">
                                     <div class="invalid-feedback">Insira o tipo da variável.</div>
                                     <div class="valid-feedback">Muito bem!</div>
                                 </div>
                                 <div class="form-group was-validated">
                                     <label for="exampleInputPassword1">Ponto Mínimo</label>
-                                    <input required onchange="ativarBotaoUniforme()" id="pminimo" type="number" class="form-control"  placeholder="Digite aqui seu ponto Mínimo" onchange="mudarSeparatriz();">
-                                     <div class="invalid-feedback">Insira o tipo da variável.</div>
+                                    <input required onchange="ativarBotaoUniforme()" id="pminimo" type="number" class="form-control" placeholder="Digite aqui seu ponto Mínimo" onchange="mudarSeparatriz();">
+                                    <div class="invalid-feedback">Insira o tipo da variável.</div>
                                     <div class="valid-feedback">Muito bem!</div>
                                 </div>
                                 <div class="form-group">
@@ -135,34 +135,91 @@
                     </div>
                 </div>
                 <!-- fim uniforme -->
-                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">test2</div>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-md-7 px-3 py-3 bordas_coluna d-flex align-items-center flex-column">
+                                <div class="form-group was-validated" style="width: 75%;">
+                                    <label for=" exampleInputEmail1">Dados</label>
+                                    <input required onchange="ativarBotaoNormal() " id="pmaximo " type="number " class="form-control " aria-describedby="emailHelp " placeholder="Digite aqui seus Dados" onchange="mudarSeparatriz(); ">
+                                    <div class="invalid-feedback ">Insira o tipo da variável.</div>
+                                    <div class="valid-feedback ">Muito bem!</div>
+                                </div>
+                                <div class="form-group was-validated " style="width: 75%;">
+                                    <label for="exampleInputPassword1">Média</label>
+                                    <input required onchange="ativarBotaoNormal()" id="pminimo" type="number" class="form-control" placeholder="Digite aqui sua  Média" onchange="mudarSeparatriz();">
+                                    <div class="invalid-feedback">Insira o tipo da variável.</div>
+                                    <div class="valid-feedback">Muito bem!</div>
+                                </div>
+                                <div class="form-group was-validated " style="width: 75%;">
+                                    <label for="exampleInputPassword1">Desvio Padrão</label>
+                                    <input required onchange="ativarBotaoNormal()" id="pminimo" type="number" class="form-control" placeholder="Digite aqui seu Desvio Padrão" onchange="mudarSeparatriz();">
+                                    <div class="invalid-feedback">Insira o tipo da variável.</div>
+                                    <div class="valid-feedback">Muito bem!</div>
+                                </div>
+
+                                <div class=" o-label--radio-holder  border border-info  rounded d-flex justify-content-between" style="width: 75%; margin-bottom: 20px;">
+                                    <label class="px-1 py-1" for="exampleInputEmail1">Intervalo de Análise:</label>
+
+                                    <div class="px-1 py-1 o-label--radio ">
+                                        <input type="radio" id="nominal" name="type" class="o-label-radio" checked="checked">
+                                        <label for="nominal" class="o-label-title">Maior Que</label>
+                                    </div>
+                                    <div class="px-1 py-1 o-label--radio ">
+                                        <input type="radio" id="ordinal" name="type" class="o-label-radio">
+                                        <label for="ordinal" class="o-label-title">Entre </label>
+                                    </div>
+
+                                    <div class="px-1 py-1 o-label--radio ">
+                                        <input type="radio" id="descritiva" name="type" class="o-label-radio">
+                                        <label for="descritiva" class="o-label-title">Menor Que</label>
+                                    </div>
+                                </div>
+
+
+
+
+                                <button id="normalbotao" type="submit" class="btn btn-primary " onclick="ativarBotaoNormal()" style="width: 75%;">Enviar</button>
+                            </div>
+                            <div class="col-md-5 px-3 py-3 d-flex align-items-center flex-column " style="margin-top: 17%">
+
+
+                                <h1 class="display-6   shadow border border-info rounded bordas_coluna5px">
+                                    <stron> Probabilidade = 1,5 </strong>
+                                </h1>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
                 <!--Distribuição Binominal  -->
                 <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-7 px-3 py-3 bordas_coluna d-flex align-items-center flex-column">
-                                <div class="form-group  was-validated" style="width: 75%;" >
-                                  
-                                    <label for="amostra">Amostra</label>                                  
-                                    <input  required onchange="ativarBotaoBinominal()" id="amostra" type="number" class="form-control"  aria-describedby="emailHelp" placeholder="Digite aqui sua Amostra(N)" onchange="mudarSeparatriz();">
-                                     <div class="invalid-feedback">Insira os dados.</div>
-                                    <div class="valid-feedback">Muito bem!</div>
+                                <div class="form-group  was-validated" style="width: 75%;">
+
+                                    <label for="amostra">Amostra</label>
+                                    <input required onchange="ativarBotaoBinominal()" id="amostra" type="number" class="form-control" aria-describedby="emailHelp" placeholder="Digite aqui sua Amostra(N)" onchange="mudarSeparatriz();">
+                                    <div class="invalid-feedback">Insira os dados.</div>
+                                    <div class="valid-feedback ">Muito bem!</div>
                                 </div>
-                                <div class="form-group  was-validated" style="width: 75%;"> 
+                                <div class="form-group  was-validated" style="width: 75%;">
                                     <label for="sucesso">Sucesso</label>
-                                    <input  required onchange="ativarBotaoBinominal()" id="sucesso"type="number" class="form-control"  placeholder="Digite aqui seu Sucesso(P)" onchange="mudarSeparatriz();">
-                                    <div class="invalid-feedback">Insira os dados.</div>
-                                    <div class="valid-feedback">Muito bem!</div>
+                                    <input required onchange="ativarBotaoBinominal()" min="0" max="100" id="sucesso" type="number" class="form-control" placeholder="Digite aqui seu Sucesso(P)" onchange="mudarSeparatriz();">
+                                    <div class="invalid-feedback">Insira de 0 a 100 </div>
+                                    <div class="valid-feedback troca">Muito bem!</div>
                                 </div>
-                                <div class="form-group was-validated" style="width: 75%;">                                    
+                                <div class="form-group was-validated" style="width: 75%;">
                                     <label for="fracasso">Fracasso</label>
-                                    <input  required onchange="ativarBotaoBinominal()" id="fracasso"type="number" class="form-control"  aria-describedby="emailHelp" placeholder="Digite aqui seu Fracasso(Q)" onchange="mudarSeparatriz();">
-                                    <div class="invalid-feedback">Insira os dados.</div>
-                                    <div class="valid-feedback">Muito bem!</div>
+                                    <input required onchange="ativarBotaoBinominal()" min="0" max="100" id="fracasso" type="number" class="form-control" aria-describedby="emailHelp" placeholder="Digite aqui seu Fracasso(Q)" onchange="mudarSeparatriz();">
+                                    <div class="invalid-feedback">Insira de 0 a 100 </div>
+                                    <div class="valid-feedback troca">Muito bem!</div>
                                 </div>
                                 <div class="form-group was-validated" style="width: 75%;">
                                     <label for="evento">Evento</label>
-                                    <input required onchange="ativarBotaoBinominal()" id="evento" type="number" class="form-control"  placeholder="Digite aqui seu Evento(K)" onchange="mudarSeparatriz();">
+                                    <input required onchange="ativarBotaoBinominal()" id="evento" type="number" class="form-control" placeholder="Digite aqui seu Evento(K)" onchange="mudarSeparatriz();">
                                     <div class="invalid-feedback">Insira os dados.</div>
                                     <div class="valid-feedback">Muito bem!</div>
                                 </div>

@@ -1,5 +1,7 @@
 // Declaração de variáveis globais
-let tabelas = [], vetorImport = [], Obejetos;
+let tabelas = [],
+    vetorImport = [],
+    Obejetos;
 let barra = document.getElementById('RangeSeparatriz');
 let littleData = document.getElementById('entrarDados');
 
@@ -19,7 +21,8 @@ function separador(vetor) {
 }
 
 function moda(Quantidades) {
-    let aux = 0, nome = [];
+    let aux = 0,
+        nome = [];
     for (let i in Quantidades) {
         if (Quantidades[i] > aux) {
             aux = Quantidades[i];
@@ -54,7 +57,8 @@ function medidaSeparatriz(porcentagem, dados, totalFrequencia) {
 
 function medidaSeparatrizContinua(totalFrequencia, intervalos, interClasses, porcentagem) {
     let posicao = parseFloat((totalFrequencia * porcentagem).toFixed(2));
-    let controle = 0, vetorIntervalos;
+    let controle = 0,
+        vetorIntervalos;
     for (let j in intervalos) {
         if (posicao >= controle && posicao <= intervalos[j][0]) {
             vetorIntervalos = j.split('|--');
@@ -68,7 +72,8 @@ function medidaSeparatrizContinua(totalFrequencia, intervalos, interClasses, por
 }
 
 function mediana(dados, totalFrequencia) {
-    let posicoes = [], medianas = [];
+    let posicoes = [],
+        medianas = [];
     if (totalFrequencia % 2 == 0) {
         posicoes.push(totalFrequencia / 2, totalFrequencia / 2 + 1);
     } else {
@@ -89,7 +94,8 @@ function mediana(dados, totalFrequencia) {
 
 function medianaContinua(totalFrequencia, intervalos, interClasses) {
     let posicao = parseInt((totalFrequencia / 2).toFixed(2));
-    let controle = 0, vetorIntervalos;
+    let controle = 0,
+        vetorIntervalos;
     for (let j in intervalos) {
         if (posicao >= controle && posicao <= intervalos[j][0]) {
             vetorIntervalos = j.split('|--');
@@ -355,9 +361,12 @@ function calcular(vetorTabelas) {
                                     <th scope="col"aria-label="Frequência Relativa em Porcentagem" data-balloon-pos="left">FR%</th>
                                     <th scope="col"aria-label="Frequência Simples Acumulada" data-balloon-pos="left">FAC</th>
                                     <th scope="col"aria-label="Frequência Relativa Acumulada" data-balloon-pos="left">FAC%</th>`;
-            let FrequenciaAtual = 0, FrequenciaPorAtual = 0;
+            let FrequenciaAtual = 0,
+                FrequenciaPorAtual = 0;
             //Escreve a Tabela
-            let js = 1, objMediana = {}, vetorGrafico = [];
+            let js = 1,
+                objMediana = {},
+                vetorGrafico = [];
             for (let z in obejeto) {
                 let linhaAtual = linhas[js];
                 linhaAtual.innerHTML = `<td>${z}</td>
@@ -392,7 +401,7 @@ function calcular(vetorTabelas) {
             `;
 
             //Gráfico
-            FusionCharts.ready(function () {
+            FusionCharts.ready(function() {
                 let fusioncharts = new FusionCharts({
                     type: 'pie3d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -469,9 +478,12 @@ function calcular(vetorTabelas) {
                                     <th scope="col"aria-label="Frequência Relativa em Porcentagem" data-balloon-pos="left">FR%</th>
                                     <th scope="col"aria-label="Frequência Simples Acumulada" data-balloon-pos="left">FAC</th>
                                     <th scope="col"aria-label="Frequência Relativa Acumulada" data-balloon-pos="left">FAC%</th>`
-            let FrequenciaAtual = 0, FrequenciaPorAtual = 0, vetorGrafico = [];
+            let FrequenciaAtual = 0,
+                FrequenciaPorAtual = 0,
+                vetorGrafico = [];
             //Escreve a Tabela
-            let js = 1, objMediana = {};
+            let js = 1,
+                objMediana = {};
             for (let z in obejeto) {
                 let linhaAtual = linhas[js];
                 linhaAtual.innerHTML = `<td>${z}</td>
@@ -509,7 +521,7 @@ function calcular(vetorTabelas) {
             `;
 
             //Gráfico
-            FusionCharts.ready(function () {
+            FusionCharts.ready(function() {
                 let fusioncharts = new FusionCharts({
                     type: 'bar3d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -581,10 +593,13 @@ function calcular(vetorTabelas) {
                                     <th scope="col"aria-label="Frequência Relativa em Porcentagem" data-balloon-pos="left">FR%</th>
                                     <th scope="col"aria-label="Frequência Simples Acumulada" data-balloon-pos="left">FAC</th>
                                     <th scope="col"aria-label="Frequência Relativa Acumulada" data-balloon-pos="left">FAC%</th>`;
-            let FrequenciaAtual = 0, FrequenciaPorAtual = 0;
+            let FrequenciaAtual = 0,
+                FrequenciaPorAtual = 0;
 
             //Escrevendo a tabela.
-            let js = 1, aux, objMediana = {}, vetorGrafico = [];
+            let js = 1,
+                aux, objMediana = {},
+                vetorGrafico = [];
 
             for (let k in obejeto) {
                 let linhaAtual = linhas[js];
@@ -630,7 +645,7 @@ function calcular(vetorTabelas) {
             </div>
             `;
             //Gráfico
-            FusionCharts.ready(function () {
+            FusionCharts.ready(function() {
                 let fusioncharts = new FusionCharts({
                     type: 'pie3d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -683,7 +698,8 @@ function calcular(vetorTabelas) {
             `;
 
             //Pegar amplitude
-            let maxVal = 0, minVal;
+            let maxVal = 0,
+                minVal;
             for (let j in obejeto) {
                 if (parseInt(j) > maxVal) {
                     maxVal = parseInt(j);
@@ -715,7 +731,8 @@ function calcular(vetorTabelas) {
                 Ic = ref / (K + 1);
             }
 
-            let ultIntervalo = minVal, intervalos = {};
+            let ultIntervalo = minVal,
+                intervalos = {};
             while (ultIntervalo < maxVal) {
                 intervalos[`${ultIntervalo}`] = ultIntervalo + Ic
                 ultIntervalo += Ic;
@@ -746,9 +763,13 @@ function calcular(vetorTabelas) {
                                     <th scope="col"aria-label="Frequência Simples Acumulada" data-balloon-pos="left">FAC</th>
                                     <th scope="col"aria-label="Frequência Relativa Acumulada" data-balloon-pos="left">FAC%</th>`;
 
-            let FrequenciaAtual = 0, FrequenciaPorAtual = 0, vetorGrafico = [], objMediana = {};
+            let FrequenciaAtual = 0,
+                FrequenciaPorAtual = 0,
+                vetorGrafico = [],
+                objMediana = {};
             //Escrever a tabela
-            let js = 1, fi;
+            let js = 1,
+                fi;
             for (let z in intervalos) {
                 let linhaAtual = linhas[js];
                 linhaAtual.innerHTML = `<td>${z} |-- ${intervalos[z]}</td>`;
@@ -799,7 +820,7 @@ function calcular(vetorTabelas) {
             </div>
             `;
             //Gráfico
-            FusionCharts.ready(function () {
+            FusionCharts.ready(function() {
                 let fusioncharts = new FusionCharts({
                     type: 'column2d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -839,18 +860,19 @@ function calcular(vetorTabelas) {
         <a href="descritiva.html" class="btn btn-success" style="width: 100%">Voltar</a>
     </div>`;
 
-    $('[data-spy="scroll"]').each(function () {
+    $('[data-spy="scroll"]').each(function() {
         var $spy = $(this).scrollspy('refresh')
     });
 
 }
 
-$('#arquivo').change(function (e) {
-    let files = e.target.files, f = files[0];
+$('#arquivo').change(function(e) {
+    let files = e.target.files,
+        f = files[0];
     let reader = new FileReader();
     let celulas_Json = {};
 
-    reader.onload = function (e) {
+    reader.onload = function(e) {
         let data = new Uint8Array(e.target.result);
         let arquivo_completo = XLSX.read(data, { type: 'array', cellText: true, cellDates: true });
         //propriedades do arquivo
@@ -900,7 +922,8 @@ $('#arquivo').change(function (e) {
 
 function desvioPadrao(dados, media, tipo) {
 
-    let somaNumerador = 0, somaDenominador = 0
+    let somaNumerador = 0,
+        somaDenominador = 0
     for (let i in dados) {
         somaNumerador += (parseInt(i) - media) ** 2 * dados[i];
         somaDenominador += dados[i];
@@ -1006,12 +1029,27 @@ function ativarBotaoBinominal() {
     let tipoAna = document.getElementById('fracasso').value;
     let dados = document.getElementById('evento').value;
     let botao = document.getElementById('binominalbotao');
+    let valorSu = parseInt(tipoVar);
+    let valorFr = parseInt(tipoAna);
+
+
+
+
+
     if (nome != "" && tipoVar != "" && tipoAna && dados != "") {
-        botao.removeAttribute('disabled');
+        if (valorSu + valorFr == 100) {
+            botao.removeAttribute('disabled');
+        } else {
+            botao.setAttribute('disabled', 'disabled');
+        }
     } else {
         botao.setAttribute('disabled', 'disabled');
+
     }
+
 }
+
+
 function ativarBotaoUniforme() {
     let nome = document.getElementById('pmaximo').value;
     let tipoVar = document.getElementById('pminimo').value;
