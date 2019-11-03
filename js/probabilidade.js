@@ -9,103 +9,103 @@ function Distribuicao(name_Btn){
     $('.btn').removeClass('active')
     $('#'+name_Btn).addClass('active')
    
-
     this.Uniforme = function(){
-        return '<div class="container "> \
-                            <div class="row"> \
-                                <div class="col-md-6 px-3 py-3 bordas_coluna">\
-                                    <div class="form-group"> \
-                                        <label for="exampleInputEmail1">Ponto Máximo</label> \
-                                        <input type="email" class="form-control" id="exampleInputEmail1"  \
-                                            aria-describedby="emailHelp" placeholder="Digite aqui seu pnto Máximo">  \
-                                    </div> \
-                                    <div class="form-group"> \
-                                        <label for="exampleInputPassword1">Ponto Mínimo</label> \
-                                        <input type="password" class="form-control" id="exampleInputPassword1" \
-                                            placeholder="Digite aqui seu ponto Mínimo"> \
-                                    </div> \
-                                    <div class="form-group"> \
-                                        <div class="o-label--radio-holder"> \
-                                            <label for="exampleInputEmail1">Intervalo de Análise</label> \
-                                            <div class="o-label--radio"> \
-                                                <input type="radio" id="nominal" name="type" class="o-label-radio" \
-                                                    checked="checked"> \
-                                                <label for="nominal" class="o-label-title">Maior Que </label> \
-                                            </div> \
-                                            <div class="o-label--radio"> \
-                                                <input type="radio" id="ordinal" name="type" class="o-label-radio"> \
-                                                <label for="ordinal" class="o-label-title">Entre</label> \
-                                            </div> \
-                                            <div class="o-label--radio"> \
-                                                <input type="radio" id="descritiva" name="type" class="o-label-radio"> \
-                                                <label for="descritiva" class="o-label-title">Menor Que</label> \
-                                            </div> \
-                                        </div> \
-                                    </div> \
-                                    <!-- <button type="submit" class="btn btn-primary">Enviar</button> --> \
-                                </div> \
-                                \
-                                <div class="col-md-6 px-3 py-3"> \
-                                    <div class="form-group was-validated"> \
-                                        <label for="entrarDados">Inserir Dados</label> \
-                                        <textarea class="form-control" id="entrarDados" rows="3" \
-                                            placeholder="Inserir os dados separados por ; - 12; 323; 12; 34" required \
-                                            onchange="ativarBotaoInserir()"> \
-                                            </textarea> \
-                                        <div class="invalid-feedback">Insira os dados.</div> \
-                                        <div class="valid-feedback">Muito bem!</div> \
-                                    </div> \
-                                    <div class="form-inline" style="margin-top: 30px;"> \
-                                        <label for="arquivo" class="sr-only">Importar uma Planilha</label> \
-                                        <input type="file" class="form-control-file" id="arquivo"> \
-                                        \
-                                        <label for="tipoArquivo" class="my-1 mr-2">Tipo de arquivo</label> \
-                                        <select onchange="tipoArquivo();" class="form-control my-1 mr-sm-2 custom-select" \
-                                            id="tipoArquivo"> \
-                                            <option selected>.xlsx</option> \
-                                            <option>.csv</option> \
-                                        </select> \
-                                    </div> \
-                                    <button type="button" class="btn btn-primary" style="width: 100%; margin-top: 30px;" \
-                                        onclick="adicionarVariavel(tabelas); ativarBotaoVerificar(); ativarBotaoInserir();" \
-                                        id="addVar">Adicionar Variável</button> \
-                                </div> \
-                            </div> \
+        return ` \
+        <div class="container"> \
+            <div class="row"> \
+                <div class="col-md-12 px-3 py-3 bordas_coluna d-flex align-items-center flex-column  entrada"> \
+                        \
+                    <div class="form-group was-validated ted" style="width: 75%;"> \
+                        <label for="exampleInputPassword1">Intervalos</label> \
+                        <input required id="teste "type="text" min="0" pattern="((?:[0-9])+(?:\;)|[0-9]*){1}((?:[0-9])+[0-9]*){1}" class="form-control dom" id="exampleInputPassword1" placeholder="Digite o(s) Dados(s)" "> \
+                        <div class="valid-feedback">Muito bem!</div>\
+                        <div class="invalid-feedback "> Adione um ou 2 numeros inteiros sepados por ponto e Virgula </div> \
+                    </div> \
+                    <div class="form-group  was-validated ted" style="width: 75%;"> \
+                        <label for="exampleInputPassword1">Minimo</label> \
+                        <input required type="text" pattern="(?:[0-9])+" step="1" min="0" class="form-control dom" id="exampleInputPassword1" placeholder="Digite aqui a Média" "> \
+                        <div class="valid-feedback  ">Muito bem!</div>\
+                        <div class="invalid-feedback">Insira um numero </div> \
+                    </div> \
+                    <div class="form-group  was-validated ted" style="width: 75%;"> \
+                        <label for="exampleInputPassword1">Maximo</label> \
+                        <input required type="text"pattern="(?:[0-9])+" step="1" min="0" class="form-control dom" id="exampleInputPassword1" placeholder="Digite aqui o Desvio Padrão" "> \
+                        <div class="valid-feedback  ">Muito bem!</div>\
+                        <div class="invalid-feedback">Insira um numero </div> \
+                    </div> \
+                    <div class="form-group " style="width: 75%;"> \
+                        <label for="exampleInputPassword1">Opções</label> \
+                        <select class="select"> \
+                           \
+                                <option value="entre"> Entre dois numeros </option>\
+                                <option value="maior"> Maior que </option>\
+                                <option value="menor"> Menor que </option>\
                             \
-                        </div> \
-                    </div> ';  
+                        </select>\
+                    </div> \
+                    \
+                    <button id="calc" type="submit" class="btn btn-primary" onclick="Gerente_Uniforme([])" style="width: 75%; ">Calcular</button> \
+                    \
+                    </form>\
+                </div> \
+                <div id="resultados" class="col-md-0 px-3 py-3  align-items-center  flex-column d-none " style="margin-top: 5%;"> \
+                        \
+                        \
+                    <h1 class="display-6 shadow border border-info rounded P "> \
+                         Probabilidade =  \
+                    </h1> \
+                    <h1 class="display-6 shadow border border-info rounded P "> \
+                         Moda =  \
+                    </h1> \
+                    <h1 class="display-6 shadow border border-info rounded P"> \
+                         Desvio Padrão =   \
+                    </h1> \
+                    <button id="btn" type="submit" class="btn btn-primary mt-5 w-100" onclick="Sweet_Alert_Name('${'uniforme'}')"  >Salvar</button> \
+                    \
+                </div> \
+            </div> \
+         \
+    </div>`;
     }
     this.Normal = function(){
-        return ''
-    }
-
-    this.BinomialA = function(){
-        binomial= 'binomial'
-        return ' \
+        
+        return ` \
             <div class="container"> \
                 <div class="row"> \
                     <div class="col-md-12 px-3 py-3 bordas_coluna d-flex align-items-center flex-column  entrada"> \
                             \
-                        <div class="form-group" style="width: 75%;"> \
-                            <label for="exampleInputEmail1">Amostra</label> \
-                            <input type="number" class="form-control dom" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite aqui a Amostra (N)" "> \
-                        </div> \
-                        <div class="form-group" style="width: 75%;"> \
-                            <label for="exampleInputPassword1">Sucesso</label> \
-                            <input type="number" class="form-control dom" id="exampleInputPassword1" placeholder="Digite aqui a chance de Sucesso (P)" "> \
-                        </div> \
-                        <div class="form-group" style="width: 75%;"> \
-                            <label for="exampleInputEmail1">Fracasso</label> \
-                            <input type="number" class="form-control dom" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite aqui a chance de Fracasso (Q)" "> \
-                            \
-                        </div> \
-                        <div class="form-group" style="width: 75%;"> \
+                        <div class="form-group was-validated ted" style="width: 75%;"> \
                             <label for="exampleInputPassword1">Evento</label> \
-                            <input type="text" class="form-control dom" id="exampleInputPassword1" placeholder="Digite o(s) Evento(s) (K)" "> \
+                            <input required id="teste "type="text" min="0" pattern="((?:[0-9])+(?:\;)|[0-9]*){1}((?:[0-9])+[0-9]*){1}" class="form-control dom" id="exampleInputPassword1" placeholder="Digite o(s) Dados(s)" "> \
+                            <div class="valid-feedback">Muito bem!</div>\
+                            <div class="invalid-feedback "> Adione um ou 2 numeros inteiros sepados por ponto e Virgula </div> \
+                        </div> \
+                        <div class="form-group  was-validated ted" style="width: 75%;"> \
+                            <label for="exampleInputPassword1">Media</label> \
+                            <input required type="text" pattern="[0-9]+([\.,][0-9]{0,2})?" step="0.01" class="form-control dom" id="exampleInputPassword1" placeholder="Digite aqui a Média" "> \
+                            <div class="valid-feedback  ">Muito bem!</div>\
+                            <div class="invalid-feedback">Insira um numero </div> \
+                        </div> \
+                        <div class="form-group  was-validated ted" style="width: 75%;"> \
+                            <label for="exampleInputPassword1">Desvio Padrão</label> \
+                            <input required type="text" pattern="[0-9]+([\.,][0-9]{0,2})?" step="0.01" class="form-control dom" id="exampleInputPassword1" placeholder="Digite aqui o Desvio Padrão" "> \
+                            <div class="valid-feedback  ">Muito bem!</div>\
+                            <div class="invalid-feedback">Insira um numero </div> \
+                        </div> \
+                        <div class="form-group " style="width: 75%;"> \
+                            <label for="exampleInputPassword1">Opções</label> \
+                            <select class="select"> \
+                               \
+                                    <option value="entre"> Entre dois numeros </option>\
+                                    <option value="maior"> Maior que </option>\
+                                    <option value="menor"> Menor que </option>\
+                                \
+                            </select>\
                         </div> \
                         \
-                        <button id="calc" type="submit" class="btn btn-primary" onclick="Gerente_Binomial()"  style="width: 75%;">Calcular</button> \
+                        <button id="calc" type="submit" class="btn btn-primary" onclick="Gerente_Normal([])" style="width: 75%; ">Calcular</button> \
                         \
+                        </form>\
                     </div> \
                     <div id="resultados" class="col-md-0 px-3 py-3  align-items-center  flex-column d-none " style="margin-top: 5%;"> \
                             \
@@ -119,20 +119,82 @@ function Distribuicao(name_Btn){
                         <h1 class="display-6 shadow border border-info rounded P"> \
                              Desvio Padrão =   \
                         </h1> \
-                        <button type="submit" class="btn btn-primary mt-5 w-100" onclick="Sweet_Alert_Name('+'binomial'+')"  >Salvar</button> \
+                        <button id="btn" type="submit" class="btn btn-primary mt-5 w-100" onclick="Sweet_Alert_Name('${'normal'}')"  >Salvar</button> \
                         \
                     </div> \
                 </div> \
              \
-        </div>';
+        </div>`;
+
     }
 
+    this.BinomialA = function(){
+        binomial= 'binomial'
+        return ` \
+            <div class="container"> \
+                <div class="row"> \
+                    <div class="col-md-12 px-3 py-3 bordas_coluna d-flex align-items-center flex-column  entrada"> \
+                            \
+                        <div class="form-group was-validated ted " style="width: 75%;"> \
+                            <label for="exampleInputEmail1">Amostra</label> \
+                            <input required type="number"  min="0" pattern="[0-9]" class="form-control dom " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite aqui a Amostra (N)" "> \
+                            <div class="valid-feedback ">Muito bem!</div>\
+                            <div class="invalid-feedback" >Insira um numero inteiro </div> \
+                        </div> \
+                        <div class="form-group was-validated ted" style="width: 75%;"> \
+                            <label for="exampleInputPassword1">Sucesso</label> \
+                            <input required type="number"  min="0" max="100" pattern="[0-9]" class="form-control dom" id="exampleInputPassword1" placeholder="Digite aqui a chance de Sucesso (P)" "> \
+                            <div class="valid-feedback  ">Muito bem!</div>\
+                            <div class="invalid-feedback">Insira de 0 a 100 </div> \
+                        </div> \
+                        <div class="form-group was-validated ted" style="width: 75%;"> \
+                            <label for="exampleInputEmail1">Fracasso</label> \
+                            <input required type="number"  min="0" max="100" pattern="[0-9]" class="form-control dom" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite aqui a chance de Fracasso (Q)" "> \
+                            <div class="valid-feedback  ">Muito bem!</div>\
+                            <div class="invalid-feedback">Insira de 0 a 100 </div> \
+                            \
+                        </div> \
+                        <div class="form-group was-validated ted" style="width: 75%;"> \
+                            <label for="exampleInputPassword1">Evento</label> \
+                            <input required id="teste "type="text" min="0" pattern="((?:[0-9])+(?:\;)|(?:[0-9]))*[0-9]" step="1" class="form-control dom" id="exampleInputPassword1" placeholder="Digite o(s) Evento(s) (K)" "> \
+                            <div class="valid-feedback">Muito bem!</div>\
+                            <div class="invalid-feedback "> Adione um ou mais numeros inteiros sepados por ponto e Virgula </div> \
+                        </div> \
+                        \
+                        <button id="calc" type="submit" class="btn btn-primary" onclick="Gerente_Binomial([])" style="width: 75%; ">Calcular</button> \
+                        \
+                        </form>\
+                    </div> \
+                    <div id="resultados" class="col-md-0 px-3 py-3  align-items-center  flex-column d-none " style="margin-top: 5%;"> \
+                            \
+                            \
+                        <h1 class="display-6 shadow border border-info rounded P "> \
+                             Probabilidade =  \
+                        </h1> \
+                        <h1 class="display-6 shadow border border-info rounded P "> \
+                             Moda =  \
+                        </h1> \
+                        <h1 class="display-6 shadow border border-info rounded P"> \
+                             Desvio Padrão =   \
+                        </h1> \
+                        <button id="btn" type="submit" class="btn btn-primary mt-5 w-100" onclick="Sweet_Alert_Name('${'binomial'}')"  >Salvar</button> \
+                        \
+                    </div> \
+                </div> \
+             \
+        </div>`;
+    }
     
+
+   
 }
+// Botões Padrão
 function DistBinomial(name_Btn){
     let dist_Bi = new Distribuicao(name_Btn);
     let div_add = document.querySelector('#pills-tabContent');
     div_add.innerHTML = dist_Bi.BinomialA();
+    var input = document.querySelector('teste');
+    
 
 }
 function DistNormal(name_Btn){
@@ -147,6 +209,9 @@ function DistUniforme(name_Btn){
     div_add.innerHTML = dist_Un.Uniforme();
     
 }
+
+
+// Funcoes Genericas
 function PegarDados(x){
     let Variaveis = document.querySelectorAll(x)
     let dados = []
@@ -156,18 +221,12 @@ function PegarDados(x){
     
     return dados
 }
+function AdicionaDados(dados, classe){
+    let Variaveis = document.querySelectorAll(classe)
+    for(let i=0;i < dados.length;i++){
+        Variaveis[i].value = dados[i]
+    }
 
-function Gerente_Binomial(){
-    let resultado = Calc_Binomial([]);
-    console.log(resultado)
-    Libera_Resul_bi();
-    let display = document.querySelectorAll('.P')
-    display[0].innerHTML = 'Probabilidade : '+resultado.binomial+'%';
-    display[1].innerHTML = 'Media : '+resultado.media;
-    display[2].innerHTML = 'Desvio Padrão : '+resultado.desvio_padrao;
-    console.log(display) 
-
-    
 }
 function Libera_Resul_bi(){
        
@@ -182,16 +241,108 @@ function Libera_Resul_bi(){
     
 
 }
+function Validacao(dados,tipo){
+    
+    var input = document.getElementsByClassName('dom');
+    var valido = 0
+    for(let i = 0;i < input.length;i++){
+        if(input[i].checkValidity() === true){
+            valido ++
+        }
+    }
+    console.log(input[0].checkValidity())
+    if(valido == input.length || dados.length != 0){
+    
+        if(dados.length == 0){
+            dados = PegarDados('.dom');
+            
+        };
+        console.log((parseInt(dados[1]) + parseInt(dados[2])))
+        
+        if(tipo == 'binomial'){
+            if((parseInt(dados[1]) + parseInt(dados[2])) == 100){
+                return true
+            }else{
+                return 'O sucesso mais o fracasso não é igual a 100'
+            }
+        
+        }else if(tipo == 'normal'){
+            
+        }else if(tipo == 'uniforme'){
+        
+        }
+    }else{
+        $('.ted').addClass('was-validated');
+        return 'Por favor Preecha todos os campos corretamente';
+
+    }
+    
+    
+}
+function AlertUsu(texto){
+    Swal.fire({
+        type: 'info',
+        title: 'Oops...',
+        text: texto
+      })
+    
+}
+
+
+// Gerentes de Distribuições
+function Gerente_Binomial(dados){
+    validacao = Validacao(dados, 'binomial')
+    
+    if(validacao != true){ 
+        AlertUsu(validacao);
+        return false
+    }else{
+        let resultado = Calc_Binomial(dados);
+        console.log(resultado)
+        Libera_Resul_bi();
+        let display = document.querySelectorAll('.P')
+        display[0].innerHTML = 'Probabilidade : '+resultado.binomial+'%';
+        display[1].innerHTML = 'Media : '+resultado.media;
+        display[2].innerHTML = 'Desvio Padrão : '+resultado.desvio_padrao;
+        console.log(display) 
+        
+    }
+ 
+    
+}function Gerente_Normal(dados){
+    validacao = Validacao(dados, 'normal')
+    let ted = document.querySelector('.ted');
+    console.log(ted.value)
+    if(validacao != true){ 
+        AlertUsu(validacao);
+        return false
+    }else{
+        let resultado = Calc_Binomial(dados);
+        console.log(resultado)
+        Libera_Resul_bi();
+        let display = document.querySelectorAll('.P')
+        display[0].innerHTML = 'Probabilidade : '+resultado.binomial+'%';
+        display[1].innerHTML = 'Media : '+resultado.media;
+        display[2].innerHTML = 'Desvio Padrão : '+resultado.desvio_padrao;
+        console.log(display) 
+    }
+ 
+    
+}
+
+
+// Funcões de Calculo
 function Calc_Binomial(dados){
     if(dados.length == 0){
         dados = PegarDados('.dom');
+        
     };
    
     console.log(dados)
     let K = dados[3].split(';');
     let N = parseInt(dados[0]);
-    let P = parseFloat(dados[1]);
-    let Q = parseFloat(dados[2]);
+    let P = parseFloat(dados[1])/100;
+    let Q = parseFloat(dados[2])/100;
    
     let resultados = {
         binomial:0,
@@ -200,7 +351,6 @@ function Calc_Binomial(dados){
     };
     
     for(let i = 0; i < K.length ;i++){
-        
         K[i]=parseInt(K[i])
         let analise_comb
         if(N == K[i]){
@@ -232,6 +382,9 @@ function Calc_Binomial(dados){
     }
 }
 
+
+
+//Funções resposaveis por salvar
 function Sweet_Alert_Name(tipo){
     quant = Object.getOwnPropertyNames(resultados_salvos[tipo]).length + 1
     name = 'Salvo '+ tipo + ' '+quant;
@@ -253,39 +406,69 @@ function Sweet_Alert_Name(tipo){
         })
         
         if (text) {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-              })
-              
-              Toast.fire({
-                type: 'success',
-                title: 'Salvo com Sucesso'
-              })
-          resultados_salvos[tipo][text] = PegarDados('.dom');
-          console.log(resultados_salvos);
-          add_nav_safe(text)
+
+            let nomeAlt = text.replace(/\s/g, '')
+
+            if(resultados_salvos[tipo][nomeAlt]){
+                Swal.fire({
+                    type: 'error',
+                    title: 'Oops...',
+                    text: 'Esse nome ja está sendo usado!',
+                   
+                  })
+            }else{
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+                
+                Toast.fire({
+                    type: 'success',
+                    title: 'Salvo com Sucesso'
+                })
+                resultados_salvos[tipo][nomeAlt] = PegarDados('.dom');
+                console.log(resultados_salvos);
+                add_nav_safe(text, tipo)
           
+            }
+                
         }
         
         })()
 }
 
-function add_nav_safe(name, tipo){
-
+function add_nav_safe(nome, tipo){
+    distri = tipo
+    let nomeAlt = nome.replace(/\s/g, '')
     if(saves.classList.contains("d-none") == true){
         $('#saves').removeClass('d-none')
         $('#saves').addClass('d-flex')
         $('#saves').addClass('animated flipInY delay-0s')
 
     }
-    button = '<button id="'+'binomial'+'" type="button"  onclick="DistBinomial('+'name, tipo'+')" class="btn btn-outline-primary mr-3 mb-2 ml-3 animated tada delay-1s">'+name+'</button>'
+    console.log(nomeAlt)
+    button = `<button id="${nomeAlt}" type="button" onclick="Visualizar('${nomeAlt}','${tipo}')" class=" teste btn btn-outline-primary mr-3 mb-2 ml-3 animated tada delay-1s">${nome}</button>`
+    
     let display = document.querySelector('#saves') 
-    display.innerHTML += button
+    display.innerHTML += button;
+    Visualizar(nomeAlt,tipo);
     
 }
-function text(name, tipo){
-    alert(name, tipo)
+
+function Visualizar(id, tipo){
+ 
+   if(tipo == 'binomial'){
+        DistBinomial(id);
+        Gerente_Binomial(resultados_salvos[tipo][id]);  
+        AdicionaDados(resultados_salvos[tipo][id],'.dom')
+
+   }else if(tipo == 'normal'){
+
+   }else if(tipo == 'uniforme'){
+
+   }
+   
 }
+
