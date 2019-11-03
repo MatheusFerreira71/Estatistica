@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -17,10 +17,16 @@
     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.candy.js"></script>
     <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+
+
+
+    <script>
+    </script>
+
     <title>Probabilidade</title>
 </head>
 
-<body onload="ativarBotaoUniforme()">
+<body>
     <!-- NAV -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="index.html" style="width: 60px !important;"><img src="imagens/logo.png" width="100%" alt="Navbar"></a>
@@ -53,6 +59,7 @@
     <div class="container my-4">
         <div class="card border-info">
             <h5 class="card-header border-info text-center">Probabilidade</h5>
+<<<<<<< HEAD
 
             <div class="d-flex justify-content-around card-header border-info">
                 <ul class="nav nav-pills mb-6 " id="pills-tab" role="tablist">
@@ -246,10 +253,22 @@
                 </div>
                 <!-- Fim Distribuição Binominal  -->
 
+=======
+            <div id="saves" class="d-none flex-row  card-header border-info overflow-auto">
+>>>>>>> 83beaa6375b90ba846fc5ac452211d119bb48be4
 
 
 
+            </div>
+            <div class="d-flex justify-content-center card-header border-info">
 
+                <ul class="nav nav-pills " id="pills-tab" role="tablist">
+                    <button id="btn_bin" type="button" onclick="DistBinomial('btn_bin')" class="btn btn-outline-primary mr-3 mb-2 " >Distribuição Binomial</button>
+                    <button id="btn_nor" type="button" onclick="DistNormal('btn_nor')" class="btn btn-outline-primary mr-3 mb-2 ">Distribuição Normal</button>
+                    <button id="btn_uni" type="button" onclick="DistUniforme('btn_uni')" class="btn btn-outline-primary mb-2 " disabled>Distribuição Uniforme</button>
+                </ul>
+            </div>
+            <div class="tab-content" id="pills-tabContent">
 
             </div>
 
@@ -284,5 +303,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@7.1.0/dist/promise.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<script src="js/probabilidade.js"></script>
 
 </html>
