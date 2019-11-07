@@ -5,6 +5,7 @@ let tabelas = [],
 let barra = document.getElementById('RangeSeparatriz');
 let littleData = document.getElementById('entrarDados');
 
+// Todas as funções vêm abaixo dessa linha.
 function separador(vetor) {
     let Quantidades = {};
     let aux;
@@ -108,6 +109,7 @@ function medianaContinua(totalFrequencia, intervalos, interClasses) {
     }
 }
 
+// Função para verificar se o vetor passado como parãmetro tem algum elemento diferente de um número
 function vetorNaN(vetor) {
     let aux = 0;
     for (let i of vetor) {
@@ -120,6 +122,7 @@ function vetorNaN(vetor) {
     return (aux == vetor.length) ? true : false
 }
 
+// Função para verificar se todos os elemtos do vetor são true ou false.
 function vetorBool(vetor) {
     let aux = 0;
     for (let i of vetor) {
@@ -159,6 +162,8 @@ function adicionarVariavel(vetorTabelas) {
 
     obj.tipoVar = document.getElementById('TipoVar').value
 
+    // Se a variável for Ordinal o sistema colocará na tela um cartão para o usuário adicionar o grau;
+    // Quando o usuário clicar em salvar, a função tabelaOrdinal() será executada.
     if (obj.tipoVar == 'Qualitativa Ordinal') {
         let Obejeto = separador(obj.dados);
         let card = document.getElementById('cardBordado');
@@ -211,6 +216,8 @@ function tabelaOrdinal(vetorTabelas, Objetante) {
         grauObj[`${i}`] = document.getElementById(`grau${i}`).value;
         verificador.push(grauObj[`${i}`]);
     }
+
+    //Verifica se os graus são utilizáveis ou se contém erros.
     if (grausNegativos(verificador)) {
         alert("Existem graus com valor negativo!");
     } else if (grausIguais(verificador).length > verificador.length) {
@@ -230,6 +237,8 @@ function tabelaOrdinal(vetorTabelas, Objetante) {
     }
 }
 
+// Função para mostrar na tela todos os dados que o usuário entrou, para serem conferidos e se necessário;
+// adicionar mais.
 function previewDados(vetorTabelas) {
     let totalLinhas = 0
     let cabecalho = document.getElementById('linhaCabecalhoPreview');
@@ -268,6 +277,7 @@ function previewDados(vetorTabelas) {
     }
 }
 
+// Função para apagar a tabela de preview sempre que o usuário fechar a tela de preview.
 function resetPreview() {
     document.getElementById('linhaCabecalhoPreview').innerHTML = '';
     document.getElementById('corpoTabelaPreview').innerHTML = '';
@@ -276,6 +286,9 @@ function resetPreview() {
 function mudarSeparatriz() {
     let seletor = document.getElementById('Separatrizes');
     let labelResultado = document.getElementById('MedidaValor');
+
+    // Dependendo do tipo de separatriz que o usuário escolher, o sistema irá mudar o atributo step do;
+    // Input type="range"
     if (seletor.value == 'Quartil') {
         barra.setAttribute('step', '25');
         labelResultado.innerText = barra.value + '%';
@@ -291,11 +304,13 @@ function mudarSeparatriz() {
     }
 }
 
+// Função para atualizar o valor da barra de separatrizes. 
 function mudarValorBarra() {
     let labelResultado = document.getElementById('MedidaValor');
     labelResultado.innerText = barra.value + '%';
 }
 
+//Função para mudar o tipo de arquivo que será permitido no seletor de arquivo.
 function tipoArquivo() {
     let tipoArquivo = document.getElementById('tipoArquivo');
     if (tipoArquivo.value == ".xlsx") {
@@ -316,11 +331,12 @@ function calcular(vetorTabelas) {
     document.getElementById('results').style = "border-width: 2px !important; border-style: solid !important; border-color: #17A2B8 !important; border-radius: 10px !important"
     let grupoResults = document.getElementById('resultList');
 
+    // O sistema percorrerá um loop pelo vetor de tabelas executando uma por uma, verificando seu tipo;
+    // e tomando as medidas necessárias para cada tipo.
     for (let i = 0; i < vetorTabelas.length; i++) {
         if (vetorTabelas[i].tipoVar == "Qualitativa Nominal") {
             vetorTabelas[i].dados.sort();
             let obejeto = separador(vetorTabelas[i].dados);
-            console.log(obejeto);
             grupoVar.innerHTML += `<a class="list-group-item list-group-item-action" style = "font-weight: bold;" href="#${vetorTabelas[i].nome}">${vetorTabelas[i].nome}</a>`;
             grupoResults.innerHTML += `<h4 id="${vetorTabelas[i].nome}" class="text-center">${vetorTabelas[i].nome}</h4>`;
             grupoResults.innerHTML += `
@@ -381,6 +397,7 @@ function calcular(vetorTabelas) {
                 vetorGrafico.push(objGrafico);
                 js++
             }
+            // Resultados estatísticos.
             grupoResults.innerHTML += `
             <div class="container-fluid">
                 <div class="row">
@@ -401,7 +418,7 @@ function calcular(vetorTabelas) {
             `;
 
             //Gráfico
-            FusionCharts.ready(function() {
+            FusionCharts.ready(function () {
                 let fusioncharts = new FusionCharts({
                     type: 'pie3d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -437,7 +454,6 @@ function calcular(vetorTabelas) {
         } else if (vetorTabelas[i].tipoVar == "Quantitativa Discreta") {
             vetorTabelas[i].dados.sort();
             let obejeto = separador(vetorTabelas[i].dados);
-            console.log(obejeto);
             grupoVar.innerHTML += `<a class="list-group-item list-group-item-action" style = "font-weight: bold;" href="#${vetorTabelas[i].nome}">${vetorTabelas[i].nome}</a>`;
             grupoResults.innerHTML += `<h4 id="${vetorTabelas[i].nome}" class="text-center">${vetorTabelas[i].nome}</h4>`;
             grupoResults.innerHTML += `
@@ -498,6 +514,7 @@ function calcular(vetorTabelas) {
                 objMediana[z] = FrequenciaAtual;
                 js++
             }
+            // Resultados estatísticos.
             grupoResults.innerHTML += `
             <div class="container-fluid">
                 <div class="row">
@@ -521,7 +538,7 @@ function calcular(vetorTabelas) {
             `;
 
             //Gráfico
-            FusionCharts.ready(function() {
+            FusionCharts.ready(function () {
                 let fusioncharts = new FusionCharts({
                     type: 'bar3d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -552,7 +569,6 @@ function calcular(vetorTabelas) {
             </div>`
         } else if (vetorTabelas[i].tipoVar == "Qualitativa Ordinal") {
             let obejeto = separador(vetorTabelas[i].dados);
-            console.log(obejeto);
             grupoVar.innerHTML += `<a class="list-group-item list-group-item-action" style = "font-weight: bold;" href="#${vetorTabelas[i].nome}">${vetorTabelas[i].nome}</a>`;
             grupoResults.innerHTML += `<h4 id="${vetorTabelas[i].nome}" class="text-center">${vetorTabelas[i].nome}</h4>`;
             grupoResults.innerHTML += `
@@ -626,6 +642,7 @@ function calcular(vetorTabelas) {
                 vetorGrafico.push(objGrafico);
                 js++
             }
+            // Resultados estatísticos.
             grupoResults.innerHTML += `
             <div class="container-fluid">
                 <div class="row">
@@ -645,7 +662,7 @@ function calcular(vetorTabelas) {
             </div>
             `;
             //Gráfico
-            FusionCharts.ready(function() {
+            FusionCharts.ready(function () {
                 let fusioncharts = new FusionCharts({
                     type: 'pie3d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -679,7 +696,6 @@ function calcular(vetorTabelas) {
             </div>`
         } else if (vetorTabelas[i].tipoVar == "Quantitativa Contínua") {
             let obejeto = separador(vetorTabelas[i].dados);
-            console.log(obejeto);
             grupoVar.innerHTML += `<a class="list-group-item list-group-item-action" style = "font-weight: bold;" href="#${vetorTabelas[i].nome}">${vetorTabelas[i].nome}</a>`;
             grupoResults.innerHTML += `<h4 id="${vetorTabelas[i].nome}" class="text-center">${vetorTabelas[i].nome}</h4>`;
             grupoResults.innerHTML += `
@@ -790,14 +806,13 @@ function calcular(vetorTabelas) {
                 vetorGrafico.push(objGrafico);
                 js++
             }
-            console.log(objMediana)
             let pontosMedio = {};
             let jq = 1;
             for (let ks in intervalos) {
                 pontosMedio[`${((parseFloat(ks) + intervalos[ks]) / 2).toFixed(2)}`] = parseInt(linhas[jq].getElementsByTagName('td')[1].innerText);
                 jq++
             }
-            console.log(pontosMedio)
+            // Resultados estatísticos.
             grupoResults.innerHTML += `
             <div class="container-fluid">
                 <div class="row">
@@ -820,7 +835,7 @@ function calcular(vetorTabelas) {
             </div>
             `;
             //Gráfico
-            FusionCharts.ready(function() {
+            FusionCharts.ready(function () {
                 let fusioncharts = new FusionCharts({
                     type: 'column2d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -860,27 +875,29 @@ function calcular(vetorTabelas) {
         <a href="descritiva.html" class="btn btn-success" style="width: 100%">Voltar</a>
     </div>`;
 
-    $('[data-spy="scroll"]').each(function() {
+    //Atualizador do ScrollSpy
+    $('[data-spy="scroll"]').each(function () {
         var $spy = $(this).scrollspy('refresh')
     });
 
 }
 
-$('#arquivo').change(function(e) {
+// Função onde é importado o arquivo XLS. Será chamado quando o valor do input type="file" for mudado.
+$('#arquivo').change(function (e) {
     let files = e.target.files,
         f = files[0];
     let reader = new FileReader();
     let celulas_Json = {};
 
-    reader.onload = function(e) {
+    reader.onload = function (e) {
         let data = new Uint8Array(e.target.result);
         let arquivo_completo = XLSX.read(data, { type: 'array', cellText: true, cellDates: true });
-        //propriedades do arquivo
+
+        // Percorre um for por todas as planilhas e todas as colunas e linhas ocupadas na planilha.
         for (let i = 0; i < arquivo_completo.SheetNames.length; i++) {
             todas_celulas = arquivo_completo.Sheets[arquivo_completo.SheetNames[i]]
             celulas_Json = XLSX.utils.sheet_to_json(todas_celulas, { raw: false });
             cabecalho = XLSX.utils.sheet_to_json(todas_celulas, { header: 1 });
-
             for (let j = 0; j < cabecalho[0].length; j++) {
                 let dados = [];
                 for (let linhas of celulas_Json) {
@@ -888,10 +905,12 @@ $('#arquivo').change(function(e) {
                         dados.push((linhas[cabecalho[0][j]]).trim());
                     }
                 }
+                // Faz o tratamento das letras para Maiúscula para não acontecer erros na hora do cálculo.
                 if (vetorNaN(dados)) {
                     for (let hs = 0; hs < dados.length; hs++) {
                         dados[hs] = dados[hs].toUpperCase();
-                    }
+                    } // Se não houver números na varíavel, elas serão convertidas para inteiro, já que;
+                    // elas são importadas como String. 
                 } else {
                     for (let hs = 0; hs < dados.length; hs++) {
                         dados[hs] = parseInt(dados[hs])
@@ -907,9 +926,12 @@ $('#arquivo').change(function(e) {
         }
         str += vetorImport[0].dados[vetorImport[0].dados.length - 1];
         document.getElementById('entrarDados').value = str;
+        // A cada clique no botão salvar o sistema irá mostrar na tela a próxima variável para terminar de;
+        // ser cadastrada. Para isso é usado a função importando();
         document.getElementById('addVar').setAttribute('onclick', 'importando(vetorImport); ativarBotaoInserir();');
         let importado = document.getElementById('arquivo').files[0].name;
         document.getElementsByClassName('toast-body')[0].innerText = `O arquivo "${importado}" foi importado com sucesso!`;
+        // Cria o cartão de notificação e o mostra na tela. 
         $('.toast').toast({
             animation: true,
             autohide: true,
@@ -921,7 +943,6 @@ $('#arquivo').change(function(e) {
 })
 
 function desvioPadrao(dados, media, tipo) {
-
     let somaNumerador = 0,
         somaDenominador = 0
     for (let i in dados) {
@@ -940,6 +961,9 @@ function coefiVaria(DP, media) {
     return `${(DP / media * 100).toFixed(2)} %`;
 }
 
+// Todas as variáveis importadas do XLS virão para cá. A cada clique no botão salvar o sistema mostrará;
+// na tela a próxima variável para ela ter seu cadastro finalizado. Ao final, ele retorna o botão salvar com;
+// seu valor inicial, que é a função adicionarVariavel().
 function importando(vet) {
     adicionarVariavel(tabelas);
     if (tabelas[tabelas.length - 1].tipoVar == "Qualitativa Ordinal") {
@@ -962,6 +986,7 @@ function importando(vet) {
     }
 }
 
+// Função que bloqueia o botão de inserir dados caso haja dados sem preenchimento na tela.
 function ativarBotaoInserir() {
     let nome = document.getElementById('nomeVariavel').value;
     let tipoVar = document.getElementById('TipoVar').value;
@@ -975,6 +1000,7 @@ function ativarBotaoInserir() {
     }
 }
 
+// Função que bloqueia o botão de verificar dados caso não haja variáveis inseridas no sistema. 
 function ativarBotaoVerificar() {
     if (tabelas.length == 0) {
         document.getElementById('previewDataButton').setAttribute('disabled', 'disabled');
@@ -983,6 +1009,8 @@ function ativarBotaoVerificar() {
     }
 }
 
+// Função que bloqueia o botão salvar do cartão de graus da variável ordinal, caso haja graus preenchidos de;
+// maneira incorreta.
 function ativarBotaoSalvar() {
     let verificadores = [];
     let graus = document.getElementsByClassName('graus');
@@ -1001,6 +1029,7 @@ function ativarBotaoSalvar() {
     }
 }
 
+// Função auxiliar para a função ativarBotaoSalvar().
 function grausIguais(Grauses) {
     let resultadoses = [];
 
@@ -1014,6 +1043,7 @@ function grausIguais(Grauses) {
     return resultadoses;
 }
 
+// Função auxiliar para a função ativarBotaoSalvar().
 function grausNegativos(Grauses) {
     for (let i = 0; i < Grauses.length; i++) {
         if (Grauses[i] < 0) {
@@ -1022,7 +1052,10 @@ function grausNegativos(Grauses) {
     }
     return false;
 }
-//////////////////////////////////
+
+// Funções da tela de Probabilidade.
+
+// Função que bloqueia o botão de salvar binominal caso sejam inseridos dados incorretos.
 function ativarBotaoBinominal() {
     let nome = document.getElementById('amostra').value;
     let tipoVar = document.getElementById('sucesso').value;
@@ -1031,10 +1064,6 @@ function ativarBotaoBinominal() {
     let botao = document.getElementById('binominalbotao');
     let valorSu = parseInt(tipoVar);
     let valorFr = parseInt(tipoAna);
-
-
-
-
 
     if (nome != "" && tipoVar != "" && tipoAna && dados != "") {
         if (valorSu + valorFr == 100) {
@@ -1049,7 +1078,7 @@ function ativarBotaoBinominal() {
 
 }
 
-
+// Função que bloqueia o botão de salvar uniforme caso sejam inseridos dados incorretos.
 function ativarBotaoUniforme() {
     let nome = document.getElementById('pmaximo').value;
     let tipoVar = document.getElementById('pminimo').value;

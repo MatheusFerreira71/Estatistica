@@ -1,3 +1,4 @@
+/* Colocar todos os estilos de tela inteira dentro dessa seção */
 .dropdown-item:hover {
     background-color: #343A40 !important;
     color: #fff !important;
@@ -7,8 +8,7 @@
     height: 80%
 }
 
-.card-title,
-.card-text {
+.card-title, .card-text {
     text-align: center !important;
 }
 
@@ -71,6 +71,40 @@ header {
     color: white;
 }
 
+.scrollspy {
+    position: relative;
+    overflow-y: scroll;
+    height: 393px;
+}
+
+.dinamica {
+    position: relative;
+    overflow-y: scroll;
+    height: 393px;
+}
+
+.colorInicial {
+    color: #1E90FF;
+    border-color: #1E90FF;
+}
+
+.select {
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    border-color: green;
+    padding-left: 1%;
+}
+
+select:hover {
+    box-shadow: 0 0 0.5em green;
+}
+
+.branco {
+    color: white;
+}
+
+/* Colocar os códigos de estilo para quando a tela diminuir a baixo de 768px nessa seção. */
 @media only screen and (max-width: 768px) {
     .bordas_coluna {
         border-width: 1px !important;
@@ -91,31 +125,4 @@ header {
         height: auto !important;
         overflow-y: visible !important;
     }
-}
-
-.scrollspy {
-    position: relative;
-    overflow-y: scroll;
-    height: 393px;
-}
-
-.dinamica {
-    position: relative;
-    overflow-y: scroll;
-    height: 393px;
-}
-.colorInicial{
-    color: #1E90FF;
-    border-color: #1E90FF;
-}
-.select{
-    width: 100%;
-    height: 40px;
-    border-radius: 5px;
-    border-color: green;
-    padding-left: 1%;
-   
-}
-select:hover{
-    box-shadow:  0 0 0.5em green;
 }
