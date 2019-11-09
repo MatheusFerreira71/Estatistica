@@ -10,16 +10,6 @@
     transition: font-size 0.5s;
 }
 
-.empresa{
-    font-size: 18px;
-    color: #000000;
-    transition: font-size 0.5s;
-}
-.empresa:hover{
-    font-size: 20px;
-    color: #106287;
-}
-
 .email{
     color: #000000;
 }
@@ -171,8 +161,5 @@ select:hover {
     .dinamica {
         height: auto !important;
         overflow-y: visible !important;
-    }
-    .list-group-item{
-        text-align: left !important;
     }
 }
