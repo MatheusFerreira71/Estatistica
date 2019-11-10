@@ -1,20 +1,22 @@
 /* Colocar todos os estilos de tela inteira dentro dessa seção */
+
 .dropdown-item:hover {
     background-color: #343A40 !important;
     color: #fff !important;
 }
 
-.icon-whatsapp, .email-icon{
+.icon-whatsapp,
+.email-icon {
     color: #000000;
     font-size: 18px;
     transition: font-size 0.5s;
 }
 
-.email{
+.email {
     color: #000000;
 }
 
-.email:hover{
+.email:hover {
     color: #313131;
 }
 
@@ -24,19 +26,19 @@
     transition: font-size 0.5s;
 }
 
-.icon-whatsapp:hover{
+.icon-whatsapp:hover {
     text-decoration: none;
     color: #54cc61;
     font-size: 20px;
 }
 
-.icon-whatsapp:hover span{
+.icon-whatsapp:hover span {
     text-decoration: none;
     color: #54cc61;
     font-size: 20px;
 }
 
-.iconZap:hover{
+.iconZap:hover {
     color: #54cc61;
     font-size: 30px;
 }
@@ -45,7 +47,8 @@
     height: 80%
 }
 
-.card-title, .card-text {
+.card-title,
+.card-text {
     text-align: center !important;
 }
 
@@ -141,7 +144,9 @@ select:hover {
     color: white;
 }
 
+
 /* Colocar os códigos de estilo para quando a tela diminuir a baixo de 768px nessa seção. */
+
 @media only screen and (max-width: 768px) {
     .bordas_coluna {
         border-width: 1px !important;
@@ -162,4 +167,11 @@ select:hover {
         height: auto !important;
         overflow-y: visible !important;
     }
+}
+
+#container {
+    width: 100%;
+    height: 480px;
+    margin: 0;
+    padding: 0;
 }
