@@ -418,7 +418,7 @@ function calcular(vetorTabelas) {
             `;
 
             //Gráfico
-            FusionCharts.ready(function () {
+            FusionCharts.ready(function() {
                 let fusioncharts = new FusionCharts({
                     type: 'pie3d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -538,7 +538,7 @@ function calcular(vetorTabelas) {
             `;
 
             //Gráfico
-            FusionCharts.ready(function () {
+            FusionCharts.ready(function() {
                 let fusioncharts = new FusionCharts({
                     type: 'bar3d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -662,7 +662,7 @@ function calcular(vetorTabelas) {
             </div>
             `;
             //Gráfico
-            FusionCharts.ready(function () {
+            FusionCharts.ready(function() {
                 let fusioncharts = new FusionCharts({
                     type: 'pie3d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -835,7 +835,7 @@ function calcular(vetorTabelas) {
             </div>
             `;
             //Gráfico
-            FusionCharts.ready(function () {
+            FusionCharts.ready(function() {
                 let fusioncharts = new FusionCharts({
                     type: 'column2d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -876,20 +876,20 @@ function calcular(vetorTabelas) {
     </div>`;
 
     //Atualizador do ScrollSpy
-    $('[data-spy="scroll"]').each(function () {
+    $('[data-spy="scroll"]').each(function() {
         var $spy = $(this).scrollspy('refresh')
     });
 
 }
 
 // Função onde é importado o arquivo XLS. Será chamado quando o valor do input type="file" for mudado.
-$('#arquivo').change(function (e) {
+$('#arquivo').change(function(e) {
     let files = e.target.files,
         f = files[0];
     let reader = new FileReader();
     let celulas_Json = {};
 
-    reader.onload = function (e) {
+    reader.onload = function(e) {
         let data = new Uint8Array(e.target.result);
         let arquivo_completo = XLSX.read(data, { type: 'array', cellText: true, cellDates: true });
 
@@ -1089,4 +1089,26 @@ function ativarBotaoUniforme() {
     } else {
         botao.setAttribute('disabled', 'disabled');
     }
+}
+
+function ativarBotaoRF() {
+    let nomeX = document.getElementById('nomeX').value;
+    let nomeY = document.getElementById('nomeY').value;
+    let valoresX = document.getElementById('valoresX').value;
+    let valoresY = document.getElementById('valoresY').value;
+    let botao = document.getElementById('ativar');
+
+    if (nomeX != "" && nomeY != "" && valoresX != "" && valoresY != "") {
+        botao.removeAttribute('disabled');
+    } else {
+        botao.setAttribute('disabled', 'disabled');
+    }
+}
+
+function Mudarestado(el) {
+    var display = document.getElementById(el).style.display;
+    if (display == "none")
+        document.getElementById(el).style.display = 'block';
+    else
+        document.getElementById(el).style.display = 'none';
 }
