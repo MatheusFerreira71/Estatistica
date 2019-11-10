@@ -15,6 +15,19 @@ function Distribuicao(name_Btn){
                 <div class="row"> \
                     <div class="col-md-12 px-3 py-3 bordas_coluna d-flex align-items-center flex-column  entrada"> \
                         \
+                         \
+                        <div class="form-group  was-validated ted" style="width: 75%;"> \
+                            <label for="exampleInputPassword1">Ponto Minimo</label> \
+                            <input required type="text" pattern="^([0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))$" step="0.01" class="form-control dom" id="exampleInputPassword1" placeholder="Digite aqui a Média" "> \
+                            <div class="valid-feedback  ">Muito bem!</div>\
+                            <div class="invalid-feedback">Insira um numero maior que 0 (no maximo 4 casas decimais)</div> \
+                        </div> \
+                        <div class="form-group  was-validated ted" style="width: 75%;"> \
+                            <label for="exampleInputPassword1">Ponto Maximo</label> \
+                            <input required type="text" pattern="^([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))$" step="0.01" class="form-control dom" id="exampleInputPassword1" placeholder="Digite aqui o Desvio Padrão" "> \
+                            <div class="valid-feedback  ">Muito bem!</div>\
+                            <div class="invalid-feedback">Insira um numero maior que 0 (no maximo 4 casas decimais) </div> \
+                        </div> \
                         <div class="form-group" style="width: 75%;"> \
                         <label for="exampleInputPassword1">Opções do Intervalo</label> \
                             <select class="select dom" onchange="NumDados()"> \
@@ -27,23 +40,10 @@ function Distribuicao(name_Btn){
                         </div> \
                         <div class="form-group was-validated ted" style="width: 75%;"> \
                             <label for="exampleInputPassword1">Intervalo</label> \
-                            <input required id="" type="text" min="0" pattern="((?:[0-9])+(?:\;)){1}((?:[0-9])+[0-9]*){1}" class="form-control dom nuns" id="exampleInputPassword1" placeholder="Digite o(s) Dados(s)" "> \
+                            <input required id="" type="text" min="0" pattern="^(([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]?|([1-9]{1,3}[0-9]?)|[1-9]{1,4}))(?:$|\;)){2}$" class="form-control dom nuns" id="exampleInputPassword1" placeholder="Digite o(s) Dados(s)" "> \
                             <div class="valid-feedback">Muito bem!</div>\
-                            <div class="invalid-feedback nuns"> Adione 2 numeros sepados por ponto e Virgula </div> \
-                        </div> \
-                        <div class="form-group  was-validated ted" style="width: 75%;"> \
-                            <label for="exampleInputPassword1">Ponto Minimo</label> \
-                            <input required type="text" pattern="^([1-9][0-9]*((\.|\,)[0-9]{1,2})?|0(\.|\,)(([0-9][1-9])|([1-9][0-9])|[1-9]{1,2}))$" step="0.01" class="form-control dom" id="exampleInputPassword1" placeholder="Digite aqui a Média" "> \
-                            <div class="valid-feedback  ">Muito bem!</div>\
-                            <div class="invalid-feedback">Insira um numero </div> \
-                        </div> \
-                        <div class="form-group  was-validated ted" style="width: 75%;"> \
-                            <label for="exampleInputPassword1">Ponto Maximo</label> \
-                            <input required type="text" pattern="^([1-9][0-9]*((\.|\,)[0-9]{1,2})?|0(\.|\,)(([0-9][1-9])|([1-9][0-9])|[1-9]{1,2}))$" step="0.01" class="form-control dom" id="exampleInputPassword1" placeholder="Digite aqui o Desvio Padrão" "> \
-                            <div class="valid-feedback  ">Muito bem!</div>\
-                            <div class="invalid-feedback">Insira um numero </div> \
-                        </div> \
-                        
+                            <div class="invalid-feedback nuns"> Insira dois numeros maiores que 0 sepados por ponto e Virgula (no maximo 4 casas decimais) </div> \
+                        </div>
                         \
                         <button id="calc" type="submit" class="btn btn-primary" onclick="Gerente_Uniforme([])" style="width: 75%; ">Calcular</button> \
                         \
@@ -79,6 +79,19 @@ function Distribuicao(name_Btn){
                 <div class="row"> \
                     <div class="col-md-12 px-3 py-3 bordas_coluna d-flex align-items-center flex-column  entrada"> \
                         \
+                        
+                        <div class="form-group  was-validated ted" style="width: 75%;"> \
+                            <label for="exampleInputPassword1">Media</label> \
+                            <input required type="text" pattern="^([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))$" step="0.01" class="form-control dom" id="exampleInputPassword1" placeholder="Digite aqui a Média" "> \
+                            <div class="valid-feedback  ">Muito bem!</div>\
+                            <div class="invalid-feedback">Insira um numero maior que 0 (no maximo 4 casas decimais)</div> \
+                        </div> \
+                        <div class="form-group  was-validated ted" style="width: 75%;"> \
+                            <label for="exampleInputPassword1">Desvio Padrão</label> \
+                            <input required type="text" pattern="^([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))$" step="0.01" class="form-control dom" id="exampleInputPassword1" placeholder="Digite aqui o Desvio Padrão" "> \
+                            <div class="valid-feedback  ">Muito bem!</div>\
+                            <div class="invalid-feedback">Insira um numero maior que 0 (no maximo 4 casas decimais)</div> \
+                        </div> \
                         <div class="form-group" style="width: 75%;"> \
                         <label for="exampleInputPassword1">Opções do Intervalo</label> \
                             <select class="select dom" onchange="NumDados()"> \
@@ -91,23 +104,10 @@ function Distribuicao(name_Btn){
                         </div> \
                         <div class="form-group was-validated ted" style="width: 75%;"> \
                             <label for="exampleInputPassword1">Intervalo</label> \
-                            <input required id="" type="text" min="0" pattern="((?:[0-9])+(?:\;)){1}((?:[0-9])+[0-9]*){1}" class="form-control dom nuns" id="exampleInputPassword1" placeholder="Digite o(s) Dados(s)" "> \
+                            <input required id="" type="text" min="0" pattern="^(([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]?|([1-9]{1,3}[0-9]?)|[1-9]{1,4}))(?:$|\;)){2}$" class="form-control dom nuns" id="exampleInputPassword1" placeholder="Digite o(s) Dados(s)" "> \
                             <div class="valid-feedback">Muito bem!</div>\
-                            <div class="invalid-feedback nuns"> Adione 2 numeros sepados por ponto e Virgula </div> \
+                            <div class="invalid-feedback nuns"> Digite dois numeros maiores que 0 sepados por ponto e Virgula (no maximo 4 casas decimais) </div> \
                         </div> \
-                        <div class="form-group  was-validated ted" style="width: 75%;"> \
-                            <label for="exampleInputPassword1">Media</label> \
-                            <input required type="text" pattern="^([1-9][0-9]*((\.|\,)[0-9]{1,2})?|0(\.|\,)(([0-9][1-9])|([1-9][0-9])|[1-9]{1,2}))$" step="0.01" class="form-control dom" id="exampleInputPassword1" placeholder="Digite aqui a Média" "> \
-                            <div class="valid-feedback  ">Muito bem!</div>\
-                            <div class="invalid-feedback">Insira um numero </div> \
-                        </div> \
-                        <div class="form-group  was-validated ted" style="width: 75%;"> \
-                            <label for="exampleInputPassword1">Desvio Padrão</label> \
-                            <input required type="text" pattern="^([1-9][0-9]*((\.|\,)[0-9]{1,2})?|0(\.|\,)(([0-9][1-9])|([1-9][0-9])|[1-9]{1,2}))$" step="0.01" class="form-control dom" id="exampleInputPassword1" placeholder="Digite aqui o Desvio Padrão" "> \
-                            <div class="valid-feedback  ">Muito bem!</div>\
-                            <div class="invalid-feedback">Insira um numero </div> \
-                        </div> \
-                        
                         \
                         <button id="calc" type="submit" class="btn btn-primary" onclick="Gerente_Normal([])" style="width: 75%; ">Calcular</button> \
                         \
@@ -137,26 +137,26 @@ function Distribuicao(name_Btn){
                             \
                         <div class="form-group was-validated ted " style="width: 75%;"> \
                             <label for="exampleInputEmail1">Amostra</label> \
-                            <input required type="number"  min="0" pattern="[0-9]" class="form-control dom " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite aqui a Amostra (N)" "> \
+                            <input required type="text"  min="0" pattern="^([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))$" class="form-control dom " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite aqui a Amostra (N)" "> \
                             <div class="valid-feedback ">Muito bem!</div>\
-                            <div class="invalid-feedback" >Insira um numero inteiro </div> \
+                            <div class="invalid-feedback" >Insira um numero maior que 0 (no maximo 4 casas decimais) </div> \
                         </div> \
                         <div class="form-group was-validated ted" style="width: 75%;"> \
                             <label for="exampleInputPassword1">Sucesso</label> \
-                            <input required type="number"  min="0" max="100" pattern="[0-9]" class="form-control dom" id="exampleInputPassword1" placeholder="Digite aqui a chance de Sucesso (P)" "> \
+                            <input required type="text"  min="0" max="100" pattern="^([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))$" class="form-control dom" id="exampleInputPassword1" placeholder="Digite aqui a chance de Sucesso (P)" "> \
                             <div class="valid-feedback  ">Muito bem!</div>\
                             <div class="invalid-feedback">Insira de 0 a 100 </div> \
                         </div> \
                         <div class="form-group was-validated ted" style="width: 75%;"> \
                             <label for="exampleInputEmail1">Fracasso</label> \
-                            <input required type="number"  min="0" max="100" pattern="[0-9]" class="form-control dom" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite aqui a chance de Fracasso (Q)" "> \
+                            <input required type="text"  min="0" max="100" pattern="^([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))$" class="form-control dom" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite aqui a chance de Fracasso (Q)" "> \
                             <div class="valid-feedback  ">Muito bem!</div>\
                             <div class="invalid-feedback">Insira de 0 a 100 </div> \
                             \
                         </div> \
                         <div class="form-group was-validated ted" style="width: 75%;"> \
                             <label for="exampleInputPassword1">Evento</label> \
-                            <input required id="teste "type="text" min="0" pattern="((?:[0-9])+(?:\;)|(?:[0-9]))*[0-9]" step="1" class="form-control dom" id="exampleInputPassword1" placeholder="Digite o(s) Evento(s) (K)" "> \
+                            <input required id="teste "type="text" min="0" pattern="(([0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))(?:\;|$))+" step="1" class="form-control dom" id="exampleInputPassword1" placeholder="Digite o(s) Evento(s) (K)" "> \
                             <div class="valid-feedback">Muito bem!</div>\
                             <div class="invalid-feedback "> Adione um ou mais numeros inteiros sepados por ponto e Virgula </div> \
                         </div> \
@@ -216,9 +216,8 @@ function PegarDados(x){
     let Variaveis = document.querySelectorAll(x)
     let dados = []
     for(Variavel of Variaveis){
-        dados.push(Variavel.value)
+        dados.push(Variavel.value.replace(',', '.'));
     }
-    
     return dados
 }
 function AdicionaDados(dados, classe){
@@ -259,7 +258,7 @@ function Validacao(dados,tipo){
         };
         
         if(tipo == 'binomial'){
-            if((parseInt(dados[1]) + parseInt(dados[2])) == 100){
+            if((parseFloat(dados[1]) + parseFloat(dados[2])) == 100){
                 return true
             }else{
                 return 'O sucesso mais o fracasso não é igual a 100'
@@ -293,13 +292,16 @@ function NumDados(){
     console.log(nuns)
     select = select.value;
     if(select == 'entre'){
-        // pattern para dois ou um numero : ((?:[0-9])+(?:\;)|[0-9]*){1}((?:[0-9])+[0-9]*){1} :)
-        nuns[0].pattern   = '((?:[0-9])+(?:\;)){1}((?:[0-9])+[0-9]*){1}'
-        nuns[1].innerText = 'Adione 2 numeros inteiros sepados por ponto e Virgula'
+        // pattern para dois ou um numero : ((?:[0-9])+(?:\;)|[0-9]*){1}((?:[0-9])+[0-9]*){1} :) // n funfa bem '-
+        // ((([1-9][0-9]*(\.|\,)[0-9]{1,4})|(0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))|[1-9][0-9]*)(?:\;|$)){2}
+
+        nuns[0].pattern   = '^(([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]?|([1-9]{1,3}[0-9]?)|[1-9]{1,4}))(?:$|\;)){2}$'
+        nuns[1].innerText = 'Digite dois numeros maiores que 0 sepados por ponto e Virgula (no maximo 4 casas decimais)'
 
     }else{
-        nuns[0].pattern   = '(?:[0-9])+'
-        nuns[1].innerText = 'Adione um numero inteiro';
+        // (([1-9][0-9]*(\.|\,)[0-9]{1,4})|(0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))|[1-9][0-9]*)
+        nuns[0].pattern   = '^([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))$'
+        nuns[1].innerText = 'Insira um numero maior que 0 (no maximo 4 casas decimais)';
 
     }
 }
@@ -355,7 +357,7 @@ function Tabela_DistNormal(num){
         num = Math.abs(num);
         num = num.toString();
         linha = num.match(/([0-9]+\.[0-9])([0-9])/);
-        console.log(linha)
+        console.log(num.match(/([0-9]+\.[0-9])([0-9])/))
         if(linha == null){
             col = 1;
             linha = parseFloat(num)*10
@@ -445,7 +447,7 @@ function Calc_Binomial(dados){
    
     console.log(dados)
     let K = dados[3].split(';');
-    let N = parseInt(dados[0]);
+    let N = parseFloat(dados[0]);
     let P = parseFloat(dados[1])/100;
     let Q = parseFloat(dados[2])/100;
    
@@ -473,7 +475,7 @@ function Calc_Binomial(dados){
         
     }
     resultados.binomial = parseFloat((resultados.binomial).toFixed(2))
-    resultados.media = N * P
+    resultados.media = (N * P).toFixed(2)
     resultados.desvio_padrao = parseFloat((Math.sqrt(N*P*Q).toFixed(2))) 
     return resultados
 
@@ -492,23 +494,23 @@ function Calc_Normal(dados){
         
     };
     console.log(dados)
-    media = parseFloat(dados[2])
-    desvio_padrao = parseFloat(dados[3])
+    media = parseFloat(dados[0])
+    desvio_padrao = parseFloat(dados[1])
     let intervalos
     let ZM , Zm, ZN, meio
     let resul_nor  
-    if(dados[0] == 'entre'){
-        intervalos = dados[1].split(';')
-        console.log(intervalos[0])
-        console.log(parseFloat(intervalos[0]))
+    if(dados[2] == 'entre'){
+        intervalos = dados[3].split(';')
+        //console.log(intervalos[0])
+        //console.log(parseFloat(intervalos[0]))
         Zm = Calc_Z(parseFloat(intervalos[0]), media, desvio_padrao);
         ZM = Calc_Z(parseFloat(intervalos[1]), media, desvio_padrao);
         resul_nor = (Calc_RelMeio(Zm, ZM, -Zm))
     }else{
-        intervalos = parseFloat(dados[1]);
+        intervalos = parseFloat(dados[3]);
         meio = 0.5
         ZN = Calc_Z(intervalos, media, desvio_padrao);
-        if(dados[0] == 'maior'){
+        if(dados[2] == 'maior'){
             resul_nor = Calc_RelMeio(ZN, meio, -ZN)
         }else{
             resul_nor = Calc_RelMeio(ZN, meio, ZN)
@@ -532,7 +534,7 @@ function Calc_Normal(dados){
         //    return parseFloat((secret+y).toFixed(2))
         //}
         secret = Tabela_DistNormal(secret);
-        if(dados[0] == 'entre'){
+        if(dados[2] == 'entre'){
             y = Tabela_DistNormal(y);
         }
         console.log(secret, y)
@@ -563,18 +565,18 @@ function Calc_Uniforme(dados){
         desvio_padrao:0,
         cv: 0
     };
-    let minimo = parseFloat(dados[2])
-    let maximo = parseFloat(dados[3])
+    let minimo = parseFloat(dados[0])
+    let maximo = parseFloat(dados[1])
     let x 
-    if(dados[0] == 'entre'){
-        intervalos = dados[1].split(';')
-        x = intervalos[1] - intervalos[2];
-    }else if(dados[0] == 'maior'){
-        x = maximo - parseFloat(dados[1]) 
+    if(dados[2] == 'entre'){
+        intervalos = dados[3].split(';')
+        x = parseFloat(intervalos[1]) - parseFloat(intervalos[0]);
+    }else if(dados[2] == 'maior'){
+        x = maximo - parseFloat(dados[3]) 
     }else{
-        x = parseFloat(dados[1]) - minimo
+        x = parseFloat(dados[3]) - minimo
     }
-        
+    alert(x)   
     resul_Uni.uniforme = (((1/(maximo -minimo))* x)* 100).toFixed(2) 
     resul_Uni.media = ((maximo + minimo)/2).toFixed(2)
     resul_Uni.desvio_padrao = (Math.sqrt(Math.pow(maximo - minimo,2)/12)).toFixed(2)
