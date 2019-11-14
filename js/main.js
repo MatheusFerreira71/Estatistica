@@ -905,6 +905,10 @@ $('#arquivo').change(function (e) {
                 cabecalho = XLSX.utils.sheet_to_json(todas_celulas, { header: 1 });
                 for (let j = 0; j < cabecalho[0].length; j++) {
                     let dados = [];
+                    console.log(cabecalho[0][j]);
+                    while (cabecalho[0][j] === undefined) {
+                        j++;
+                    }
                     for (let linhas of celulas_Json) {
                         if (linhas[cabecalho[0][j]] != undefined) {
                             dados.push((linhas[cabecalho[0][j]]).trim());
@@ -924,7 +928,7 @@ $('#arquivo').change(function (e) {
                     vetorImport.push({ nome: cabecalho[0][j], dados: dados })
                 }
             }
-            document.getElementById('nomeVariavel').value = vetorImport[0].nome;
+            document.getElementById('nomeVariavel').value = vetorImport[0].nome.replace(/ /gi, '_');
             let str = '';
             for (let i = 0; i < vetorImport[0].dados.length - 1; i++) {
                 str += `${vetorImport[0].dados[i]};`;
@@ -934,11 +938,11 @@ $('#arquivo').change(function (e) {
             // A cada clique no botão salvar o sistema irá mostrar na tela a próxima variável para terminar de;
             // ser cadastrada. Para isso é usado a função importando();
             document.getElementById('addVar').setAttribute('onclick', 'importando(vetorImport); ativarBotaoInserir();');
-            
+
             // Cria o cartão de notificação e o mostra na tela. 
             let importado = document.getElementById('arquivo').files[0].name;
             document.getElementsByClassName('toast-body')[0].innerText = `O arquivo "${importado}" foi importado com sucesso!`;
-            
+
             $('.toast').toast({
                 animation: true,
                 autohide: true,
@@ -961,7 +965,7 @@ $('#arquivo').change(function (e) {
 
             // Cria o cartão de notificação e o mostra na tela. 
             document.getElementsByClassName('toast-body')[0].innerText = `O arquivo "${name[0]}.csv" foi importado com sucesso!`;
-            
+
             $('.toast').toast({
                 animation: true,
                 autohide: true,
@@ -1006,7 +1010,7 @@ function importando(vet) {
 
     vet.shift();
     if (vet.length > 0) {
-        document.getElementById('nomeVariavel').value = vetorImport[0].nome;
+        document.getElementById('nomeVariavel').value = vetorImport[0].nome.replace(/ /gi, '_');;
         let str = '';
         for (let i = 0; i < vetorImport[0].dados.length - 1; i++) {
             str += `${vetorImport[0].dados[i]};`;
