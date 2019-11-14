@@ -949,7 +949,8 @@ $('#arquivo').change(function (e) {
         reader.readAsArrayBuffer(f);
     } else {
         const file = document.getElementById('arquivo').files[0];
-        const name = document.getElementById('arquivo').files[0].name.split('.');
+        let name = document.getElementById('arquivo').files[0].name.replace(/ /gi, '_');
+        name = name.split('.');
         const Reader = new FileReader();
 
         Reader.onload = (e) => {
