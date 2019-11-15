@@ -167,14 +167,16 @@ function adicionarVariavel(vetorTabelas) {
     if (obj.tipoVar == 'Qualitativa Ordinal') {
         let Obejeto = separador(obj.dados);
         let card = document.getElementById('cardBordado');
-        card.innerHTML = `<div class="card" style="width: auto;">
-                            <div class="card-body">
-                                <h5 class="card-title">Selecione o grau dos dados</h5>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                            </ul>
-                        </div>`;
-
+        card.innerHTML = `
+            <div class="card" style="width: auto;">
+                <div class="card-body">
+                    <h5 class="card-title">Selecione o grau dos dados</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                </ul>
+            </div>
+        `;
+        window.location.href = '#selectGrau';
         let vars = document.getElementsByTagName('ul')[1];
         document.getElementsByTagName('header')[0].classList.remove('my-3');
         document.getElementById('nomeVariavel').setAttribute('disabled', 'disabled');
@@ -418,7 +420,7 @@ function calcular(vetorTabelas) {
             `;
 
             //Gráfico
-            FusionCharts.ready(function() {
+            FusionCharts.ready(function () {
                 let fusioncharts = new FusionCharts({
                     type: 'pie3d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -538,7 +540,7 @@ function calcular(vetorTabelas) {
             `;
 
             //Gráfico
-            FusionCharts.ready(function() {
+            FusionCharts.ready(function () {
                 let fusioncharts = new FusionCharts({
                     type: 'bar3d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -662,7 +664,7 @@ function calcular(vetorTabelas) {
             </div>
             `;
             //Gráfico
-            FusionCharts.ready(function() {
+            FusionCharts.ready(function () {
                 let fusioncharts = new FusionCharts({
                     type: 'pie3d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -835,7 +837,7 @@ function calcular(vetorTabelas) {
             </div>
             `;
             //Gráfico
-            FusionCharts.ready(function() {
+            FusionCharts.ready(function () {
                 let fusioncharts = new FusionCharts({
                     type: 'column2d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -876,20 +878,20 @@ function calcular(vetorTabelas) {
     </div>`;
 
     //Atualizador do ScrollSpy
-    $('[data-spy="scroll"]').each(function() {
+    $('[data-spy="scroll"]').each(function () {
         var $spy = $(this).scrollspy('refresh')
     });
 
 }
 
 // Função onde é importado o arquivo XLS. Será chamado quando o valor do input type="file" for mudado.
-$('#arquivo').change(function(e) {
+$('#arquivo').change(function (e) {
     let files = e.target.files,
         f = files[0];
     let reader = new FileReader();
     let celulas_Json = {};
 
-    reader.onload = function(e) {
+    reader.onload = function (e) {
         let data = new Uint8Array(e.target.result);
         let arquivo_completo = XLSX.read(data, { type: 'array', cellText: true, cellDates: true });
 

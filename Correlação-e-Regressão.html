@@ -24,15 +24,15 @@
     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.candy.js"></script>
     <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 
-    <title>RM² - Descritiva</title>
+    <title>RM² - Correlação e Regressão</title>
 </head>
 
-<body class="d-flex flex-column h-100 " onload="ativarBotaoRF(); Mudarestado('oculta')">
+<body class="d-flex flex-column h-100 " onload="Exibir_Cor_Reg()">
 
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.html" style="width: 60px !important;"><img src="imagens/logo.png" width="100%" alt="Navbar"></a>
+        <a class="navbar-brand" href="index.html" style="width: 60px !important;"><img src="images/logo.png" width="100%" alt="Navbar"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -63,55 +63,13 @@
         <div class="card border-info">
             <h5 class="card-header border-info text-center">Correlação e Regressão</h5>
             <div class="card-body px-0 py-0">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 bordas_coluna px-3 py-3">
-                            <div class="form-group was-validated">
-                                <label for="nomeVariavel">Nome da variavel independente:</label>
-                                <input type="text" class="form-control" id="nomeX" placeholder="Nome da variável independente" required onchange="ativarBotaoRF()">
-                                <div class=" invalid-feedback ">Insira o nome da variavel independente!</div>
-                                <div class="valid-feedback ">Muito bem!</div>
-                            </div>
-                            <div class="form-group was-validated ">
-                                <label for="nomeVariavel ">Nome da variavel dependente:</label>
-                                <input type="text " class="form-control " id="nomeY" placeholder="Nome da variável dependente" required onchange="ativarBotaoRF()">
-                                <div class="invalid-feedback">Insira o nome da variavel dependente!</div>
-                                <div class="valid-feedback">Muito bem!</div>
-                            </div>
-                            <div class="form-group was-validated">
-                                <label for="nomeVariavel">Valores de (X):</label>
-                                <input type="text" class="form-control" id="valoresX" placeholder="Dados (X)" required onchange="ativarBotaoRF()">
-                                <div class="invalid-feedback">Insira os dados separados por ;</div>
-                                <div class="valid-feedback">Muito bem!</div>
-                            </div>
-                            <div class="form-group was-validated">
-                                <label for="nomeVariavel">Valores de (Y):</label>
-                                <input type="text" class="form-control" id="valoresY" placeholder="Dados (Y)" required onchange="ativarBotaoRF()">
-                                <div class="invalid-feedback">Insira os dados separados por ;</div>
-                                <div class="valid-feedback">Muito bem!</div>
-                            </div>
-                            <button onclick="ativarBotaoRF();Mudarestado('ocultar')" id="ativar" type="button" style="width: 100%" class="btn btn-info">Calcular</button>
-
-                        </div>
-                        <div id="ocultar" class="col-md-6 bordas_coluna px-3 py-3">
-                            <div id="container"></div>
-                        </div>
-
+                <div class="container" id="index">
+                    
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- <script>
-        function Mudarestado(el) {
-            var display = document.getElementById(el).style.display;
-            if (display == "none")
-                document.getElementById(el).style.display = 'block';
-            else
-                document.getElementById(el).style.display = 'none';
-        }
-    </script> -->
-
 
     <header class="my-3">
     </header>
@@ -144,75 +102,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="js/main.js"></script>
+<script src="js/correlacao_regressao.js"></script>
 <script src="https://cdn.anychart.com/samples/scatter-charts/combination-of-line-and-marker-charts/data.js"></script>
 <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"></script>
 <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"></script>
 <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"></script>
 <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css?hcode=c11e6e3cfefb406e8ce8d99fa8368d33" type="text/css" rel="stylesheet">
 <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css?hcode=c11e6e3cfefb406e8ce8d99fa8368d33" type="text/css" rel="stylesheet">
-<script>
-    anychart.onDocumentReady(function() {
-        let nomeX = document.getElementById('nomeX').value;
-        let nomeY = document.getElementById('nomeY').value;
 
-        var chart = anychart.scatter();
-
-        // turn on chart animation
-        chart.animation(true);
-
-        // set chart title
-        chart.title('Projeção');
-
-        chart.xScale()
-            .minimum(1.5)
-            .maximum(5.5)
-            .ticks({
-                interval: 1
-            });
-        chart.yScale()
-            .minimum(40)
-            .maximum(100)
-            .ticks({
-                interval: 10
-            });
-
-        chart.yAxis().title(nomeY);
-        chart.xAxis()
-            .title(nomeX)
-            .drawFirstLabel(false)
-            .drawLastLabel(false);
-
-        chart.interactivity()
-            .hoverMode('by-spot')
-            .spotRadius(30);
-
-        chart.tooltip().displayMode('union');
-
-        // The data used in this sample can be obtained from the CDN
-        // https://cdn.anychart.com/samples/scatter-charts/combination-of-line-and-marker-charts/data.js
-        var marker = chart.marker(getMarkerData());
-        marker.type('circle')
-            .size(4);
-        marker.hovered()
-            .size(7)
-            .fill('gold')
-            .stroke(anychart.color.darken('gold'));
-        marker.tooltip()
-            .hAlign('start')
-            .format(function() {
-                return 'Waiting time: ' + this.value + ' min.\nDuration: ' + this.x + ' min.';
-            });
-
-        // The data used in this sample can be obtained from the CDN
-        // https://cdn.anychart.com/samples/scatter-charts/combination-of-line-and-marker-charts/data.js
-        chart.line(getLineData());
-
-        // set container id for the chart
-        chart.container('container');
-        // initiate chart drawing
-        chart.draw();
-    });
-</script>
+<!-- Outros Scripts usados -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@7.1.0/dist/promise.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<script src="https://unpkg.com/autonumeric"></script>
+<script src="https://cdn.jsdelivr.net/npm/autonumeric@4.1.0"></script>
 
 
 </html>

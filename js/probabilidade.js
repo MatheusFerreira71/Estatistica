@@ -269,6 +269,8 @@ function Validacao(dados,tipo){
         }else if(tipo == 'uniforme'){
             return true
         
+        }else if(tipo == 'correlacao'){
+            
         }
     }else{
         $('.ted').addClass('was-validated');
@@ -308,6 +310,8 @@ function NumDados(){
 function Tabela_DistNormal(num){
     if(num === 0){
         return 0
+    }else if(num > 3.9 || num < -3.9){
+        return 0.5
     }else{    
         let linha, col
         let tabelaDN = [
