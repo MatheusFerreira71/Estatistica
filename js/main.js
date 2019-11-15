@@ -886,6 +886,7 @@ function calcular(vetorTabelas) {
 
 // Função onde é importado o arquivo XLS. Será chamado quando o valor do input type="file" for mudado.
 $('#arquivo').change(function (e) {
+<<<<<<< HEAD
     let files = e.target.files,
         f = files[0];
     let reader = new FileReader();
@@ -905,43 +906,98 @@ $('#arquivo').change(function (e) {
                 for (let linhas of celulas_Json) {
                     if (linhas[cabecalho[0][j]] != undefined) {
                         dados.push((linhas[cabecalho[0][j]]).trim());
+=======
+    const tipoArq = document.getElementById('tipoArquivo').value;
+
+    if (tipoArq === '.xlsx') {
+        let files = e.target.files,
+            f = files[0];
+        let reader = new FileReader();
+        let celulas_Json = {};
+
+        reader.onload = function (e) {
+            let data = new Uint8Array(e.target.result);
+            let arquivo_completo = XLSX.read(data, { type: 'array', cellText: true, cellDates: true });
+
+            // Percorre um for por todas as planilhas e todas as colunas e linhas ocupadas na planilha.
+            for (let i = 0; i < arquivo_completo.SheetNames.length; i++) {
+                todas_celulas = arquivo_completo.Sheets[arquivo_completo.SheetNames[i]]
+                celulas_Json = XLSX.utils.sheet_to_json(todas_celulas, { raw: false });
+                cabecalho = XLSX.utils.sheet_to_json(todas_celulas, { header: 1 });
+                for (let j = 0; j < cabecalho[0].length; j++) {
+                    let dados = [];
+                    console.log(cabecalho[0][j]);
+                    while (cabecalho[0][j] === undefined) {
+                        j++;
+>>>>>>> 26482c737746fbe216e391bc23196f5b7a5a2b4a
                     }
-                }
-                // Faz o tratamento das letras para Maiúscula para não acontecer erros na hora do cálculo.
-                if (vetorNaN(dados)) {
-                    for (let hs = 0; hs < dados.length; hs++) {
-                        dados[hs] = dados[hs].toUpperCase();
-                    } // Se não houver números na varíavel, elas serão convertidas para inteiro, já que;
-                    // elas são importadas como String. 
-                } else {
-                    for (let hs = 0; hs < dados.length; hs++) {
-                        dados[hs] = parseInt(dados[hs])
+                    for (let linhas of celulas_Json) {
+                        if (linhas[cabecalho[0][j]] != undefined) {
+                            dados.push((linhas[cabecalho[0][j]]).trim());
+                        }
                     }
+                    // Faz o tratamento das letras para Maiúscula para não acontecer erros na hora do cálculo.
+                    if (vetorNaN(dados)) {
+                        for (let hs = 0; hs < dados.length; hs++) {
+                            dados[hs] = dados[hs].toUpperCase();
+                        } // Se não houver números na varíavel, elas serão convertidas para inteiro, já que;
+                        // elas são importadas como String. 
+                    } else {
+                        for (let hs = 0; hs < dados.length; hs++) {
+                            dados[hs] = parseInt(dados[hs])
+                        }
+                    }
+                    vetorImport.push({ nome: cabecalho[0][j], dados: dados })
                 }
-                vetorImport.push({ nome: cabecalho[0][j], dados: dados })
             }
-        }
-        document.getElementById('nomeVariavel').value = vetorImport[0].nome;
-        let str = '';
-        for (let i = 0; i < vetorImport[0].dados.length - 1; i++) {
-            str += `${vetorImport[0].dados[i]};`;
-        }
-        str += vetorImport[0].dados[vetorImport[0].dados.length - 1];
-        document.getElementById('entrarDados').value = str;
-        // A cada clique no botão salvar o sistema irá mostrar na tela a próxima variável para terminar de;
-        // ser cadastrada. Para isso é usado a função importando();
-        document.getElementById('addVar').setAttribute('onclick', 'importando(vetorImport); ativarBotaoInserir();');
-        let importado = document.getElementById('arquivo').files[0].name;
-        document.getElementsByClassName('toast-body')[0].innerText = `O arquivo "${importado}" foi importado com sucesso!`;
-        // Cria o cartão de notificação e o mostra na tela. 
-        $('.toast').toast({
-            animation: true,
-            autohide: true,
-            delay: 6000
-        });
-        $('#notificaImport').toast('show')
-    };
-    reader.readAsArrayBuffer(f);
+            document.getElementById('nomeVariavel').value = vetorImport[0].nome.replace(/ /gi, '_');
+            let str = '';
+            for (let i = 0; i < vetorImport[0].dados.length - 1; i++) {
+                str += `${vetorImport[0].dados[i]};`;
+            }
+            str += vetorImport[0].dados[vetorImport[0].dados.length - 1];
+            document.getElementById('entrarDados').value = str;
+            // A cada clique no botão salvar o sistema irá mostrar na tela a próxima variável para terminar de;
+            // ser cadastrada. Para isso é usado a função importando();
+            document.getElementById('addVar').setAttribute('onclick', 'importando(vetorImport); ativarBotaoInserir();');
+
+            // Cria o cartão de notificação e o mostra na tela. 
+            let importado = document.getElementById('arquivo').files[0].name;
+            document.getElementsByClassName('toast-body')[0].innerText = `O arquivo "${importado}" foi importado com sucesso!`;
+
+            $('.toast').toast({
+                animation: true,
+                autohide: true,
+                delay: 6000
+            });
+            $('#notificaImport').toast('show')
+        };
+        reader.readAsArrayBuffer(f);
+    } else {
+        const file = document.getElementById('arquivo').files[0];
+        let name = document.getElementById('arquivo').files[0].name.replace(/ /gi, '_');
+        name = name.split('.');
+        const Reader = new FileReader();
+
+        Reader.onload = (e) => {
+            const dados = document.getElementById('entrarDados');
+            const nome = document.getElementById('nomeVariavel');
+            dados.value = Reader.result;
+            nome.value = name[0];
+
+            // Cria o cartão de notificação e o mostra na tela. 
+            document.getElementsByClassName('toast-body')[0].innerText = `O arquivo "${name[0]}.csv" foi importado com sucesso!`;
+
+            $('.toast').toast({
+                animation: true,
+                autohide: true,
+                delay: 6000
+            });
+            $('#notificaImport').toast('show')
+        };
+        Reader.readAsText(file);
+    }
+
 })
 
 function desvioPadrao(dados, media, tipo) {
@@ -976,7 +1032,7 @@ function importando(vet) {
 
     vet.shift();
     if (vet.length > 0) {
-        document.getElementById('nomeVariavel').value = vetorImport[0].nome;
+        document.getElementById('nomeVariavel').value = vetorImport[0].nome.replace(/ /gi, '_');;
         let str = '';
         for (let i = 0; i < vetorImport[0].dados.length - 1; i++) {
             str += `${vetorImport[0].dados[i]};`;
