@@ -201,7 +201,7 @@ function DistNormal(name_Btn){
     let dist_No = new Distribuicao(name_Btn);
     let div_add = document.querySelector('#pills-tabContent');
     div_add.innerHTML = dist_No.Normal();
-    
+    le
 }
 function DistUniforme(name_Btn){
     let dist_Un = new Distribuicao(name_Btn);
@@ -270,7 +270,7 @@ function Validacao(dados,tipo){
             return true
         
         }else if(tipo == 'correlacao'){
-            
+            return true
         }
     }else{
         $('.ted').addClass('was-validated');

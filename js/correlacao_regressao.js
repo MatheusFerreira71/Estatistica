@@ -1,6 +1,8 @@
 var imported = document.createElement('script');
     imported.src = 'js/probabilidade.js';
     document.head.appendChild(imported); 
+
+
 function Exibir_Cor_Reg(){
     let saphe = `<div class="row">
         <div class="col-md-12 bordas_coluna px-3 py-3">
@@ -102,17 +104,56 @@ function Gera_Grafico(dados){
 // CorrelaÇão
 function Gerente_Correlacao(dados){
 
-    let validacao = Validacao(dados, 'binomial')
+    let validacao = Validacao(dados, 'correlacao')
     
     if(validacao != true){ 
         AlertUsu(validacao);
         return false
     }else{
         let resultado = Calc_Correlacao(dados);
-
+        alert(resultado)
     }
  
 }
-function Calc_Correlacao(){
-    PegarDados()
+function Calc_Correlacao(dados){
+    if(dados.length == 0){
+        dados = PegarDados('.dom');
+    };
+
+    let independentes = dados[2].split(';');
+    let dependentes = dados[3].split(';');
+    let n_obser = dependentes.length;
+    alert(Somatorio(independentes,' * ', dependentes))
+
+    let part_sup = n_obser * Somatorio(independentes,' * ', dependentes) - Somatorio(dependentes,'') * Somatorio(independentes,'');
+
+    let part_inf1 = n_obser * (n_obser * Somatorio(independentes, ' ** 2') - (Somatorio(independentes, '') ** 2)); 
+
+    let part_inf2 = (n_obser * Somatorio(dependentes, ' ** 2') - (Somatorio(dependentes, '')) **2 );
+    alert(part_inf1 * part_inf2)
+    let coef_corre = part_sup / (part_inf1 * part_inf2)
+
+    alert(coef_corre);
+    
+}
+function Somatorio(valores, operacao, opcional){
+        let valor;
+        let soma = 0;
+        // lindo consegue ler texto como um expressao
+        var geval = eval;
+        for(let i = 0; i < valores.length; i++){
+            if(operacao == ''){
+                valor = parseFloat(valores[i]);
+                
+            }else if(typeof opcional === 'object'){
+                valor = geval(valores[i] + operacao + opcional[i]);
+                
+            }else{
+                valor = geval(valores[i] + operacao);
+            }
+
+            soma += valor
+        }
+        return soma
+
 }
