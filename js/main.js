@@ -420,7 +420,7 @@ function calcular(vetorTabelas) {
             `;
 
             //Gráfico
-            FusionCharts.ready(function () {
+            FusionCharts.ready(function() {
                 let fusioncharts = new FusionCharts({
                     type: 'pie3d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -540,7 +540,7 @@ function calcular(vetorTabelas) {
             `;
 
             //Gráfico
-            FusionCharts.ready(function () {
+            FusionCharts.ready(function() {
                 let fusioncharts = new FusionCharts({
                     type: 'bar3d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -664,7 +664,7 @@ function calcular(vetorTabelas) {
             </div>
             `;
             //Gráfico
-            FusionCharts.ready(function () {
+            FusionCharts.ready(function() {
                 let fusioncharts = new FusionCharts({
                     type: 'pie3d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -837,7 +837,7 @@ function calcular(vetorTabelas) {
             </div>
             `;
             //Gráfico
-            FusionCharts.ready(function () {
+            FusionCharts.ready(function() {
                 let fusioncharts = new FusionCharts({
                     type: 'column2d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -878,35 +878,14 @@ function calcular(vetorTabelas) {
     </div>`;
 
     //Atualizador do ScrollSpy
-    $('[data-spy="scroll"]').each(function () {
+    $('[data-spy="scroll"]').each(function() {
         var $spy = $(this).scrollspy('refresh')
     });
 
 }
 
 // Função onde é importado o arquivo XLS. Será chamado quando o valor do input type="file" for mudado.
-$('#arquivo').change(function (e) {
-<<<<<<< HEAD
-    let files = e.target.files,
-        f = files[0];
-    let reader = new FileReader();
-    let celulas_Json = {};
-
-    reader.onload = function (e) {
-        let data = new Uint8Array(e.target.result);
-        let arquivo_completo = XLSX.read(data, { type: 'array', cellText: true, cellDates: true });
-
-        // Percorre um for por todas as planilhas e todas as colunas e linhas ocupadas na planilha.
-        for (let i = 0; i < arquivo_completo.SheetNames.length; i++) {
-            todas_celulas = arquivo_completo.Sheets[arquivo_completo.SheetNames[i]]
-            celulas_Json = XLSX.utils.sheet_to_json(todas_celulas, { raw: false });
-            cabecalho = XLSX.utils.sheet_to_json(todas_celulas, { header: 1 });
-            for (let j = 0; j < cabecalho[0].length; j++) {
-                let dados = [];
-                for (let linhas of celulas_Json) {
-                    if (linhas[cabecalho[0][j]] != undefined) {
-                        dados.push((linhas[cabecalho[0][j]]).trim());
-=======
+$('#arquivo').change(function(e) {
     const tipoArq = document.getElementById('tipoArquivo').value;
 
     if (tipoArq === '.xlsx') {
@@ -915,7 +894,7 @@ $('#arquivo').change(function (e) {
         let reader = new FileReader();
         let celulas_Json = {};
 
-        reader.onload = function (e) {
+        reader.onload = function(e) {
             let data = new Uint8Array(e.target.result);
             let arquivo_completo = XLSX.read(data, { type: 'array', cellText: true, cellDates: true });
 
@@ -926,10 +905,8 @@ $('#arquivo').change(function (e) {
                 cabecalho = XLSX.utils.sheet_to_json(todas_celulas, { header: 1 });
                 for (let j = 0; j < cabecalho[0].length; j++) {
                     let dados = [];
-                    console.log(cabecalho[0][j]);
                     while (cabecalho[0][j] === undefined) {
                         j++;
->>>>>>> 26482c737746fbe216e391bc23196f5b7a5a2b4a
                     }
                     for (let linhas of celulas_Json) {
                         if (linhas[cabecalho[0][j]] != undefined) {

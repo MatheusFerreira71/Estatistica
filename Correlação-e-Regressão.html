@@ -27,7 +27,7 @@
     <title>RM² - Correlação e Regressão</title>
 </head>
 
-<body class="d-flex flex-column h-100 " onload="Exibir_Cor_Reg()">
+<body class="d-flex flex-column h-100 " onload="Exibir_Cor_Reg();">
 
 
     <!-- Navbar -->
@@ -57,6 +57,25 @@
     </nav>
 
 
+    <div id="notificacete">
+        <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 90px;">
+            <div class="toast border-dark bg-success text-white" style="position: absolute; top: 5px; right: 3px;" id="notificaImport">
+                <div class="toast-header border-dark">
+                    <i class="far fa-check-circle" style="color:#28a746;"></i>
+                    <strong class="ml-2 mr-auto">Sucesso!</strong>
+                    <small>1 Segundo Atrás</small>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="toast-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Triagem -->
 
     <div class="container my-4">
@@ -65,7 +84,6 @@
             <div class="card-body px-0 py-0">
                 <div class="container" id="index">
                     
-                    </div>
                 </div>
             </div>
         </div>
@@ -117,6 +135,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 <script src="https://unpkg.com/autonumeric"></script>
 <script src="https://cdn.jsdelivr.net/npm/autonumeric@4.1.0"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
 
 
 </html>
