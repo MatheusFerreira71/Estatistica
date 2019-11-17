@@ -1,7 +1,8 @@
 let resultados_salvos = {
     binomial: {},
     normal:{},
-    uniforme:{}
+    uniforme:{},
+    correlacao:{}
 }
 
 function Distribuicao(name_Btn){
@@ -201,7 +202,6 @@ function DistNormal(name_Btn){
     let dist_No = new Distribuicao(name_Btn);
     let div_add = document.querySelector('#pills-tabContent');
     div_add.innerHTML = dist_No.Normal();
-    le
 }
 function DistUniforme(name_Btn){
     let dist_Un = new Distribuicao(name_Btn);
@@ -250,33 +250,62 @@ function Validacao(dados,tipo){
         }
     }
     console.log(input[0].checkValidity())
-    if(valido == input.length || dados.length != 0){
-    
-        if(dados.length == 0){
-            dados = PegarDados('.dom');
-            
-        };
-        
-        if(tipo == 'binomial'){
-            if((parseFloat(dados[1]) + parseFloat(dados[2])) == 100){
-                return true
-            }else{
-                return 'O sucesso mais o fracasso não é igual a 100'
-            }
-        
-        }else if(tipo == 'normal'){
-            return true
-        }else if(tipo == 'uniforme'){
-            return true
-        
-        }else if(tipo == 'correlacao'){
-            return true
+    if(dados == 'add'){
+        let add_graf = PegarDados('.new')
+        if(add_graf[0].length > 0 && add_graf[1].length > 0 ){
+            return 'Preencha somente um dos campos';
+        }else{
+            return add_graf[0].length == 0 ? 2 : 0;
         }
     }else{
-        $('.ted').addClass('was-validated');
-        return 'Por favor Preecha todos os campos corretamente';
-
+        if(valido == input.length || dados.length != 0){
+        
+            if(dados.length == 0){
+                dados = PegarDados('.dom');
+                
+            }
+            
+            if(tipo == 'binomial'){
+                if((parseFloat(dados[1]) + parseFloat(dados[2])) == 100){
+                    return true
+                }else{
+                    return 'O sucesso mais o fracasso não é igual a 100'
+                }
+            
+            }else if(tipo == 'normal'){
+                return true
+            }else if(tipo == 'uniforme'){
+                return true
+            
+            }else if(tipo == 'correlacao'){
+                let independentes = dados[2].split(';');
+                let dependentes = dados[3].split(';');
+    
+                if(independentes.length != dependentes.length){
+                    return 'O quantidade de dados do X não correpondem ao Y'
+                }else if(independentes.length == 1){
+                    
+                    return 'É necessario mais de um valor em X e Y'
+                }else{
+                    for(let i = 0; i < dependentes.length;i++){
+                        for(let j = dependentes.length - i; j > i;j--){
+                            if(dependentes[i] == dependentes[j] && independentes[i] == independentes[j] ){
+                                return 'Os '+(i+1)+'º elementos do X e Y não podem ser iguais aos '+(j+1)+'º elementos'
+                            }
+                        }
+                    }
+                    return true 
+                }
+    
+            }
+        }else{
+            
+            $('.ted').addClass('was-validated');
+            return 'Por favor Preecha todos os campos corretamente';
+    
+        }
     }
+    
     
     
 }
