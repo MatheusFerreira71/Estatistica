@@ -21,6 +21,18 @@ function separador(vetor) {
     return Quantidades;
 }
 
+function vetorNumber(vetor) {
+    let aux = 0;
+    for (let i of vetor) {
+        if (!isNaN(i)) {
+            aux++
+        } else {
+            aux--
+        }
+    }
+    return (aux == vetor.length) ? true : false
+}
+
 function moda(Quantidades) {
     let aux = 0,
         nome = [];
@@ -152,7 +164,7 @@ function adicionarVariavel(vetorTabelas) {
         }
     }
 
-    //Se for um vetor NaN, deixa todos em letra maiúscula.
+    //Se for um vetor NaN, deixa todos em letra maiúscula e remove os espaços.
     if (vetorNaN(obj.dados)) {
         for (let i = 0; i < obj.dados.length; i++) {
             obj.dados[i] = obj.dados[i].toUpperCase();
@@ -162,12 +174,18 @@ function adicionarVariavel(vetorTabelas) {
 
     obj.tipoVar = document.getElementById('TipoVar').value
 
-    // Se a variável for Ordinal o sistema colocará na tela um cartão para o usuário adicionar o grau;
-    // Quando o usuário clicar em salvar, a função tabelaOrdinal() será executada.
-    if (obj.tipoVar == 'Qualitativa Ordinal') {
-        let Obejeto = separador(obj.dados);
-        let card = document.getElementById('cardBordado');
-        card.innerHTML = `
+    if ((obj.tipoVar == 'Qualitativa Ordinal' || obj.tipoVar == 'Qualitativa Nominal') && !vetorNaN(obj.dados)) {
+        alert('Por favor, insira apenas valores não numéricos.');
+    } else if ((obj.tipoVar == 'Quantitativa Discreta' || obj.tipoVar == 'Quantitativa Contínua') && !vetorNumber(obj.dados)) {
+        alert('Por favor, insira apenas valores numéricos.');
+    } else {
+
+        // Se a variável for Ordinal o sistema colocará na tela um cartão para o usuário adicionar o grau;
+        // Quando o usuário clicar em salvar, a função tabelaOrdinal() será executada.
+        if (obj.tipoVar == 'Qualitativa Ordinal') {
+            let Obejeto = separador(obj.dados);
+            let card = document.getElementById('cardBordado');
+            card.innerHTML = `
             <div class="card" style="width: auto;">
                 <div class="card-body">
                     <h5 class="card-title">Selecione o grau dos dados</h5>
@@ -176,38 +194,39 @@ function adicionarVariavel(vetorTabelas) {
                 </ul>
             </div>
         `;
-        window.location.href = '#selectGrau';
-        let vars = document.getElementsByTagName('ul')[1];
-        document.getElementsByTagName('header')[0].classList.remove('my-3');
-        document.getElementById('nomeVariavel').setAttribute('disabled', 'disabled');
-        document.getElementById('TipoVar').setAttribute('disabled', 'disabled');
-        document.getElementById('TipoDeAnalise').setAttribute('disabled', 'disabled');
-        document.getElementById('entrarDados').setAttribute('disabled', 'disabled');
-        document.getElementById('arquivo').setAttribute('disabled', 'disabled');
-        document.getElementById('RangeSeparatriz').setAttribute('disabled', 'disabled');
-        document.getElementById('Separatrizes').setAttribute('disabled', 'disabled');
-        document.getElementById('tipoArquivo').setAttribute('disabled', 'disabled');
+            window.location.href = '#selectGrau';
+            let vars = document.getElementsByTagName('ul')[1];
+            document.getElementsByTagName('header')[0].classList.remove('my-3');
+            document.getElementById('nomeVariavel').setAttribute('disabled', 'disabled');
+            document.getElementById('TipoVar').setAttribute('disabled', 'disabled');
+            document.getElementById('TipoDeAnalise').setAttribute('disabled', 'disabled');
+            document.getElementById('entrarDados').setAttribute('disabled', 'disabled');
+            document.getElementById('arquivo').setAttribute('disabled', 'disabled');
+            document.getElementById('RangeSeparatriz').setAttribute('disabled', 'disabled');
+            document.getElementById('Separatrizes').setAttribute('disabled', 'disabled');
+            document.getElementById('tipoArquivo').setAttribute('disabled', 'disabled');
 
 
-        for (let i in Obejeto) {
-            vars.innerHTML += `<li class="list-group-item border-info">${i}<div class="form-group">
+            for (let i in Obejeto) {
+                vars.innerHTML += `<li class="list-group-item border-info">${i}<div class="form-group">
             <input type="number" min="1" class="form-control text-center graus" id="grau${i}" placeholder="O maior ficará no topo da tabela." onchange="ativarBotaoSalvar()"></div></li>`;
-        }
+            }
 
-        Obejetos = Obejeto;
+            Obejetos = Obejeto;
 
-        document.getElementById('cardBordado').classList.add('border-info')
-        vars.innerHTML += `<li class="list-group-item border-info">
+            document.getElementById('cardBordado').classList.add('border-info')
+            vars.innerHTML += `<li class="list-group-item border-info">
                                 <button class="btn btn-success" id="salvarGraus" onclick="tabelaOrdinal(tabelas, Obejetos);" style="width: 100%;">Salvar</button>
                             </li>`;
-        ativarBotaoSalvar();
-        card.getElementsByTagName('div')[0].classList.add('border-info');
+            ativarBotaoSalvar();
+            card.getElementsByTagName('div')[0].classList.add('border-info');
+        }
+        vetorTabelas.push(obj);
+        document.getElementById('nomeVariavel').value = "";
+        document.getElementById('entrarDados').value = "";
+        document.getElementById('TipoVar').value = "";
+        document.getElementById('TipoDeAnalise').value = "";
     }
-    vetorTabelas.push(obj);
-    document.getElementById('nomeVariavel').value = "";
-    document.getElementById('entrarDados').value = "";
-    document.getElementById('TipoVar').value = "";
-    document.getElementById('TipoDeAnalise').value = "";
 }
 
 function tabelaOrdinal(vetorTabelas, Objetante) {
@@ -420,7 +439,7 @@ function calcular(vetorTabelas) {
             `;
 
             //Gráfico
-            FusionCharts.ready(function() {
+            FusionCharts.ready(function () {
                 let fusioncharts = new FusionCharts({
                     type: 'pie3d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -540,7 +559,7 @@ function calcular(vetorTabelas) {
             `;
 
             //Gráfico
-            FusionCharts.ready(function() {
+            FusionCharts.ready(function () {
                 let fusioncharts = new FusionCharts({
                     type: 'bar3d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -664,7 +683,7 @@ function calcular(vetorTabelas) {
             </div>
             `;
             //Gráfico
-            FusionCharts.ready(function() {
+            FusionCharts.ready(function () {
                 let fusioncharts = new FusionCharts({
                     type: 'pie3d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -837,7 +856,7 @@ function calcular(vetorTabelas) {
             </div>
             `;
             //Gráfico
-            FusionCharts.ready(function() {
+            FusionCharts.ready(function () {
                 let fusioncharts = new FusionCharts({
                     type: 'column2d',
                     renderAt: `chart${vetorTabelas[i].nome}`,
@@ -878,14 +897,14 @@ function calcular(vetorTabelas) {
     </div>`;
 
     //Atualizador do ScrollSpy
-    $('[data-spy="scroll"]').each(function() {
+    $('[data-spy="scroll"]').each(function () {
         var $spy = $(this).scrollspy('refresh')
     });
 
 }
 
 // Função onde é importado o arquivo XLS. Será chamado quando o valor do input type="file" for mudado.
-$('#arquivo').change(function(e) {
+$('#arquivo').change(function (e) {
     const tipoArq = document.getElementById('tipoArquivo').value;
 
     if (tipoArq === '.xlsx') {
@@ -894,7 +913,7 @@ $('#arquivo').change(function(e) {
         let reader = new FileReader();
         let celulas_Json = {};
 
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             let data = new Uint8Array(e.target.result);
             let arquivo_completo = XLSX.read(data, { type: 'array', cellText: true, cellDates: true });
 
