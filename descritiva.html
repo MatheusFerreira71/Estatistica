@@ -8,7 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- links css -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="font_awesome/css/all.css">
     <link rel="stylesheet" href="https://unpkg.com/balloon-css/balloon.min.css">
@@ -21,16 +22,19 @@
 
     <!-- alguns scripts usados -->
     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
-    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.candy.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.candy.js"></script>
     <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 
     <title>RM² - Descritiva</title>
 </head>
 
-<body class="d-flex flex-column h-100" onload="barra.value = 100; mudarSeparatriz(); tipoArquivo(); littleData.value = ''; ativarBotaoInserir(); ativarBotaoVerificar();">
+<body class="d-flex flex-column h-100"
+    onload="barra.value = 100; mudarSeparatriz(); tipoArquivo(); littleData.value = ''; ativarBotaoInserir(); ativarBotaoVerificar();">
 
     <!-- Modal Preview -->
-    <div class="modal fade" id="PreviewModal" tabindex="-1" role="dialog" aria-labelledby="PreviewModalLabel" aria-hidden="true">
+    <div class="modal fade" id="PreviewModal" tabindex="-1" role="dialog" aria-labelledby="PreviewModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
             <div class="modal-content border-success">
                 <div class="modal-header border-success">
@@ -55,7 +59,8 @@
                 </div>
                 <div class="modal-footer border-success">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Adicionar mais Dados</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="calcular(tabelas);">Calcular</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal"
+                        onclick="calcular(tabelas);">Calcular</button>
                 </div>
             </div>
         </div>
@@ -63,8 +68,10 @@
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.html" style="width: 60px !important;"><img src="images/logo.png" width="100%" alt="Navbar"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="index.html" style="width: 60px !important;"><img src="images/logo.png"
+                width="100%" alt="Navbar"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -74,7 +81,8 @@
                     <a class="nav-link" href="index.html">Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle branco" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle branco" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Estatísticas
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -83,6 +91,13 @@
                         <a class="dropdown-item" href="Correlação-e-Regressão.html">Correlação e Regressão</a>
                     </div>
                 </li>
+                <li>
+                    <a class="nav-link" href="#" id="altocontraste" accesskey="3" onclick="window.toggleContrast()"
+                        onkeydown="window.toggleContrast()">
+                        Alto contraste [Alt +
+                        3]
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -90,7 +105,8 @@
     <!-- Notificação de Sucesso -->
     <div id="notificacete">
         <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 90px;">
-            <div class="toast border-dark bg-success text-white" style="position: absolute; top: 5px; right: 3px;" id="notificaImport">
+            <div class="toast border-dark bg-success text-white" style="position: absolute; top: 5px; right: 3px;"
+                id="notificaImport">
                 <div class="toast-header border-dark">
                     <i class="far fa-check-circle" style="color:#28a746;"></i>
                     <strong class="ml-2 mr-auto">Sucesso!</strong>
@@ -118,7 +134,8 @@
                             <div class="col-md-3 bordas_coluna px-3 py-3">
                                 <div class="form-group was-validated">
                                     <label for="nomeVariavel">Nome da Variável</label>
-                                    <input type="text" class="form-control" id="nomeVariavel" placeholder="Nome da Variável" required onchange="ativarBotaoInserir()">
+                                    <input type="text" class="form-control" id="nomeVariavel"
+                                        placeholder="Nome da Variável" required onchange="ativarBotaoInserir()">
                                     <div class="invalid-feedback">Insira o nome da variável.</div>
                                     <div class="valid-feedback">Muito bem!</div>
                                 </div>
@@ -138,7 +155,8 @@
                             <div class="col-md-3 bordas_coluna px-3 py-3">
                                 <div class="form-group was-validated">
                                     <label for="TipoDeAnalise">Tipo de Análise</label>
-                                    <select class="custom-select" id="TipoDeAnalise" required onchange="ativarBotaoInserir()">
+                                    <select class="custom-select" id="TipoDeAnalise" required
+                                        onchange="ativarBotaoInserir()">
                                         <option value="">Escolha...</option>
                                         <option value="População">População</option>
                                         <option value="Amostra">Amostra</option>
@@ -148,7 +166,8 @@
                                 </div>
                                 <div class="form-group was-validated">
                                     <label for="Separatrizes">Medidas Separatrizes</label>
-                                    <select name="MedidasSeparatrizes" id="Separatrizes" class="custom-select" onchange="mudarSeparatriz();">
+                                    <select name="MedidasSeparatrizes" id="Separatrizes" class="custom-select"
+                                        onchange="mudarSeparatriz();">
                                         <option value="Quartil" selected>Quartil</option>
                                         <option value="Quintil">Quintil</option>
                                         <option value="Decil">Decil</option>
@@ -157,14 +176,17 @@
                                     <div class="valid-feedback">Muito bem!</div>
                                 </div>
                                 <div class="form-group mb-0">
-                                    <input type="range" class="custom-range" min="0" max="100" id="RangeSeparatriz" oninput="mudarValorBarra();">
+                                    <input type="range" class="custom-range" min="0" max="100" id="RangeSeparatriz"
+                                        oninput="mudarValorBarra();">
                                     <label for="RangeSeparatriz" class="mb-0" id="MedidaValor"></label>
                                 </div>
                             </div>
                             <div class="col-md-6 px-3 py-3">
                                 <div class="form-group was-validated">
                                     <label for="entrarDados">Inserir Dados</label>
-                                    <textarea class="form-control" id="entrarDados" rows="3" placeholder="Inserir os dados separados por ; - 12; 323; 12; 34" required onchange="ativarBotaoInserir()">
+                                    <textarea class="form-control" id="entrarDados" rows="3"
+                                        placeholder="Inserir os dados separados por ; - 12; 323; 12; 34" required
+                                        onchange="ativarBotaoInserir()">
                                     </textarea>
                                     <div class="invalid-feedback">Insira os dados.</div>
                                     <div class="valid-feedback">Muito bem!</div>
@@ -174,7 +196,8 @@
                                     <input type="file" class="form-control-file" id="arquivo">
 
                                     <label for="tipoArquivo" class="my-1 mr-2">Tipo de arquivo</label>
-                                    <select onchange="tipoArquivo();" class="form-control my-1 mr-sm-2 custom-select" id="tipoArquivo">
+                                    <select onchange="tipoArquivo();" class="form-control my-1 mr-sm-2 custom-select"
+                                        id="tipoArquivo">
                                         <option selected>.xlsx</option>
                                         <option>.csv</option>
                                     </select>
@@ -189,7 +212,9 @@
                     </div>
                 </div>
                 <div class="card-footer bg-transparent border-info">
-                    <button type="button" class="btn btn-info" style="width: 100%;" data-toggle="modal" data-target="#PreviewModal" onclick="resetPreview(); previewDados(tabelas);" id="previewDataButton">Verificar
+                    <button type="button" class="btn btn-info" style="width: 100%;" data-toggle="modal"
+                        data-target="#PreviewModal" onclick="resetPreview(); previewDados(tabelas);"
+                        id="previewDataButton">Verificar
                         Dados</button>
                 </div>
             </div>
@@ -233,9 +258,16 @@
 </body>
 
 <!-- Scripts bootstrap e nosso script -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 <script src="js/main.js"></script>
+<script src="js/contraste.js"></script>
 
 </html>
