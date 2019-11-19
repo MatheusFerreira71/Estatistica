@@ -85,6 +85,7 @@ function Gerente_Correlacao(dados) {
     if(dados.length == 0 || dados == 'add'){
         dados = PegarDados('.dom');
     };  
+    validacao = true
     if (validacao != true) {
         if(validacao == 0 || validacao == 2){
             validacao = validacao == 2 ? 1 : 0;
@@ -156,7 +157,7 @@ function Calc_Correlacao_regressao(dados){
     function Calc_Regressao(){
         let a, b 
         a = part_sup / part_inf1;
-        b = (Somatorio(dependentes,'')/6) - a * (Somatorio(independentes,'')/6)
+        b = (Somatorio(dependentes,'')/n_obser) - a * (Somatorio(independentes,'')/n_obser)
         return {'a':a,'b':b} 
     }
 }
@@ -174,6 +175,7 @@ function Somatorio(valores, operacao, opcional){
                 valor = geval(valores[i] + operacao + opcional[i]);
                 
             }else{
+                console.log(geval(valores[i] + operacao))
                 valor = geval(valores[i] + operacao);
             }
 
