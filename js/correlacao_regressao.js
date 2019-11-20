@@ -1,3 +1,4 @@
+// global
 var imported = document.createElement('script');
     imported.src = 'js/probabilidade.js';
     document.head.appendChild(imported); 
@@ -5,6 +6,8 @@ var save_dados = {
     dados:{},
     result: {}
 }
+var dados_last_add = {x:[],y:[]};
+
 function Exibir_Cor_Reg(){
     let saphe = `<div class="row">
                     <div class="col-md-12 bordas_coluna px-3 py-3 entrada">
@@ -20,19 +23,19 @@ function Exibir_Cor_Reg(){
                         </div>
                         <div class="form-group was-validated">
                             <label for="nomeVariavel2">Valores de (X):</label>
-                            <input type="text" class="form-control dom" id="entrarDados2" placeholder="Dados (X)" required pattern="(((([-1-9]|[1-9])[0-9]*(\.|\,)[0-9]{1,3})|(0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,3}))|[1-9][0-9]*)(?:\;|$))+">
+                            <input type="text" class="form-control dom" id="entrarDados2" placeholder="Dados (X)" required pattern="((?:\-){0,1}[0-9]*((\.|\,){1}[0-9]{1,4}|(\.|\,){0}))*(?:\;|$)">
                             <div class="invalid-feedback">Insira os dados separados por ; (no maximo 3 casas decimais) </div>
                             <div class="valid-feedback">Muito bem!</div>
                         </div>
                         <div class="form-group was-validated">
                             <label for="nomeVariavel1">Valores de (Y):</label>
-                            <input type="text" class="form-control dom" id="entrarDados1" placeholder="Dados (Y)" required pattern="(((([-1-9]|[1-9])[0-9]*(\.|\,)[0-9]{1,3})|(0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,3}))|[1-9][0-9]*)(?:\;|$))+">
+                            <input type="text" class="form-control dom" id="entrarDados1" placeholder="Dados (Y)" required pattern="((?:\-){0,1}[0-9]*((\.|\,){1}[0-9]{1,4}|(\.|\,){0}))*(?:\;|$)">
                             <div class="invalid-feedback">Insira os dados separados por ; (no maximo 3 casas decimais) </div>
                             <div class="valid-feedback">Muito bem!</div>
                         </div>
-                        <div class="form-inline">
-                            <label for="arquivo1" class="sr-only">Importar uma Planilha</label>
-                            <input type="file" class="form-control-file" id="arquivo1">
+                        <div class="form-inline ">
+                            <label for="arquivo1" class="sr-only ">Importar uma Planilha</label>
+                            <input type="file" class="form-control-file dim" id="arquivo1">
 
                             <label for="tipoArquivo1" class="my-1 mr-2">Tipo de arquivo</label>
                             <select onchange="tipoArquivo1();" class="form-control my-1 mr-sm-2 custom-select" id="tipoArquivo1">
@@ -52,15 +55,18 @@ function Exibir_Cor_Reg(){
                         <h1 class="display-6 shadow border border-info rounded P"> \
                                 Probabilidade =  \
                         </h1> \
+                        <h1 id='new_resul'class="display-6 shadow border border-info rounded P houver d-none"> \
+                                <a href='#new_resul' onclick="Modal()" class="">Resultados Salvos</a>
+                        </h1> \
                         <div class="form-group was-validated ">
                             <label for="nomeVariavel2">Adicionar variaveis independentes (X):</label>
-                            <input type="text" class="form-control new" id="entrarDados2" placeholder="Dados (X)" pattern="(((([-1-9]|[1-9])[0-9]*(\.|\,)[0-9]{1,3})|(0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,3}))|[1-9][0-9]*)(?:\;|$))+" >
+                            <input type="text" class="form-control new" id="entrarDados2" placeholder="Dados (X)" pattern="((?:\-){0,1}[0-9]*((\.|\,){1}[0-9]{1,4}|(\.|\,){0}))*(?:\;|$)" >
                             <div class="invalid-feedback">Insira os dados separados por ; (no maximo 3 casas decimais) </div>
                             <div class="valid-feedback">Muito bem!</div>
                         </div>
                         <div class="form-group was-validated ">
                             <label for="nomeVariavel1">Adicionar variaveis independentes (Y):</label>
-                            <input type="text" class="form-control new"  id="entrarDados1" placeholder="Dados (Y)" pattern="(((([-1-9]|[1-9])[0-9]*(\.|\,)[0-9]{1,3})|(0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,3}))|[1-9][0-9]*)(?:\;|$))+">
+                            <input type="text" class="form-control new"  id="entrarDados1" placeholder="Dados (Y)" pattern="((?:\-){0,1}[0-9]*((\.|\,){1}[0-9]{1,4}|(\.|\,){0}))*(?:\;|$)">
                             <div class="invalid-feedback">Insira os dados separados por ; (no maximo 3 casas decimais)</div>
                             <div class="valid-feedback">Muito bem!</div>
                         </div>
@@ -70,6 +76,20 @@ function Exibir_Cor_Reg(){
                     <div id="grafico" class="col-md-0 border border-info rounded  mt-2 align-self-center d-none w-100 " style="height: 430px; ">
     
                     </div>
+                    <div id='myModal' class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Resultados Salvos</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div id='modal-body'class=" row mt-3 mb-3 pr-5 flex-row card-header overflow-auto text-center">
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                 </div>`
     let div_add = document.querySelector('#index');
     div_add.innerHTML = saphe;   
@@ -78,7 +98,16 @@ function Exibir_Cor_Reg(){
 }
 
 // CorrelaÇão
-
+function Modal(){
+    add_div = document.querySelector("#modal-body");
+    add_div.innerHTML = ''
+    console.log(add_div)
+    for(i = 0; i < dados_last_add['x'].length;i++){
+        add_div.innerHTML += `<div class='col-md-5 ml-auto display-5 border border-info rounded mt-2 mb-3'> X =${dados_last_add['x'][i]}</div> <div class='col-md-5 display-6 border border-info rounded ml-auto mt-2 mb-3 mr-1' > Y =${dados_last_add['x'][i]}</div>`
+    }
+    $('#myModal').modal('show')
+    
+}
 function Gerente_Correlacao(dados) {
 
     let validacao = Validacao(dados, 'correlacao')
@@ -91,11 +120,16 @@ function Gerente_Correlacao(dados) {
             let coordenada_add = PegarDados('.new');
             coordenada_add = coordenada_add[validacao].split(';')
             let coordenada_falta = Equacao_Reta(coordenada_add, validacao)
-            for(i = 0; i < coordenada_add.length;i++){
-                let oposto = validacao == 0 ? 3 : 2
+            let oposto = validacao == 0 ? 3 : 2
                 validacao = validacao + 2
+            $('#new_resul').removeClass('d-none');
+            
+           
+            for(i = 0; i < coordenada_add.length;i++){
                 save_dados['dados'][validacao] += ';'+parseFloat(coordenada_add[i]).toFixed(3);
                 save_dados['dados'][oposto] += `;${coordenada_falta[i].toFixed(3)}`
+                dados_last_add['x'].push(parseFloat(coordenada_add[i]).toFixed(3))
+                dados_last_add['y'].push(parseFloat(coordenada_falta[i].toFixed(3)))
             }
             console.log(save_dados)
             Gera_Grafico(save_dados['dados'])
@@ -105,6 +139,8 @@ function Gerente_Correlacao(dados) {
         }
         
     }else{
+        dados_last_add = {x:[],y:[]};
+        $('#new_resul').addClass('d-none');
         let resultado = Calc_Correlacao_regressao(dados);
         console.log(resultado)
         Libera_Resul()
@@ -129,9 +165,9 @@ function Libera_Resul(){
     $('#resultados').removeClass('d-none');;
     $('#resultados').addClass('animated bounceInUp delay-0s');
     $('#grafico').addClass('animated bounceInUp delay-0s');
-    $('#calc').text('Modificar Historico');
-    
-    
+    $('#calc').text('Resetar o Historico');
+    $('.dom').attr('disabled', true);
+    $('.dim').attr('disabled', true);
 
 }
 
@@ -195,7 +231,7 @@ function Equacao_Reta(coordenada, xory){
 function Gera_Grafico(dados) {
     let div_add = document.querySelector('#grafico');
     div_add.innerHTML = '';   
-
+    // trata e organiza os dados para serem usudos no grafico
     let coordenadas = [['X','Y']]
     let coordenadas_reta = {x: [], y:[]}
     let x = dados[2].split(';');
@@ -205,6 +241,7 @@ function Gera_Grafico(dados) {
         coordenadas_reta['x'].push(parseFloat(x[i]))
         coordenadas_reta['y'].push(parseFloat(y[i]))
     }
+    // era usado pra determinar os ponto da reta
     let menorx = Math.min.apply(null, coordenadas_reta['x']);
     let menorx_reta = Equacao_Reta([menorx],'0')
     let menory = coordenadas_reta['y'][coordenadas_reta['x'].indexOf(menorx)] 

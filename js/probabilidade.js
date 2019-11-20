@@ -254,6 +254,8 @@ function Validacao(dados,tipo){
         let add_graf = PegarDados('.new')
         if(add_graf[0].length > 0 && add_graf[1].length > 0 ){
             return 'Preencha somente um dos campos';
+        }else if(add_graf[0].length == 0 && add_graf[1].length == 0){
+            return 'Preencha um dos campos';
         }else{
             return add_graf[0].length == 0 ? 2 : 0;
         }
@@ -287,13 +289,14 @@ function Validacao(dados,tipo){
                     
                     return 'É necessario mais de um valor em X e Y'
                 }else{
-                    for(let i = 0; i < dependentes.length;i++){
-                        for(let j = dependentes.length - i; j > i;j--){
-                            if(dependentes[i] == dependentes[j] && independentes[i] == independentes[j] ){
-                                return 'Os '+(i+1)+'º elementos do X e Y não podem ser iguais aos '+(j+1)+'º elementos'
-                            }
-                        }
-                    }
+                    // podem ser iguais :)
+                    //for(let i = 0; i < dependentes.length;i++){
+                    //    for(let j = dependentes.length - i; j > i;j--){
+                    //        if(dependentes[i] == dependentes[j] && independentes[i] == independentes[j] ){
+                    //           return 'Os '+(i+1)+'º elementos do X e Y não podem ser iguais aos '+(j+1)+'º elementos'
+                    //        }
+                    //    }
+                    //}
                     return true 
                 }
     
