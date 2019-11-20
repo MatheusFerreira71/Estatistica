@@ -20,13 +20,13 @@ function Exibir_Cor_Reg(){
                         </div>
                         <div class="form-group was-validated">
                             <label for="nomeVariavel2">Valores de (X):</label>
-                            <input type="text" class="form-control dom" id="entrarDados2" placeholder="Dados (X)" required pattern="((([1-9][0-9]*(\.|\,)[0-9]{1,3})|(0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,3}))|[1-9][0-9]*)(?:\;|$))+">
+                            <input type="text" class="form-control dom" id="entrarDados2" placeholder="Dados (X)" required pattern="(((([-1-9]|[1-9])[0-9]*(\.|\,)[0-9]{1,3})|(0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,3}))|[1-9][0-9]*)(?:\;|$))+">
                             <div class="invalid-feedback">Insira os dados separados por ; (no maximo 3 casas decimais) </div>
                             <div class="valid-feedback">Muito bem!</div>
                         </div>
                         <div class="form-group was-validated">
                             <label for="nomeVariavel1">Valores de (Y):</label>
-                            <input type="text" class="form-control dom" id="entrarDados1" placeholder="Dados (Y)" required pattern="((([1-9][0-9]*(\.|\,)[0-9]{1,3})|(0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,3}))|[1-9][0-9]*)(?:\;|$))+">
+                            <input type="text" class="form-control dom" id="entrarDados1" placeholder="Dados (Y)" required pattern="(((([-1-9]|[1-9])[0-9]*(\.|\,)[0-9]{1,3})|(0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,3}))|[1-9][0-9]*)(?:\;|$))+">
                             <div class="invalid-feedback">Insira os dados separados por ; (no maximo 3 casas decimais) </div>
                             <div class="valid-feedback">Muito bem!</div>
                         </div>
@@ -54,20 +54,20 @@ function Exibir_Cor_Reg(){
                         </h1> \
                         <div class="form-group was-validated ">
                             <label for="nomeVariavel2">Adicionar variaveis independentes (X):</label>
-                            <input type="text" class="form-control new" id="entrarDados2" placeholder="Dados (X)" pattern="((([1-9][0-9]*(\.|\,)[0-9]{1,3})|(0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,3}))|[1-9][0-9]*)(?:\;|$))+" >
+                            <input type="text" class="form-control new" id="entrarDados2" placeholder="Dados (X)" pattern="(((([-1-9]|[1-9])[0-9]*(\.|\,)[0-9]{1,3})|(0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,3}))|[1-9][0-9]*)(?:\;|$))+" >
                             <div class="invalid-feedback">Insira os dados separados por ; (no maximo 3 casas decimais) </div>
                             <div class="valid-feedback">Muito bem!</div>
                         </div>
                         <div class="form-group was-validated ">
                             <label for="nomeVariavel1">Adicionar variaveis independentes (Y):</label>
-                            <input type="text" class="form-control new"  id="entrarDados1" placeholder="Dados (Y)" pattern="((([1-9][0-9]*(\.|\,)[0-9]{1,3})|(0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,3}))|[1-9][0-9]*)(?:\;|$))+">
+                            <input type="text" class="form-control new"  id="entrarDados1" placeholder="Dados (Y)" pattern="(((([-1-9]|[1-9])[0-9]*(\.|\,)[0-9]{1,3})|(0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,3}))|[1-9][0-9]*)(?:\;|$))+">
                             <div class="invalid-feedback">Insira os dados separados por ; (no maximo 3 casas decimais)</div>
                             <div class="valid-feedback">Muito bem!</div>
                         </div>
                         <button onclick="Gerente_Correlacao('add')" id="calc" type="button" style="width: 100%" class="btn btn-info">Calcular</button>
     
                     </div>
-                    <div id="grafico" class="col-md-0 border border-info rounded mt-2 align-self-center d-none w-100 " style="height: 450px; ">
+                    <div id="grafico" class="col-md-0 border border-info rounded  mt-2 align-self-center d-none w-100 " style="height: 430px; ">
     
                     </div>
                 </div>`
@@ -85,7 +85,6 @@ function Gerente_Correlacao(dados) {
     if(dados.length == 0 || dados == 'add'){
         dados = PegarDados('.dom');
     };  
-    validacao = true
     if (validacao != true) {
         if(validacao == 0 || validacao == 2){
             validacao = validacao == 2 ? 1 : 0;
@@ -197,7 +196,7 @@ function Gera_Grafico(dados) {
     let div_add = document.querySelector('#grafico');
     div_add.innerHTML = '';   
 
-    let coordenadas = []
+    let coordenadas = [['X','Y']]
     let coordenadas_reta = {x: [], y:[]}
     let x = dados[2].split(';');
     let y = dados[3].split(';');
@@ -222,47 +221,31 @@ function Gera_Grafico(dados) {
     //console.log(retab)
 
     // grafico
-        var chart = anychart.scatter();
+    google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(coordenadas)
 
-        chart.animation(true);
+        var options = {
+        title: 'Gráfico de dispersão com linha de regressão',
+        hAxis: {title: 'Independentes (X)'},
+        vAxis: {title: 'Dependentes (Y)'},
+        chartArea: {width:'70%'},
+        trendlines: {
+            0: {
+              type: 'linear'
+            }
+          }
+        };
 
-        chart.title('Gráfico de dispersão com linha de regressão');
+        var chartLinear = new google.visualization.ScatterChart(document.getElementById('grafico'));
+        chartLinear.draw(data, options);
+      }
 
-        chart.xScale()
-                
-        chart.yScale()
-
-        chart.yAxis().title('Dependentes (Y)');
-        chart.xAxis()
-                .title('Independentes (X)')
-                .drawFirstLabel(false)
-                .drawLastLabel(false);
-
-        chart.interactivity()
-                .hoverMode('by-spot')
-                .spotRadius(30);
-
-        chart.tooltip().displayMode('union');
-
-       
-        var marker = chart.marker(coordenadas);
-        marker.type('circle')
-                .size(4);
-        marker.hovered()
-                .size(7)
-                .fill('gold')
-                .stroke(anychart.color.darken('gold'));
-        marker.tooltip()
-                .hAlign('start')
-
-
-        chart.line(reta);
-        chart.container('grafico');
-
-        chart.draw();
-    
 }
 /////////////// testes
+
+
 
 function tipoArquivo1() {
     let tipoArquivo = document.getElementById('tipoArquivo1');
@@ -275,7 +258,7 @@ function tipoArquivo1() {
 
 $('#arquivo1').change(function(e) {
     const tipoArq = document.getElementById('tipoArquivo1').value;
-
+    alert()
     if (tipoArq === '.xlsx') {
         let files = e.target.files,
             f = files[0];
@@ -350,6 +333,7 @@ $('#arquivo1').change(function(e) {
         };
         reader.readAsArrayBuffer(f);
     } else {
+        
         const file = document.getElementById('arquivo1').files[0];
         let name = document.getElementById('arquivo1').files[0].name.replace(/ /gi, '_');
         name = name.split('.');
