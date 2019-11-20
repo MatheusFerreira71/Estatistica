@@ -1,41 +1,74 @@
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<html>
+<head>
+  <script src="https://cdn.anychart.com/samples/scatter-charts/combination-of-line-and-marker-charts/data.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js?hcode=c11e6e3cfefb406e8ce8d99fa8368d33"></script>
+  <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css?hcode=c11e6e3cfefb406e8ce8d99fa8368d33" type="text/css" rel="stylesheet">
+  <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css?hcode=c11e6e3cfefb406e8ce8d99fa8368d33" type="text/css" rel="stylesheet">
+  <style type="text/css">
+html, body, #container {
+    width: 80%;
+    height: 80%;
+    margin: 0;
+    padding: 0;
+}
+</style>
+</head>
+<body>
+  <div id="container"></div>
+  <script>
+anychart.onDocumentReady(function () {
+    var chart = anychart.scatter();
 
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-<script>
- Highcharts.chart('container', {
-        xAxis: {
-          min: -0.5,
-          max: 5.5
-        },
-        yAxis: {
-          min: 0
-        },
-        title: {
-          text: 'Gráfico de dispersão com linha de regressão'
-        },
-        series: [{
-          type: 'line',
-          name: 'Regression Line',
-          data: [[0, 1.1111112241], [5, 4.51]],
-          marker: {
-            enabled: false
-          },
-          states: {
-            hover: {
-              lineWidth: 0
-            }
-          },
-          enableMouseTracking: false
-        }, {
-          type: 'scatter',
-          name: 'Observations',
-          data: [[1, 1.5],[ 2.8, 3.5], [3.9, 4.2]],
-          zones: [{value:0}, {value:1}],
-          marker: {
-            radius: 4
-          }
-        }]
-      });
+    // turn on chart animation
+    chart.animation(true);
+
+    // set chart title
+    chart.title('System interruptions');
+
+    chart.xScale()
+          
+    chart.yScale()
+           
+
+    chart.yAxis().title('Waiting time between interruptions (Min)');
+    chart.xAxis()
+            .title('Interruption duration (Min)')
+            .drawFirstLabel(false)
+            .drawLastLabel(false);
+
+    chart.interactivity()
+            .hoverMode('by-spot')
+            .spotRadius(30);
+
+    chart.tooltip().displayMode('union');
+
+    // The data used in this sample can be obtained from the CDN
+    // https://cdn.anychart.com/samples/scatter-charts/combination-of-line-and-marker-charts/data.js
+    var marker = chart.marker( [[-4.4, -7],[-4.5, -15]]);
+    marker.type('triangle-up')
+            .size(4);
+    marker.hovered()
+            .size(7)
+            .fill('gold')
+            .stroke(anychart.color.darken('gold'));
+    marker.tooltip()
+            .hAlign('start')
+            .format(function () {
+                return 'Waiting time: ' + this.value + ' min.\nDuration: ' + this.x + ' min.';
+            });
+
+    // The data used in this sample can be obtained from the CDN
+    // https://cdn.anychart.com/samples/scatter-charts/combination-of-line-and-marker-charts/data.js
+    chart.line( [[-4.4, -7],[-4.5, -15]]);
+
+    // set container id for the chart
+    chart.container('container');
+    // initiate chart drawing
+    chart.draw();
+});
 </script>
+</body>
+</html>
 

@@ -67,7 +67,7 @@ function Exibir_Cor_Reg(){
                         <button onclick="Gerente_Correlacao('add')" id="calc" type="button" style="width: 100%" class="btn btn-info">Calcular</button>
     
                     </div>
-                    <div id="grafico" class="col-md-0 border border-info rounded mt-2 align-self-center d-none w-100" style="height: 100%; ">
+                    <div id="grafico" class="col-md-0 border border-info rounded mt-2 align-self-center d-none w-100 " style="height: 450px; ">
     
                     </div>
                 </div>`
@@ -175,10 +175,8 @@ function Somatorio(valores, operacao, opcional){
                 valor = geval(valores[i] + operacao + opcional[i]);
                 
             }else{
-                console.log(geval(valores[i] + operacao))
-                valor = geval(valores[i] + operacao);
+                valor = geval('('+valores[i]+')' + operacao);
             }
-
             soma += valor
         }
         return soma
@@ -196,6 +194,9 @@ function Equacao_Reta(coordenada, xory){
 }
 
 function Gera_Grafico(dados) {
+    let div_add = document.querySelector('#grafico');
+    div_add.innerHTML = '';   
+
     let coordenadas = []
     let coordenadas_reta = {x: [], y:[]}
     let x = dados[2].split(';');
@@ -215,44 +216,50 @@ function Gera_Grafico(dados) {
     let maiory = coordenadas_reta['y'][coordenadas_reta['x'].indexOf(maiorx)] 
     let maiory_reta = Equacao_Reta([parseFloat(maiory)],'1')
     
-    let retab = [[Math.min.apply(null, x),Math.min.apply(null, y )],[Math.max.apply(null, x),Math.max.apply(null, y )]]
+    //let retab = [[Math.min.apply(null, x),Math.min.apply(null, y )],[Math.max.apply(null, x),Math.max.apply(null, y )]]
     let reta = [[menory_reta[0], menorx_reta[0]],[maiory_reta[0], maiorx_reta[0]]]
     console.log(reta)
-    console.log(retab)
+    //console.log(retab)
 
-   
-    Highcharts.chart('grafico', {
-        xAxis: {
-          min: 0
-        },
-        yAxis: {
-          min: 0
-        },
-        title: {
-          text: 'Gráfico de dispersão com linha de regressão'
-        },
-        series: [{
-          type: 'line',
-          name: 'Regression Line',
-          data: reta,
-          marker: {
-            enabled: false
-          },
-          states: {
-            hover: {
-              lineWidth: 0
-            }
-          },
-          enableMouseTracking: false
-        }, {
-          type: 'scatter',
-          name: 'Observations',
-          data: coordenadas,
-          marker: {
-            radius: 4
-          }
-        }]
-      });
+    // grafico
+        var chart = anychart.scatter();
+
+        chart.animation(true);
+
+        chart.title('Gráfico de dispersão com linha de regressão');
+
+        chart.xScale()
+                
+        chart.yScale()
+
+        chart.yAxis().title('Dependentes (Y)');
+        chart.xAxis()
+                .title('Independentes (X)')
+                .drawFirstLabel(false)
+                .drawLastLabel(false);
+
+        chart.interactivity()
+                .hoverMode('by-spot')
+                .spotRadius(30);
+
+        chart.tooltip().displayMode('union');
+
+       
+        var marker = chart.marker(coordenadas);
+        marker.type('circle')
+                .size(4);
+        marker.hovered()
+                .size(7)
+                .fill('gold')
+                .stroke(anychart.color.darken('gold'));
+        marker.tooltip()
+                .hAlign('start')
+
+
+        chart.line(reta);
+        chart.container('grafico');
+
+        chart.draw();
     
 }
 /////////////// testes
