@@ -452,7 +452,7 @@ function Gerente_Uniforme(dados) {
     }
 }
 
-// Funcões de Calculo
+// Funcões de Cálculo
 function Calc_Binomial(dados) {
     if (dados.length == 0) {
         dados = PegarDados('.dom');

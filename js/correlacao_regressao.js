@@ -74,10 +74,9 @@ function Exibir_Cor_Reg(){
     let div_add = document.querySelector('#index');
     div_add.innerHTML = saphe;   
     tipoArquivo1();
-
 }
 
-// CorrelaÇão
+// Correlação
 
 function Gerente_Correlacao(dados) {
 
