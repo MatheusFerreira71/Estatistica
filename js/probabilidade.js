@@ -7,8 +7,8 @@ let resultados_salvos = {
 
 function Distribuicao(name_Btn) {
 
-    $('.btn').removeClass('active')
-    $('#' + name_Btn).addClass('active')
+    $('.btn').removeClass('active');
+    $('#' + name_Btn).addClass('active');
 
     this.Uniforme = function () {
         return ` \
@@ -18,24 +18,24 @@ function Distribuicao(name_Btn) {
                         \
                          \
                         <div class="form-group  was-validated ted" style="width: 75%;"> \
-                            <label for="exampleInputPassword1">Ponto Minimo</label> \
+                            <label for="exampleInputPassword1">Ponto Mínimo</label> \
                             <input required type="text" pattern="^([0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))$" step="0.01" class="form-control dom" id="exampleInputPassword1" placeholder="Digite aqui a Média" "> \
                             <div class="valid-feedback  ">Muito bem!</div>\
-                            <div class="invalid-feedback">Insira um numero maior que 0 (no maximo 4 casas decimais)</div> \
+                            <div class="invalid-feedback">Insira um número maior que 0 (no máximo 4 casas decimais).</div> \
                         </div> \
                         <div class="form-group  was-validated ted" style="width: 75%;"> \
-                            <label for="exampleInputPassword1">Ponto Maximo</label> \
+                            <label for="exampleInputPassword1">Ponto Máximo</label> \
                             <input required type="text" pattern="^([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))$" step="0.01" class="form-control dom" id="exampleInputPassword1" placeholder="Digite aqui o Desvio Padrão" "> \
                             <div class="valid-feedback  ">Muito bem!</div>\
-                            <div class="invalid-feedback">Insira um numero maior que 0 (no maximo 4 casas decimais) </div> \
+                            <div class="invalid-feedback">Insira um número maior que 0 (no máximo 4 casas decimais).</div> \
                         </div> \
                         <div class="form-group" style="width: 75%;"> \
                         <label for="exampleInputPassword1">Opções do Intervalo</label> \
                             <select class="select dom" onchange="NumDados()"> \
                                 \
-                                <option value="entre"> Entre dois numeros </option>\
-                                <option value="maior"> Maior que </option>\
-                                <option value="menor"> Menor que </option>\
+                                <option value="entre">Entre dois números</option>\
+                                <option value="maior">Maior que</option>\
+                                <option value="menor">Menor que</option>\
                                 \
                             </select>\
                         </div> \
@@ -43,7 +43,7 @@ function Distribuicao(name_Btn) {
                             <label for="exampleInputPassword1">Intervalo</label> \
                             <input required id="" type="text" min="0" pattern="^(([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]?|([1-9]{1,3}[0-9]?)|[1-9]{1,4}))(?:$|\;)){2}$" class="form-control dom nuns" id="exampleInputPassword1" placeholder="Digite o(s) Dados(s)" "> \
                             <div class="valid-feedback">Muito bem!</div>\
-                            <div class="invalid-feedback nuns"> Insira dois numeros maiores que 0 sepados por ponto e Virgula (no maximo 4 casas decimais) </div> \
+                            <div class="invalid-feedback nuns"> Insira dois números maiores que 0 separados por ponto e vírgula (no máximo 4 casas decimais).</div> \
                         </div>
                         \
                         <button id="calc" type="submit" class="btn btn-primary" onclick="Gerente_Uniforme([])" style="width: 75%; ">Calcular</button> \
@@ -71,8 +71,8 @@ function Distribuicao(name_Btn) {
                 </div> \
              \
         </div>`;
-
     }
+
     this.Normal = function () {
 
         return ` \
@@ -82,24 +82,24 @@ function Distribuicao(name_Btn) {
                         \
                         
                         <div class="form-group  was-validated ted" style="width: 75%;"> \
-                            <label for="exampleInputPassword1">Media</label> \
+                            <label for="exampleInputPassword1">Média</label> \
                             <input required type="text" pattern="^([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))$" step="0.01" class="form-control dom" id="exampleInputPassword1" placeholder="Digite aqui a Média" "> \
                             <div class="valid-feedback  ">Muito bem!</div>\
-                            <div class="invalid-feedback">Insira um numero maior que 0 (no maximo 4 casas decimais)</div> \
+                            <div class="invalid-feedback">Insira um número maior que 0 (no máximo 4 casas decimais).</div> \
                         </div> \
                         <div class="form-group  was-validated ted" style="width: 75%;"> \
                             <label for="exampleInputPassword1">Desvio Padrão</label> \
                             <input required type="text" pattern="^([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))$" step="0.01" class="form-control dom" id="exampleInputPassword1" placeholder="Digite aqui o Desvio Padrão" "> \
                             <div class="valid-feedback  ">Muito bem!</div>\
-                            <div class="invalid-feedback">Insira um numero maior que 0 (no maximo 4 casas decimais)</div> \
+                            <div class="invalid-feedback">Insira um número maior que 0 (no máximo 4 casas decimais).</div> \
                         </div> \
                         <div class="form-group" style="width: 75%;"> \
                         <label for="exampleInputPassword1">Opções do Intervalo</label> \
                             <select class="select dom" onchange="NumDados()"> \
                                 \
-                                <option value="entre"> Entre dois numeros </option>\
-                                <option value="maior"> Maior que </option>\
-                                <option value="menor"> Menor que </option>\
+                                <option value="entre">Entre dois números</option>\
+                                <option value="maior">Maior que</option>\
+                                <option value="menor">Menor que</option>\
                                 \
                             </select>\
                         </div> \
@@ -107,7 +107,7 @@ function Distribuicao(name_Btn) {
                             <label for="exampleInputPassword1">Intervalo</label> \
                             <input required id="" type="text" min="0" pattern="^(([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]?|([1-9]{1,3}[0-9]?)|[1-9]{1,4}))(?:$|\;)){2}$" class="form-control dom nuns" id="exampleInputPassword1" placeholder="Digite o(s) Dados(s)" "> \
                             <div class="valid-feedback">Muito bem!</div>\
-                            <div class="invalid-feedback nuns"> Digite dois numeros maiores que 0 sepados por ponto e Virgula (no maximo 4 casas decimais) </div> \
+                            <div class="invalid-feedback nuns"> Digite dois números maiores que 0 separados por ponto e vírgula (no máximo 4 casas decimais).</div> \
                         </div> \
                         \
                         <button id="calc" type="submit" class="btn btn-primary" onclick="Gerente_Normal([])" style="width: 75%; ">Calcular</button> \
@@ -140,26 +140,26 @@ function Distribuicao(name_Btn) {
                             <label for="exampleInputEmail1">Amostra</label> \
                             <input required type="text"  min="0" pattern="^([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))$" class="form-control dom " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite aqui a Amostra (N)" "> \
                             <div class="valid-feedback ">Muito bem!</div>\
-                            <div class="invalid-feedback" >Insira um numero maior que 0 (no maximo 4 casas decimais) </div> \
+                            <div class="invalid-feedback" >Insira um número maior que 0 (no máximo 4 casas decimais).</div> \
                         </div> \
                         <div class="form-group was-validated ted" style="width: 75%;"> \
                             <label for="exampleInputPassword1">Sucesso</label> \
                             <input required type="text"  min="0" max="100" pattern="^([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))$" class="form-control dom" id="exampleInputPassword1" placeholder="Digite aqui a chance de Sucesso (P)" "> \
                             <div class="valid-feedback  ">Muito bem!</div>\
-                            <div class="invalid-feedback">Insira de 0 a 100 </div> \
+                            <div class="invalid-feedback">Insira um número de 0 a 100.</div> \
                         </div> \
                         <div class="form-group was-validated ted" style="width: 75%;"> \
                             <label for="exampleInputEmail1">Fracasso</label> \
                             <input required type="text"  min="0" max="100" pattern="^([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))$" class="form-control dom" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite aqui a chance de Fracasso (Q)" "> \
                             <div class="valid-feedback  ">Muito bem!</div>\
-                            <div class="invalid-feedback">Insira de 0 a 100 </div> \
+                            <div class="invalid-feedback">Insira um número de 0 a 100.</div> \
                             \
                         </div> \
                         <div class="form-group was-validated ted" style="width: 75%;"> \
                             <label for="exampleInputPassword1">Evento</label> \
                             <input required id="teste "type="text" min="0" pattern="(([0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))(?:\;|$))+" step="1" class="form-control dom" id="exampleInputPassword1" placeholder="Digite o(s) Evento(s) (K)" "> \
                             <div class="valid-feedback">Muito bem!</div>\
-                            <div class="invalid-feedback "> Adione um ou mais numeros inteiros sepados por ponto e Virgula </div> \
+                            <div class="invalid-feedback "> Adione um ou mais números inteiros separados por ponto e vírgula.</div> \
                         </div> \
                         \
                         <button id="calc" type="submit" class="btn btn-primary" onclick="Gerente_Binomial([])" style="width: 75%; ">Calcular</button> \
@@ -186,8 +186,6 @@ function Distribuicao(name_Btn) {
         </div>`;
     }
 
-
-
 }
 // Botões Padrão
 function DistBinomial(name_Btn) {
@@ -195,61 +193,56 @@ function DistBinomial(name_Btn) {
     let div_add = document.querySelector('#pills-tabContent');
     div_add.innerHTML = dist_Bi.BinomialA();
     var input = document.querySelector('teste');
-
-
 }
+
 function DistNormal(name_Btn) {
     let dist_No = new Distribuicao(name_Btn);
     let div_add = document.querySelector('#pills-tabContent');
     div_add.innerHTML = dist_No.Normal();
 }
+
 function DistUniforme(name_Btn) {
     let dist_Un = new Distribuicao(name_Btn);
     let div_add = document.querySelector('#pills-tabContent');
     div_add.innerHTML = dist_Un.Uniforme();
-
 }
-
 
 // Funcoes Genericas
 function PegarDados(x) {
-    let Variaveis = document.querySelectorAll(x)
-    let dados = []
+    let Variaveis = document.querySelectorAll(x);
+    let dados = [];
     for (Variavel of Variaveis) {
         dados.push(Variavel.value.replace(',', '.'));
     }
-    return dados
+    return dados;
 }
+
 function AdicionaDados(dados, classe) {
-    let Variaveis = document.querySelectorAll(classe)
+    let Variaveis = document.querySelectorAll(classe);
     for (let i = 0; i < dados.length; i++) {
         Variaveis[i].value = dados[i]
     }
-
 }
+
 function Libera_Resul_bi() {
-
-    $('.entrada').removeClass('col-md-12')
-    $('.entrada').addClass('col-md-7')
-    $('#resultados').removeClass('col-md-12')
-    $('#resultados').addClass('col-md-5 ')
-    $('#resultados').removeClass('d-none')
-    $('#resultados').addClass('animated bounceInDown delay-0s')
-    $('#calc').text('Editar')
-
-
-
+    $('.entrada').removeClass('col-md-12');
+    $('.entrada').addClass('col-md-7');
+    $('#resultados').removeClass('col-md-12');
+    $('#resultados').addClass('col-md-5 ');
+    $('#resultados').removeClass('d-none');
+    $('#resultados').addClass('animated bounceInDown delay-0s');
+    $('#calc').text('Editar');
 }
+
 function Validacao(dados, tipo) {
 
     var input = document.getElementsByClassName('dom');
-    var valido = 0
+    var valido = 0;
     for (let i = 0; i < input.length; i++) {
         if (input[i].checkValidity() === true) {
             valido++
         }
     }
-    console.log(input[0].checkValidity())
     if (dados == 'add') {
         let add_graf = PegarDados('.new')
         if (add_graf[0].length > 0 && add_graf[1].length > 0) {
@@ -269,83 +262,68 @@ function Validacao(dados, tipo) {
 
             if (tipo == 'binomial') {
                 if ((parseFloat(dados[1]) + parseFloat(dados[2])) == 100) {
-                    return true
+                    return true;
                 } else {
-                    return 'O sucesso mais o fracasso não é igual a 100'
+                    return 'O sucesso mais o fracasso não é igual a 100';
                 }
 
             } else if (tipo == 'normal') {
-                return true
+                return true;
             } else if (tipo == 'uniforme') {
-                return true
+                return true;
 
             } else if (tipo == 'correlacao') {
                 let independentes = dados[2].split(';');
                 let dependentes = dados[3].split(';');
 
                 if (independentes.length != dependentes.length) {
-                    return 'O quantidade de dados do X não correpondem ao Y'
+                    return 'O quantidade de dados do X não correpondem ao Y.';
                 } else if (independentes.length == 1) {
-
-                    return 'É necessario mais de um valor em X e Y'
+                    return 'É necessário mais de um valor em X e Y.';
                 } else {
-                    // podem ser iguais :)
-                    //for(let i = 0; i < dependentes.length;i++){
-                    //    for(let j = dependentes.length - i; j > i;j--){
-                    //        if(dependentes[i] == dependentes[j] && independentes[i] == independentes[j] ){
-                    //           return 'Os '+(i+1)+'º elementos do X e Y não podem ser iguais aos '+(j+1)+'º elementos'
-                    //        }
-                    //    }
-                    //}
-                    return true
+                    return true;
                 }
-
             }
         } else {
-
             $('.ted').addClass('was-validated');
             return 'Por favor Preecha todos os campos corretamente';
-
         }
     }
-
-
-
 }
+
 function AlertUsu(texto) {
     Swal.fire({
         type: 'info',
         title: 'Oops...',
         text: texto
     })
-
 }
+
 function NumDados() {
     let select = document.querySelector('.select');
     let nuns = document.querySelectorAll('.nuns');
-    console.log(nuns)
     select = select.value;
     if (select == 'entre') {
         // pattern para dois ou um numero : ((?:[0-9])+(?:\;)|[0-9]*){1}((?:[0-9])+[0-9]*){1} :) // n funfa bem '-
         // ((([1-9][0-9]*(\.|\,)[0-9]{1,4})|(0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))|[1-9][0-9]*)(?:\;|$)){2}
 
-        nuns[0].pattern = '^(([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]?|([1-9]{1,3}[0-9]?)|[1-9]{1,4}))(?:$|\;)){2}$'
-        nuns[1].innerText = 'Digite dois numeros maiores que 0 sepados por ponto e Virgula (no maximo 4 casas decimais)'
+        nuns[0].pattern = '^(([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]?|([1-9]{1,3}[0-9]?)|[1-9]{1,4}))(?:$|\;)){2}$';
+        nuns[1].innerText = 'Digite dois números maiores que 0 separados por ponto e vírgula (no máximo 4 casas decimais).';
 
     } else {
         // (([1-9][0-9]*(\.|\,)[0-9]{1,4})|(0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))|[1-9][0-9]*)
-        nuns[0].pattern = '^([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))$'
-        nuns[1].innerText = 'Insira um numero maior que 0 (no maximo 4 casas decimais)';
-
+        nuns[0].pattern = '^([1-9][0-9]*((\.|\,)[0-9]{1,4})?|0(\.|\,)(([0-9]){1,3}[1-9]|([1-9]{1,3}[0-9])|[1-9]{1,4}))$';
+        nuns[1].innerText = 'Insira um número maior que 0 (no máximo 4 casas decimais).';
     }
 }
+
 function Tabela_DistNormal(num) {
     if (num === 0) {
-        return 0
+        return 0;
     } else if (num > 3.9 || num < -3.9) {
-        return 0.5
+        return 0.5;
     } else {
-        let linha, col
+        let linha, col;
         let tabelaDN = [
             [0.0, 0.0000, 0.0040, 0.0080, 0.0120, 0.0160, 0.0199, 0.0239, 0.0279, 0.0319, 0.0359],
             [0.1, 0.0398, 0.0438, 0.0478, 0.0517, 0.0557, 0.0596, 0.0636, 0.0675, 0.0714, 0.0753],
@@ -388,88 +366,68 @@ function Tabela_DistNormal(num) {
             [3.8, 0.4999, 0.4999, 0.4999, 0.4999, 0.4999, 0.4999, 0.4999, 0.4999, 0.4999, 0.4999],
             [3.9, 0.5000, 0.5000, 0.5000, 0.5000, 0.5000, 0.5000, 0.5000, 0.5000, 0.5000, 0.5000]];
 
-
-        let mult = Math.sign(num)
+        let mult = Math.sign(num);
         num = Math.abs(num);
         num = num.toString();
         linha = num.match(/([0-9]+\.[0-9])([0-9])/);
-        console.log(num.match(/([0-9]+\.[0-9])([0-9])/))
         if (linha == null) {
             col = 1;
-            linha = parseFloat(num) * 10
+            linha = parseFloat(num) * 10;
         } else {
-            col = parseFloat(linha[2]) + 1
-            linha = parseFloat(linha[1]) * 10
+            col = parseFloat(linha[2]) + 1;
+            linha = parseFloat(linha[1]) * 10;
         }
-        console.log(linha, col)
-        console.log(tabelaDN[linha][col])
         teste = tabelaDN[linha][col];
-
-        return tabelaDN[linha][col] * mult
-
-
+        return tabelaDN[linha][col] * mult;
     }
-
 }
 
 // Gerentes de Distribuições
 function Gerente_Binomial(dados) {
-    validacao = Validacao(dados, 'binomial')
+    validacao = Validacao(dados, 'binomial');
 
     if (validacao != true) {
         AlertUsu(validacao);
-        return false
+        return false;
     } else {
         let resultado = Calc_Binomial(dados);
-        console.log(resultado)
         Libera_Resul_bi();
-        let display = document.querySelectorAll('.P')
+        let display = document.querySelectorAll('.P');
         display[0].innerHTML = 'Probabilidade : ' + resultado.binomial + '%';
-        display[1].innerHTML = 'Media : ' + resultado.media;
+        display[1].innerHTML = 'Média : ' + resultado.é;
         display[2].innerHTML = 'Desvio Padrão : ' + resultado.desvio_padrao;
-        console.log(display)
-
     }
-
-
 }
+
 function Gerente_Normal(dados) {
-    validacao = Validacao(dados, 'normal')
+    validacao = Validacao(dados, 'normal');
     let ted = document.querySelector('.ted');
-    console.log(ted.value)
     if (validacao != true) {
         AlertUsu(validacao);
-        return false
+        return false;
     } else {
         let resultado = Calc_Normal(dados);
-        console.log(resultado)
         Libera_Resul_bi();
-        let display = document.querySelector('.P')
+        let display = document.querySelector('.P');
         display.innerHTML = 'Probabilidade : ' + resultado + '%';
-        console.log(display)
     }
-
 }
+
 function Gerente_Uniforme(dados) {
-    validacao = Validacao(dados, 'uniforme')
+    validacao = Validacao(dados, 'uniforme');
     let ted = document.querySelector('.ted');
-    console.log(ted.value)
     if (validacao != true) {
         AlertUsu(validacao);
-        return false
+        return false;
     } else {
         let resultado = Calc_Uniforme(dados);
-        console.log(resultado)
         Libera_Resul_bi();
-        let display = document.querySelectorAll('.P')
+        let display = document.querySelectorAll('.P');
         display[0].innerHTML = 'Probabilidade : ' + resultado.uniforme + '%';
-        display[1].innerHTML = 'Media : ' + resultado.media;
+        display[1].innerHTML = 'Média : ' + resultado.media;
         display[2].innerHTML = 'Desvio Padrão : ' + resultado.desvio_padrao;
         display[3].innerHTML = 'Coeficiente de Variação : ' + resultado.cv;
-
-        console.log(display)
     }
-
 }
 
 // Funcões de Cálculo
@@ -478,7 +436,6 @@ function Calc_Binomial(dados) {
         dados = PegarDados('.dom');
     };
 
-    console.log(dados)
     let K = dados[3].split(';');
     let N = parseFloat(dados[0]);
     let P = parseFloat(dados[1]) / 100;
@@ -492,25 +449,25 @@ function Calc_Binomial(dados) {
 
     for (let i = 0; i < K.length; i++) {
         K[i] = parseInt(K[i])
-        let analise_comb
+        let analise_comb;
         if (N == K[i]) {
-            analise_comb = 1
+            analise_comb = 1;
         } else if (K[i] == 1) {
-            analise_comb = N
+            analise_comb = N;
         } else if (K[i] == 0) {
-            analise_comb = 1
+            analise_comb = 1;
         } else {
-            analise_comb = fat(N) / (fat(K[i]) * fat(N - K[i]))
+            analise_comb = fat(N) / (fat(K[i]) * fat(N - K[i]));
         }
-        x = Math.pow(P, K[i])
-        y = Math.pow(Q, N - K[i])
-        resultados.binomial += (analise_comb * Math.pow(P, K[i]) * Math.pow(Q, N - K[i])) * 100
-
+        x = Math.pow(P, K[i]);
+        y = Math.pow(Q, N - K[i]);
+        resultados.binomial += (analise_comb * Math.pow(P, K[i]) * Math.pow(Q, N - K[i])) * 100;
     }
-    resultados.binomial = parseFloat((resultados.binomial).toFixed(2))
-    resultados.media = (N * P).toFixed(2)
-    resultados.desvio_padrao = parseFloat((Math.sqrt(N * P * Q).toFixed(2)))
-    return resultados
+
+    resultados.binomial = parseFloat((resultados.binomial).toFixed(2));
+    resultados.media = (N * P).toFixed(2);
+    resultados.desvio_padrao = parseFloat((Math.sqrt(N * P * Q).toFixed(2)));
+    return resultados;
 
     function fat(num) {
         let acumula = 1;
@@ -518,61 +475,40 @@ function Calc_Binomial(dados) {
             acumula = acumula * i;
         }
         return acumula;
-
     }
 }
+
 function Calc_Normal(dados) {
     if (dados.length == 0) {
         dados = PegarDados('.dom');
-
     };
-    console.log(dados)
-    media = parseFloat(dados[0])
-    desvio_padrao = parseFloat(dados[1])
-    let intervalos
-    let ZM, Zm, ZN, meio
-    let resul_nor
+    media = parseFloat(dados[0]);
+    desvio_padrao = parseFloat(dados[1]);
+    let intervalos;
+    let ZM, Zm, ZN, meio;
+    let resul_nor;
     if (dados[2] == 'entre') {
-        intervalos = dados[3].split(';')
-        //console.log(intervalos[0])
-        //console.log(parseFloat(intervalos[0]))
+        intervalos = dados[3].split(';');
         Zm = Calc_Z(parseFloat(intervalos[0]), media, desvio_padrao);
         ZM = Calc_Z(parseFloat(intervalos[1]), media, desvio_padrao);
-        resul_nor = (Calc_RelMeio(Zm, ZM, -Zm))
+        resul_nor = (Calc_RelMeio(Zm, ZM, -Zm));
     } else {
         intervalos = parseFloat(dados[3]);
-        meio = 0.5
+        meio = 0.5;
         ZN = Calc_Z(intervalos, media, desvio_padrao);
         if (dados[2] == 'maior') {
-            resul_nor = Calc_RelMeio(ZN, meio, -ZN)
+            resul_nor = Calc_RelMeio(ZN, meio, -ZN);
         } else {
-            resul_nor = Calc_RelMeio(ZN, meio, ZN)
+            resul_nor = Calc_RelMeio(ZN, meio, ZN);
         }
-
     }
 
     function Calc_RelMeio(x, y, secret) {
-        console.log(x, y)
-
-        //if((x  === 0 || y === 0) || (x < 0 && y > 0) || (x > 0 && y > 0)){
-        //    return parseFloat((secret+y).toFixed(2))
-
-        //}else if(x < 0 && y < 0){
-        //    return parseFloat((-x+y).toFixed(2))
-        //}
-
-        //if(x < 0 && y < 0){
-        //    return parseFloat((secret+y).toFixed(2))
-        //}else{
-        //    return parseFloat((secret+y).toFixed(2))
-        //}
         secret = Tabela_DistNormal(secret);
         if (dados[2] == 'entre') {
             y = Tabela_DistNormal(y);
         }
-        console.log(secret, y)
-        return (parseFloat((secret + y) * 100).toFixed(2))
-
+        return (parseFloat((secret + y) * 100).toFixed(2));
     }
 
     function Calc_Z(x, media, desvio_padrao) {
@@ -587,10 +523,10 @@ function Calc_Normal(dados) {
 
     return resul_nor
 }
+
 function Calc_Uniforme(dados) {
     if (dados.length == 0) {
         dados = PegarDados('.dom');
-
     };
     let resul_Uni = {
         uniforme: 0,
@@ -598,31 +534,29 @@ function Calc_Uniforme(dados) {
         desvio_padrao: 0,
         cv: 0
     };
-    let minimo = parseFloat(dados[0])
-    let maximo = parseFloat(dados[1])
-    let x
+    let minimo = parseFloat(dados[0]);
+    let maximo = parseFloat(dados[1]);
+    let x;
     if (dados[2] == 'entre') {
-        intervalos = dados[3].split(';')
+        intervalos = dados[3].split(';');
         x = parseFloat(intervalos[1]) - parseFloat(intervalos[0]);
     } else if (dados[2] == 'maior') {
-        x = maximo - parseFloat(dados[3])
+        x = maximo - parseFloat(dados[3]);
     } else {
-        x = parseFloat(dados[3]) - minimo
+        x = parseFloat(dados[3]) - minimo;
     }
-    alert(x)
-    resul_Uni.uniforme = (((1 / (maximo - minimo)) * x) * 100).toFixed(2)
-    resul_Uni.media = ((maximo + minimo) / 2).toFixed(2)
-    resul_Uni.desvio_padrao = (Math.sqrt(Math.pow(maximo - minimo, 2) / 12)).toFixed(2)
-    resul_Uni.cv = ((resul_Uni.desvio_padrao / resul_Uni.media) * 100).toFixed(2)
-    return resul_Uni
+    resul_Uni.uniforme = (((1 / (maximo - minimo)) * x) * 100).toFixed(2);
+    resul_Uni.media = ((maximo + minimo) / 2).toFixed(2);
+    resul_Uni.desvio_padrao = (Math.sqrt(Math.pow(maximo - minimo, 2) / 12)).toFixed(2);
+    resul_Uni.cv = ((resul_Uni.desvio_padrao / resul_Uni.media) * 100).toFixed(2);
+    return resul_Uni;
 }
 
 //Funções resposaveis por salvar
 function Sweet_Alert_Name(tipo) {
-    quant = Object.getOwnPropertyNames(resultados_salvos[tipo]).length + 1
+    quant = Object.getOwnPropertyNames(resultados_salvos[tipo]).length + 1;
     name = 'Salvo ' + tipo + ' ' + quant;
     (async () => {
-
 
         const inputValue = name;
 
@@ -640,14 +574,13 @@ function Sweet_Alert_Name(tipo) {
 
         if (text) {
 
-            let nomeAlt = text.replace(/\s/g, '')
+            let nomeAlt = text.replace(/\s/g, '');
 
             if (resultados_salvos[tipo][nomeAlt]) {
                 Swal.fire({
                     type: 'error',
                     title: 'Oops...',
                     text: 'Esse nome ja está sendo usado!',
-
                 })
             } else {
                 const Toast = Swal.mixin({
@@ -662,29 +595,23 @@ function Sweet_Alert_Name(tipo) {
                     title: 'Salvo com Sucesso'
                 })
                 resultados_salvos[tipo][nomeAlt] = PegarDados('.dom');
-                console.log(resultados_salvos);
-                add_nav_safe(text, tipo)
-
+                add_nav_safe(text, tipo);
             }
-
         }
-
     })()
 }
 
 function add_nav_safe(nome, tipo) {
-    distri = tipo
-    let nomeAlt = nome.replace(/\s/g, '')
+    distri = tipo;
+    let nomeAlt = nome.replace(/\s/g, '');
     if (saves.classList.contains("d-none") == true) {
-        $('#saves').removeClass('d-none')
-        $('#saves').addClass('d-flex')
-        $('#saves').addClass('animated flipInY delay-0s')
-
+        $('#saves').removeClass('d-none');
+        $('#saves').addClass('d-flex');
+        $('#saves').addClass('animated flipInY delay-0s');
     }
-    console.log(nomeAlt)
-    button = `<button id="${nomeAlt}" type="button" onclick="Visualizar('${nomeAlt}','${tipo}')" class=" teste btn btn-outline-primary mr-3 mb-2 ml-3 animated tada delay-1s">${nome}</button>`
+    button = `<button id="${nomeAlt}" type="button" onclick="Visualizar('${nomeAlt}','${tipo}')" class=" teste btn btn-outline-primary mr-3 mb-2 ml-3 animated tada delay-1s">${nome}</button>`;
 
-    let display = document.querySelector('#saves')
+    let display = document.querySelector('#saves');
     display.innerHTML += button;
     Visualizar(nomeAlt, tipo);
 
@@ -695,19 +622,17 @@ function Visualizar(id, tipo) {
     if (tipo == 'binomial') {
         DistBinomial(id);
         Gerente_Binomial(resultados_salvos[tipo][id]);
-        AdicionaDados(resultados_salvos[tipo][id], '.dom')
+        AdicionaDados(resultados_salvos[tipo][id], '.dom');
 
     } else if (tipo == 'normal') {
         DistNormal(id);
         Gerente_Normal(resultados_salvos[tipo][id]);
-        AdicionaDados(resultados_salvos[tipo][id], '.dom')
+        AdicionaDados(resultados_salvos[tipo][id], '.dom');
         NumDados()
     } else if (tipo == 'uniforme') {
         DistUniforme(id);
         Gerente_Uniforme(resultados_salvos[tipo][id]);
-        AdicionaDados(resultados_salvos[tipo][id], '.dom')
-        NumDados()
+        AdicionaDados(resultados_salvos[tipo][id], '.dom');
+        NumDados();
     }
-
 }
-

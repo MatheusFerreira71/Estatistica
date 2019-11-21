@@ -13,24 +13,24 @@ function Exibir_Cor_Reg(){
                     <div class="col-md-12 bordas_coluna px-3 py-3 entrada">
                         <div class="form-group was-validated d-none">
                             <label for="nomeVariavel">Nome da variavel independente:</label>
-                            <input type="text" class="form-control dom" id="nomeVariavel2" placeholder="Nome da variável independente (opcional)">
+                            <input type="text" class="form-control dom" id="nomeVariavel2" placeholder="Nome da variável independente (opcional).">
 
                         </div>
                         <div class="form-group was-validated d-none">
                             <label for="nomeVariavel1 ">Nome da variavel dependente:</label>
-                            <input type="text " class="form-control dom" id="nomeVariavel1" placeholder="Nome da variável dependente (opcional)">
+                            <input type="text " class="form-control dom" id="nomeVariavel1" placeholder="Nome da variável dependente (opcional).">
 
                         </div>
                         <div class="form-group was-validated">
                             <label for="nomeVariavel2">Valores de (X):</label>
                             <input type="text" class="form-control dom" id="entrarDados2" placeholder="Dados (X)" required pattern="((?:\-){0,1}[0-9]*((\.|\,){1}[0-9]{1,4}|(\.|\,){0}))*(?:\;|$)">
-                            <div class="invalid-feedback">Insira os dados separados por ; (no maximo 3 casas decimais) </div>
+                            <div class="invalid-feedback">Insira os dados separados por ponto e vírgula (no máximo 3 casas decimais).</div>
                             <div class="valid-feedback">Muito bem!</div>
                         </div>
                         <div class="form-group was-validated">
                             <label for="nomeVariavel1">Valores de (Y):</label>
                             <input type="text" class="form-control dom" id="entrarDados1" placeholder="Dados (Y)" required pattern="((?:\-){0,1}[0-9]*((\.|\,){1}[0-9]{1,4}|(\.|\,){0}))*(?:\;|$)">
-                            <div class="invalid-feedback">Insira os dados separados por ; (no maximo 3 casas decimais) </div>
+                            <div class="invalid-feedback">Insira os dados separados por ponto e vírgula (no máximo 3 casas decimais).</div>
                             <div class="valid-feedback">Muito bem!</div>
                         </div>
                         <div class="form-inline ">
@@ -61,13 +61,13 @@ function Exibir_Cor_Reg(){
                         <div class="form-group was-validated ">
                             <label for="nomeVariavel2">Adicionar variaveis independentes (X):</label>
                             <input type="text" class="form-control new" id="entrarDados2" placeholder="Dados (X)" pattern="((?:\-){0,1}[0-9]*((\.|\,){1}[0-9]{1,4}|(\.|\,){0}))*(?:\;|$)" >
-                            <div class="invalid-feedback">Insira os dados separados por ; (no maximo 3 casas decimais) </div>
+                            <div class="invalid-feedback">Insira os dados separados por ponto e vírgula (no máximo 3 casas decimais).</div>
                             <div class="valid-feedback">Muito bem!</div>
                         </div>
                         <div class="form-group was-validated ">
-                            <label for="nomeVariavel1">Adicionar variaveis independentes (Y):</label>
+                            <label for="nomeVariavel1">Adicionar variaveis dependentes (Y):</label>
                             <input type="text" class="form-control new"  id="entrarDados1" placeholder="Dados (Y)" pattern="((?:\-){0,1}[0-9]*((\.|\,){1}[0-9]{1,4}|(\.|\,){0}))*(?:\;|$)">
-                            <div class="invalid-feedback">Insira os dados separados por ; (no maximo 3 casas decimais)</div>
+                            <div class="invalid-feedback">Insira os dados separados por ponto e vírgula (no máximo 3 casas decimais).</div>
                             <div class="valid-feedback">Muito bem!</div>
                         </div>
                         <button onclick="Gerente_Correlacao('add')" id="calc" type="button" style="width: 100%" class="btn btn-info">Calcular</button>
@@ -99,12 +99,12 @@ function Exibir_Cor_Reg(){
 // CorrelaÇão
 function Modal(){
     add_div = document.querySelector("#modal-body");
-    add_div.innerHTML = ''
+    add_div.innerHTML = '';
     console.log(add_div)
     for(i = 0; i < dados_last_add['x'].length;i++){
-        add_div.innerHTML += `<div class='col-md-5 ml-auto display-5 border border-info rounded mt-2 mb-3'> X =${dados_last_add['x'][i]}</div> <div class='col-md-5 display-6 border border-info rounded ml-auto mt-2 mb-3 mr-1' > Y =${dados_last_add['x'][i]}</div>`
+        add_div.innerHTML += `<div class='col-md-5 ml-auto display-5 border border-info rounded mt-2 mb-3'> X =${dados_last_add['x'][i]}</div> <div class='col-md-5 display-6 border border-info rounded ml-auto mt-2 mb-3 mr-1' > Y =${dados_last_add['x'][i]}</div>`;
     }
-    $('#myModal').modal('show')
+    $('#myModal').modal('show');
     
 }
 function Gerente_Correlacao(dados) {
@@ -164,7 +164,7 @@ function Libera_Resul(){
     $('#resultados').removeClass('d-none');;
     $('#resultados').addClass('animated bounceInUp delay-0s');
     $('#grafico').addClass('animated bounceInUp delay-0s');
-    $('#calc').text('Resetar o Historico');
+    $('#calc').text('Resetar o Histórico');
     $('.dom').attr('disabled', true);
     $('.dim').attr('disabled', true);
 
