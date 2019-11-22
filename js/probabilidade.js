@@ -394,7 +394,7 @@ function Gerente_Binomial(dados) {
         Libera_Resul_bi();
         let display = document.querySelectorAll('.P');
         display[0].innerHTML = 'Probabilidade : ' + resultado.binomial + '%';
-        display[1].innerHTML = 'Média : ' + resultado.é;
+        display[1].innerHTML = 'Média : ' + resultado.media;
         display[2].innerHTML = 'Desvio Padrão : ' + resultado.desvio_padrao;
     }
 }
