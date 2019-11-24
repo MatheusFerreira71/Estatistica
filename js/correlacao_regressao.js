@@ -7,6 +7,7 @@ var save_dados = {
     result: {}
 }
 var dados_last_add = {x:[],y:[]};
+// atualiza o grafico, se ja foi gerado, sempre q redimencionar o tamanho da pagina
 $(window).resize(function(){
     if(Object.keys(save_dados['dados']).length != 0){   
         Gera_Grafico(save_dados['dados']);
@@ -107,7 +108,6 @@ function Exibir_Cor_Reg(){
 function Modal(){
     add_div = document.querySelector("#modal-body");
     add_div.innerHTML = '';
-    console.log(add_div)
     add_div.innerHTML += `<div class='col-md-10  ml-5 font border border-info rounded mt-2 mb-1'> Y = ${save_dados['result']['regre']['a'].toFixed(3)}X - ${save_dados['result']['regre']['b'].toFixed(3)} `
     for(i = 0; i < dados_last_add['x'].length;i++){
         add_div.innerHTML += `<div class='col-md-2 ml-auto display-5 border border-info rounded mt-2 mb-3'> ${i+1}º </div> <div class='col-md-4 ml-auto display-5 border border-info rounded mt-2 mb-3'> X = ${parseFloat(dados_last_add['x'][i]).toFixed(3)}</div> <div class='col-md-4 display-5 border border-info rounded ml-auto mt-2 mb-3 mr-1' > Y = ${dados_last_add['y'][i].toFixed(3)}</div>`;
@@ -138,7 +138,6 @@ function Gerente_Correlacao(dados) {
                 dados_last_add['x'].push(parseFloat(coordenada_add[i]).toFixed(3))
                 dados_last_add['y'].push(parseFloat(coordenada_falta[i].toFixed(3)))
             }
-            console.log(save_dados)
             Gera_Grafico(save_dados['dados'])
         }else{
             AlertUsu(validacao);
@@ -149,13 +148,11 @@ function Gerente_Correlacao(dados) {
         dados_last_add = {x:[],y:[]};
         $('#new_resul').addClass('d-none');
         let resultado = Calc_Correlacao_regressao(dados);
-        console.log(resultado)
         Libera_Resul()
         let display = document.querySelectorAll('.P')
         save_dados['dados'] = dados
         save_dados['result']['corre'] = resultado[0];
         save_dados['result']['regre'] = resultado[1];
-        console.log(save_dados)
         display[0].innerHTML = 'Correlação : '+resultado[0].toFixed(3);
         display[1].innerHTML = 'Regressão :<br> Y = '+resultado[1]['a'].toFixed(3)+'X + '+resultado[1]['b'].toFixed(3)
         Gera_Grafico(dados)
@@ -184,7 +181,6 @@ function Calc_Correlacao_regressao(dados){
         dados = PegarDados('.dom');
     };  
 
-    console.log(dados)
     let independentes = dados[2].split(';');
     let dependentes = dados[3].split(';');
     let n_obser = dependentes.length;
@@ -245,11 +241,11 @@ function Gera_Grafico(dados) {
     let y = dados[3].split(';');
     for(let i = 0;i < x.length;i++){
         coordenadas.push([parseFloat(x[i]),parseFloat(y[i])])
-        coordenadas_reta['x'].push(parseFloat(x[i]))
-        coordenadas_reta['y'].push(parseFloat(y[i]))
+        //coordenadas_reta['x'].push(parseFloat(x[i]))
+        //coordenadas_reta['y'].push(parseFloat(y[i]))
     }
     // era usado pra determinar os ponto da reta
-    let menorx = Math.min.apply(null, coordenadas_reta['x']);
+    /*let menorx = Math.min.apply(null, coordenadas_reta['x']);
     let menorx_reta = Equacao_Reta([menorx],'0')
     let menory = coordenadas_reta['y'][coordenadas_reta['x'].indexOf(menorx)] 
     let menory_reta = Equacao_Reta([parseFloat(menory)],'1')
@@ -261,9 +257,8 @@ function Gera_Grafico(dados) {
     
     //let retab = [[Math.min.apply(null, x),Math.min.apply(null, y )],[Math.max.apply(null, x),Math.max.apply(null, y )]]
     let reta = [[menory_reta[0], menorx_reta[0]],[maiory_reta[0], maiorx_reta[0]]]
-    console.log(reta)
     //console.log(retab)
-
+    */
     // grafico
     google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
