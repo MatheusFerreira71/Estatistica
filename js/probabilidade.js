@@ -4,7 +4,6 @@ let resultados_salvos = {
     uniforme: {},
     correlacao: {}
 }
-
 function Distribuicao(name_Btn) {
 
     $('.btn').removeClass('active');
@@ -14,7 +13,7 @@ function Distribuicao(name_Btn) {
         return ` \
             <div class="container"> \
                 <div class="row"> \
-                    <div class="col-md-12 px-3 py-3 bordas_coluna d-flex align-items-center flex-column  entrada"> \
+                    <div class="col-md-12 px-3 py-3  d-flex align-items-center flex-column  entrada"> \
                         \
                          \
                         <div class="form-group  was-validated ted" style="width: 75%;"> \
@@ -78,7 +77,7 @@ function Distribuicao(name_Btn) {
         return ` \
             <div class="container"> \
                 <div class="row"> \
-                    <div class="col-md-12 px-3 py-3 bordas_coluna d-flex align-items-center flex-column  entrada"> \
+                    <div class="col-md-12 px-3 py-3  d-flex align-items-center flex-column  entrada"> \
                         \
                         
                         <div class="form-group  was-validated ted" style="width: 75%;"> \
@@ -134,7 +133,7 @@ function Distribuicao(name_Btn) {
         return ` \
             <div class="container"> \
                 <div class="row"> \
-                    <div class="col-md-12 px-3 py-3 bordas_coluna d-flex align-items-center flex-column  entrada"> \
+                    <div class="col-md-12 px-3 py-3 d-flex align-items-center flex-column  entrada"> \
                             \
                         <div class="form-group was-validated ted " style="width: 75%;"> \
                             <label for="exampleInputEmail1">Amostra</label> \
@@ -213,11 +212,9 @@ function PegarDados(x) {
     let dados = [];
     
     for (let i = 0; i < Variaveis.length;i++) {
-        console.log(Variaveis[i])
         dados.push(Variaveis[i].value.replace(/,/g, '.'));
     }
 
-    console.log(dados);
     return dados;
 }
 
@@ -231,6 +228,7 @@ function AdicionaDados(dados, classe) {
 function Libera_Resul_bi() {
     $('.entrada').removeClass('col-md-12');
     $('.entrada').addClass('col-md-7');
+    $('.entrada').addClass('bordas_coluna');
     $('#resultados').removeClass('col-md-12');
     $('#resultados').addClass('col-md-5 ');
     $('#resultados').removeClass('d-none');

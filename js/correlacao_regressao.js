@@ -269,7 +269,8 @@ function Gera_Grafico(dados) {
         title: 'Gráfico de dispersão com linha de regressão',
         hAxis: {title: 'Independentes (X)'},
         vAxis: {title: 'Dependentes (Y)'},
-        chartArea: {width:'100%'},
+        legend : {position: 'none', text:'teste'},		
+        chartArea: {width:'80%'},
         trendlines: {
             0: {
               type: 'linear'
