@@ -7,10 +7,16 @@ var save_dados = {
     result: {}
 }
 var dados_last_add = {x:[],y:[]};
+$(window).resize(function(){
+    if(Object.keys(save_dados['dados']).length != 0){   
+        Gera_Grafico(save_dados['dados']);
+        
+    }
+});
 
 function Exibir_Cor_Reg(){
     let saphe = `<div class="row">
-                    <div class="col-md-12 bordas_coluna px-3 py-3 entrada">
+                    <div class="col-md-12  px-3 py-3 entrada">
                         <div class="form-group was-validated d-none">
                             <label for="nomeVariavel">Nome da variavel independente:</label>
                             <input type="text" class="form-control dom" id="nomeVariavel2" placeholder="Nome da variável independente (opcional).">
@@ -56,7 +62,7 @@ function Exibir_Cor_Reg(){
                                 Probabilidade =  \
                         </h1> \
                         <h1 id='new_resul'class="display-6 shadow border border-info rounded P houver d-none"> \
-                                <a href='#new_resul' onclick="Modal()" class="">Resultados Salvos</a>
+                                <a href='#new_resul' onclick="Modal()" class="">Visualizar Resultados</a>
                         </h1> \
                         <div class="form-group was-validated ">
                             <label for="nomeVariavel2">Adicionar variaveis independentes (X):</label>
@@ -73,14 +79,15 @@ function Exibir_Cor_Reg(){
                         <button onclick="Gerente_Correlacao('add')" id="calc" type="button" style="width: 100%" class="btn btn-info">Calcular</button>
     
                     </div>
-                    <div id="grafico" class="col-md-0 border border-info rounded  mt-2 align-self-center d-none w-100 " style="height: 430px; ">
+                    <div class="clearfix"></div>
+                    <div id="grafico" class="col-md-0 border border-info rounded  mt-2 align-self-center d-none w-100 " style="">
     
                     </div>
                     <div id='myModal' class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
+                        <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Resultados Salvos</h5>
+                            <div class="modal-header text-center">
+                                <h5 class="modal-title" id="exampleModalLabel">Resultados</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
@@ -101,8 +108,9 @@ function Modal(){
     add_div = document.querySelector("#modal-body");
     add_div.innerHTML = '';
     console.log(add_div)
+    add_div.innerHTML += `<div class='col-md-10  ml-5 font border border-info rounded mt-2 mb-1'> Y = ${save_dados['result']['regre']['a'].toFixed(3)}X - ${save_dados['result']['regre']['b'].toFixed(3)} `
     for(i = 0; i < dados_last_add['x'].length;i++){
-        add_div.innerHTML += `<div class='col-md-5 ml-auto display-5 border border-info rounded mt-2 mb-3'> X =${dados_last_add['x'][i]}</div> <div class='col-md-5 display-6 border border-info rounded ml-auto mt-2 mb-3 mr-1' > Y =${dados_last_add['x'][i]}</div>`;
+        add_div.innerHTML += `<div class='col-md-2 ml-auto display-5 border border-info rounded mt-2 mb-3'> ${i+1}º </div> <div class='col-md-4 ml-auto display-5 border border-info rounded mt-2 mb-3'> X = ${parseFloat(dados_last_add['x'][i]).toFixed(3)}</div> <div class='col-md-4 display-5 border border-info rounded ml-auto mt-2 mb-3 mr-1' > Y = ${dados_last_add['y'][i].toFixed(3)}</div>`;
     }
     $('#myModal').modal('show');
     
@@ -266,7 +274,7 @@ function Gera_Grafico(dados) {
         title: 'Gráfico de dispersão com linha de regressão',
         hAxis: {title: 'Independentes (X)'},
         vAxis: {title: 'Dependentes (Y)'},
-        chartArea: {width:'70%'},
+        chartArea: {width:'100%'},
         trendlines: {
             0: {
               type: 'linear'

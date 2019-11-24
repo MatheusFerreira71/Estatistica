@@ -199,6 +199,7 @@ select:hover {
         height: auto !important;
         overflow-y: visible !important;
     }
+    
 }
 
 #container {
@@ -217,3 +218,14 @@ select:hover {
 
 
 } 
+.font{
+    font-size: 25px;
+    font-weight: 600;
+}
+#grafico{
+    width: 100%; 
+    min-height: 430px;
+}
+.row {
+    margin:0 !important;
+  }

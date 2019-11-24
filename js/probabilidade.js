@@ -211,9 +211,13 @@ function DistUniforme(name_Btn) {
 function PegarDados(x) {
     let Variaveis = document.querySelectorAll(x);
     let dados = [];
-    for (Variavel of Variaveis) {
-        dados.push(Variavel.value.replace(',', '.'));
+    
+    for (let i = 0; i < Variaveis.length;i++) {
+        console.log(Variaveis[i])
+        dados.push(Variaveis[i].value.replace(/,/g, '.'));
     }
+
+    console.log(dados);
     return dados;
 }
 
