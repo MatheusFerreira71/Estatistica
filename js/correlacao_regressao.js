@@ -292,8 +292,8 @@ function importarArquivo() {
         const dados2 = document.getElementById('entrarDados2');
         const data = Reader.result.split('\n');
 
-        dados1.value = data[0];
-        dados2.value = data[1];
+        dados1.value = data[1];
+        dados2.value = data[0];
 
         // Cria o cartão de notificação e o mostra na tela. 
         document.getElementsByClassName('toast-body')[0].innerText = `O arquivo "${name}" foi importado com sucesso!`;
