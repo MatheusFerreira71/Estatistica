@@ -8,6 +8,7 @@ var save_dados = {
 }
 
 var dados_last_add = { x: [], y: [] };
+
 // atualiza o grafico, se ja foi gerado, sempre q redimencionar o tamanho da pagina
 $(window).resize(function () {
     if (Object.keys(save_dados['dados']).length != 0) {
@@ -101,9 +102,19 @@ function Exibir_Cor_Reg() {
 function Modal() {
     add_div = document.querySelector("#modal-body");
     add_div.innerHTML = '';
-    add_div.innerHTML += `<div class='col-md-10  ml-5 font border border-info rounded mt-2 mb-1'> Y = ${save_dados['result']['regre']['a'].toFixed(3)}X - ${save_dados['result']['regre']['b'].toFixed(3)} `
+    add_div.innerHTML += `<div class='col-md-10  
+    ml-5 font border border-info rounded mt-2 mb-1'> 
+    Y = ${save_dados['result']['regre']['a'].toFixed(4)}X + ${save_dados['result']['regre']['b'].toFixed(4)} `
     for (i = 0; i < dados_last_add['x'].length; i++) {
-        add_div.innerHTML += `<div class='col-md-2 ml-auto display-5 border border-info rounded mt-2 mb-3'> ${i + 1}º </div> <div class='col-md-4 ml-auto display-5 border border-info rounded mt-2 mb-3'> X = ${parseFloat(dados_last_add['x'][i]).toFixed(3)}</div> <div class='col-md-4 display-5 border border-info rounded ml-auto mt-2 mb-3 mr-1' > Y = ${dados_last_add['y'][i].toFixed(3)}</div>`;
+        add_div.innerHTML += `<div class='col-md-2 ml-auto display-5 border border-info rounded mt-2 mb-3'>
+         ${i + 1}º 
+         </div> 
+         <div class='col-md-4 ml-auto display-5 border border-info rounded mt-2 mb-3'>
+          X = ${Number(dados_last_add['x'][i])}
+          </div> 
+          <div class='col-md-4 display-5 border border-info rounded ml-auto mt-2 mb-3 mr-1' > 
+          Y = ${Number(dados_last_add['y'][i])}
+          </div>`;
     }
     $('#myModal').modal('show');
 
@@ -127,10 +138,10 @@ function Gerente_Correlacao(dados) {
 
 
             for (i = 0; i < coordenada_add.length; i++) {
-                save_dados['dados'][validacao] += ';' + parseFloat(coordenada_add[i]).toFixed(3);
-                save_dados['dados'][oposto] += `;${coordenada_falta[i].toFixed(3)}`
-                dados_last_add['x'].push(parseFloat(coordenada_add[i]).toFixed(3))
-                dados_last_add['y'].push(parseFloat(coordenada_falta[i].toFixed(3)))
+                save_dados['dados'][validacao] += ';' + parseFloat(coordenada_add[i]).toFixed(4);
+                save_dados['dados'][oposto] += `;${coordenada_falta[i].toFixed(4)}`
+                dados_last_add['x'].push(parseFloat(coordenada_add[i]).toFixed(4))
+                dados_last_add['y'].push(parseFloat(coordenada_falta[i].toFixed(4)))
             }
             Gera_Grafico(save_dados['dados'])
         } else {
@@ -148,7 +159,7 @@ function Gerente_Correlacao(dados) {
         save_dados['result']['corre'] = resultado[0];
         save_dados['result']['regre'] = resultado[1];
         display[0].innerHTML = 'Correlação : ' + resultado[0].toFixed(3);
-        display[1].innerHTML = 'Regressão :<br> Y = ' + resultado[1]['a'].toFixed(3) + 'X + ' + resultado[1]['b'].toFixed(3)
+        display[1].innerHTML = 'Regressão :<br> Y = ' + resultado[1]['a'].toFixed(4) + 'X + ' + resultado[1]['b'].toFixed(4);
         Gera_Grafico(dados)
     }
 
@@ -184,7 +195,7 @@ function Calc_Correlacao_regressao(dados) {
     let part_inf1 = (n_obser * Somatorio(independentes, ' ** 2') - (Somatorio(independentes, '') ** 2));
     let part_inf2 = (n_obser * Somatorio(dependentes, ' ** 2') - (Somatorio(dependentes, '')) ** 2);
     let coef_corre = part_sup / Math.sqrt(part_inf1 * part_inf2)
-    let regressao = Calc_Regressao()
+    let regressao = Calc_Regressao();
     return [coef_corre, regressao]
 
     function Calc_Regressao() {
