@@ -140,8 +140,8 @@ function Gerente_Correlacao(dados) {
             for (i = 0; i < coordenada_add.length; i++) {
                 save_dados['dados'][validacao] += ';' + parseFloat(coordenada_add[i]).toFixed(4);
                 save_dados['dados'][oposto] += `;${coordenada_falta[i].toFixed(4)}`
-                dados_last_add['x'].push(parseFloat(coordenada_add[i]).toFixed(4))
-                dados_last_add['y'].push(parseFloat(coordenada_falta[i].toFixed(4)))
+                dados_last_add[validacao == 3 ? 'y': 'x'].push(parseFloat(coordenada_add[i]).toFixed(4))
+                dados_last_add[validacao == 3 ? 'y': 'x'].push(parseFloat(coordenada_falta[i].toFixed(4)))
             }
             Gera_Grafico(save_dados['dados'])
         } else {
