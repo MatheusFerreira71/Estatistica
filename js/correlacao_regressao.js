@@ -141,7 +141,7 @@ function Gerente_Correlacao(dados) {
                 save_dados['dados'][validacao] += ';' + parseFloat(coordenada_add[i]).toFixed(4);
                 save_dados['dados'][oposto] += `;${coordenada_falta[i].toFixed(4)}`
                 dados_last_add[validacao == 3 ? 'y': 'x'].push(parseFloat(coordenada_add[i]).toFixed(4))
-                dados_last_add[validacao == 3 ? 'y': 'x'].push(parseFloat(coordenada_falta[i].toFixed(4)))
+                dados_last_add[oposto == 3 ? 'y': 'x'].push(parseFloat(coordenada_falta[i].toFixed(4)))
             }
             Gera_Grafico(save_dados['dados'])
         } else {
@@ -159,7 +159,7 @@ function Gerente_Correlacao(dados) {
         save_dados['result']['corre'] = resultado[0];
         save_dados['result']['regre'] = resultado[1];
         display[0].innerHTML = 'Correlação : ' + resultado[0].toFixed(3);
-        display[1].innerHTML = 'Regressão :<br> Y = ' + resultado[1]['a'].toFixed(4) + 'X + ' + resultado[1]['b'].toFixed(4);
+        display[1].innerHTML = 'Regressão :<br> Y = ' + resultado[1]['a'].toFixed(3) + 'X + ' + resultado[1]['b'].toFixed(3);
         Gera_Grafico(dados)
     }
 
