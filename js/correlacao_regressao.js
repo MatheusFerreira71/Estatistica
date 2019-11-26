@@ -104,7 +104,7 @@ function Modal() {
     add_div.innerHTML = '';
     add_div.innerHTML += `<div class='col-md-10  
     ml-5 font border border-info rounded mt-2 mb-1'> 
-    Y = ${save_dados['result']['regre']['a'].toFixed(4)}X + ${save_dados['result']['regre']['b'].toFixed(4)} `
+    Y = ${Number(save_dados['result']['regre']['a'].toFixed(3))}X + ${Number(save_dados['result']['regre']['b'].toFixed(3))} `
     for (i = 0; i < dados_last_add['x'].length; i++) {
         add_div.innerHTML += `<div class='col-md-2 ml-auto display-5 border border-info rounded mt-2 mb-3'>
          ${i + 1}º 
@@ -138,10 +138,10 @@ function Gerente_Correlacao(dados) {
 
 
             for (i = 0; i < coordenada_add.length; i++) {
-                save_dados['dados'][validacao] += ';' + parseFloat(coordenada_add[i]).toFixed(4);
-                save_dados['dados'][oposto] += `;${coordenada_falta[i].toFixed(4)}`
-                dados_last_add['x'].push(parseFloat(coordenada_add[i]).toFixed(4))
-                dados_last_add['y'].push(parseFloat(coordenada_falta[i].toFixed(4)))
+                save_dados['dados'][validacao] += ';' + parseFloat(coordenada_add[i]).toFixed(3);
+                save_dados['dados'][oposto] += `;${coordenada_falta[i].toFixed(3)}`
+                dados_last_add[validacao == 3 ? 'y': 'x'].push(parseFloat(coordenada_add[i]).toFixed(3))
+                dados_last_add[oposto == 3 ? 'y': 'x'].push(parseFloat(coordenada_falta[i].toFixed(3)))
             }
             Gera_Grafico(save_dados['dados'])
         } else {
@@ -159,7 +159,7 @@ function Gerente_Correlacao(dados) {
         save_dados['result']['corre'] = resultado[0];
         save_dados['result']['regre'] = resultado[1];
         display[0].innerHTML = 'Correlação : ' + resultado[0].toFixed(3);
-        display[1].innerHTML = 'Regressão :<br> Y = ' + resultado[1]['a'].toFixed(4) + 'X + ' + resultado[1]['b'].toFixed(4);
+        display[1].innerHTML = 'Regressão :<br> Y = ' + Number(resultado[1]['a'].toFixed(3)) + 'X + ' + Number(resultado[1]['b'].toFixed(3));
         Gera_Grafico(dados)
     }
 
